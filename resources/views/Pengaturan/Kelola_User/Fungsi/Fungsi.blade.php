@@ -52,7 +52,8 @@
             $('#fullname').val(data.fullname);
             $('#email').val(data.email);
             $('#role').val(data.role);
-            $('#id_opd').val(data.id_opd);
+            // $('#id_opd').val(data.id_opd);
+            $("#id_opd").html('<option value = "'+data.id_opd+'" selected >'+data.nama_opd+'</option>');
 
             $('#modal-preview').attr('alt', 'No image available');
             if(data.gambar){

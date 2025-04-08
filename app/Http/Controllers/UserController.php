@@ -144,6 +144,11 @@ class UserController extends Controller
     {
         $where = array('id' => $id);
         $user = UserModel::where($where)->first();
+        // ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
+        // $user = DB::table('users')
+        //         ->select('users.id_opd', 'tb_opd.nama_opd', 'tb_opd.id', 'users.id')
+        //         ->join('tb_opd', 'tb_opd.id', '=', 'users.id_opd')
+        //         ->where($where)->first();
 
         return response()->json($user);
     }
