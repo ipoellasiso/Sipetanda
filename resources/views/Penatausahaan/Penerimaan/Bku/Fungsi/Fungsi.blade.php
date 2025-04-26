@@ -48,15 +48,15 @@
 
     // edit data
     $('body').on('click', '.editBku', function(e)  {
-        var id_transaksi = $(this).data('id_transaksi');
-        $.get("/bku/edit/"+id_transaksi, function (data) {
+        var id_transaksi1 = $(this).data('id_transaksi');
+        $.get("/bku/edit/"+id_transaksi1, function (data) {
             $('#saveBtn').val("edit-bku");
             $('#tambahbku').modal('show');
         
             $('#id_transaksi').val(data.id_transaksi);
             $("#id_rekening").html('<option value = "'+data.id_rekening+'" selected >'+data.rekening2+'</option>');
             // $('#id_rekening').val(data.id_rekening);
-            $('#id_opd').html('<option value = "'+data.id_opd+'" selected >'+data.nama_opd+'</option>');
+            $('#id_opd').html('<option value = "'+data.id+'" selected >'+data.nama_opd+'</option>');
             $('#id_bank').html('<option value = "'+data.id_bank+'" selected >'+data.nama_bank+'</option>');
             $('#uraian').val(data.uraian);
             $('#no_buku').val(data.no_buku);
@@ -228,9 +228,9 @@
             type: "Get",
             dataType: 'json',
             delay: 250,
-            data: function (params) {
+            data: function (params2) {
                 return {
-                    searchBank: params.term // search term
+                    searchBank: params2.term2 // search term
                 };
             },
             processResults: function (response) {

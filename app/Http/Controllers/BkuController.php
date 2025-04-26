@@ -101,11 +101,19 @@ class BkuController extends Controller
     {
         $bkuId = $request->id_transaksi;
 
-        $bkuId = bkusModel::where('no_buku', $request->no_buku)->where('id_transaksi', '!=', $request->id_transaksi)->first();
-        if($bkuId)
+        $cekbku = bkusModel::where('no_buku', $request->no_buku)->where('id_transaksi', '!=', $request->id_transaksi)->first();
+        if($cekbku)
         {
             return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
         } else {
+
+        // $opdId = $request->id;
+
+        // $cekopd = OpdModel::where('nama_opd', $request->nama_opd)->where('id', '!=', $request->id)->first();
+        // if($cekopd)
+        // {
+        //     return redirect()->back()->with('error', 'OPD Sudah Ada');
+        // } else {
             $details = [
                 'id_rekening'       => $request->id_rekening,
                 'id_opd'            => $request->id_opd,
@@ -128,7 +136,7 @@ class BkuController extends Controller
         $where = array('id_transaksi' => $id_transaksi);
         // $bku = bkusModel::where($where)->first();
         $bku = DB::table('tb_transaksi')
-                        ->select('tb_rekening.id_rekening', 'tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', )
+                        ->select('tb_rekening.id_rekening', 'tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', 'tb_opd.id', 'tb_bank.id_bank' )
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
                         ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
                         ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')

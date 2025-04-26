@@ -14,3 +14,5 @@ class BankModel extends Model
         'nama_bank',
     ];
 }
+
+

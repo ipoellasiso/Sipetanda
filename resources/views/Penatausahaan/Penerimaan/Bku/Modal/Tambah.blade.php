@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <form id="userForm" name="userForm" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <input type="text" name="id_transaksi" id="id_transaksi">
+                        <input type="hidden" name="id_transaksi" id="id_transaksi">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
