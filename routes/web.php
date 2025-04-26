@@ -7,6 +7,7 @@ use App\Http\Controllers\BkuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\OpdController;
+use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -67,3 +68,6 @@ Route::post('bku', [BkuController::class, 'import'])->name('bku.import')->middle
 Route::get('/bku/rekening', [BkuController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
 Route::get('/bku/opd', [BkuController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
 Route::get('/bku/bank', [BkuController::class, 'getDatabank'])->middleware('auth:web','checkRole:Admin');
+
+// REALISASI
+Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('realisasi.index')->middleware('auth:web','checkRole:Admin');

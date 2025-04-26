@@ -101,7 +101,7 @@
                             <a href="/tampilbku">BKU</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="ui-widgets-pricing.html">Realisasi</a>
+                            <a href="/tampilrealisasi">Realisasi</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="ui-widgets-todolist.html">Buku Pembantu Penerimaan</a>

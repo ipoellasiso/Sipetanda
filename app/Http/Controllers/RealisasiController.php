@@ -23,10 +23,11 @@ class RealisasiController extends Controller
     {
         $userId = Auth::guard('web')->user()->id;
         $data = array(
-            'title'                => 'Realisasi',
-            'active_sidepenerimaan'         => 'active',
-            'active_realisasi'           => 'active',
-            'page_title'           => 'Penatausahaan',
+            'title'                => 'BKU Penerimaan',
+            'active_penerimaan'    => 'active',
+            'active_sub'           => 'active',
+            'active_siderealisasi' => 'active',
+            'breadcumd'            => 'Penatausahaan',
             'breadcumd1'           => 'Penerimaan',
             'breadcumd2'           => 'Realisasi',
             'userx'                => UserModel::where('id',$userId)->first(['fullname','role','gambar','tahun']),
@@ -372,7 +373,7 @@ class RealisasiController extends Controller
                     ->make(true);
         }
 
-        return view('Penatausahaan.Realisasi.Tampilrealisasi', $data);
+        return view('Penatausahaan.Penerimaan.Realisasi.Tampilrealisasi1', $data);
     }
 
 }
