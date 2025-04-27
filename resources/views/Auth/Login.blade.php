@@ -92,8 +92,10 @@
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Tidak Punya Akun? <a href="/register" class="font-bold">Daftar</a>.</p>
+                        {{-- <p class="text-gray-600">Tidak Punya Akun? <a href="/register" class="font-bold">Daftar</a>.</p> --}}
+                        <p class="text-gray-600">Klik Tombol Home untuk kembali ke Halaman Depan <a href="/" class="font-bold">Home</a>.</p>
                         {{-- <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p> --}}
+                        {{-- <a href="/" class="btn btn-outline-primary anticon anticon-undo"> Kembali ke Halaman Depan </a> --}}
                     </div>
                 </div>
             </div>

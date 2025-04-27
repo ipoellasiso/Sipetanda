@@ -7,6 +7,7 @@ use App\Http\Controllers\BkuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\OpdController;
+use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\UserController;
@@ -71,3 +72,6 @@ Route::get('/bku/bank', [BkuController::class, 'getDatabank'])->middleware('auth
 
 // REALISASI
 Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('realisasi.index')->middleware('auth:web','checkRole:Admin');
+
+// REALISASI HALAMAN DEPAN
+Route::get('/tampilrealisasi_hd', [Realisasi_hd_Controller::class, 'index'])->name('realisasi.index');

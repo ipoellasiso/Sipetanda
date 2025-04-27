@@ -16,14 +16,14 @@
             </div>
             <div class="links">
                 <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="/login">Login</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="#">Realisasi</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="/tampilrealisasi_hd">Realisasi</a></div>
         </div>
         <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
     </div>
         <div class="dropdown">
             <div class="links">
                 <a href="/login">Login</a>
-                <a href="#">Realisasi</a>
+                <a href="/tampilrealisasi_hd">Realisasi</a>
                 <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
             </div>
         </div>
