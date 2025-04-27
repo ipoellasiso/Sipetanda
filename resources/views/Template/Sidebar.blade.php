@@ -50,44 +50,45 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                    <li class="sidebar-title">Pengaturan</li>
 
-                <li class="sidebar-title">Pengaturan</li>
+                    <li class="sidebar-item  has-sub @if(isset($active_master_data)){{ $active_master_data }} @endif">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-pen-fill"></i>
+                            <span>Master Data</span>
+                        </a>
+                        <ul class="submenu @if(isset($active_subopd)){{ $active_subopd }} @endif">
+                            <li class="submenu-item @if(isset($active_sideopd)){{ $active_sideopd }} @endif">
+                                <a href="/tampilopd">Opd</a>
+                            </li>
+                            <li class="submenu-item @if(isset($active_siderek)){{ $active_siderek }} @endif">
+                                <a href="/tampilrekening">Rekening</a>
+                            </li>
+                            <li class="submenu-item @if(isset($active_sidebank)){{ $active_sidebank }} @endif">
+                                <a href="/tampilbank">Bank</a>
+                            </li>
+                            <li class="submenu-item @if(isset($active_sideanggaran)){{ $active_sideanggaran }} @endif">
+                                <a href="/tampilanggaran">Anggaran</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                <li class="sidebar-item  has-sub @if(isset($active_master_data)){{ $active_master_data }} @endif">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-pen-fill"></i>
-                        <span>Master Data</span>
-                    </a>
-                    <ul class="submenu @if(isset($active_subopd)){{ $active_subopd }} @endif">
-                        <li class="submenu-item @if(isset($active_sideopd)){{ $active_sideopd }} @endif">
-                            <a href="/tampilopd">Opd</a>
-                        </li>
-                        <li class="submenu-item @if(isset($active_siderek)){{ $active_siderek }} @endif">
-                            <a href="/tampilrekening">Rekening</a>
-                        </li>
-                        <li class="submenu-item @if(isset($active_sidebank)){{ $active_sidebank }} @endif">
-                            <a href="/tampilbank">Bank</a>
-                        </li>
-                        <li class="submenu-item @if(isset($active_sideanggaran)){{ $active_sideanggaran }} @endif">
-                            <a href="/tampilanggaran">Anggaran</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  has-sub @if(isset($active_kelola_user)){{ $active_kelola_user }} @endif">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-person-circle"></i>
-                        <span>Kelola User</span>
-                    </a>
-                    <ul class="submenu @if(isset($active_subuser)){{ $active_subuser }} @endif">
-                        <li class="submenu-item @if(isset($active_sideuser)){{ $active_sideuser }} @endif">
-                            <a href="/tampiluser">List User</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-element-input.html">Profil</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="sidebar-item  has-sub @if(isset($active_kelola_user)){{ $active_kelola_user }} @endif">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-circle"></i>
+                            <span>Kelola User</span>
+                        </a>
+                        <ul class="submenu @if(isset($active_subuser)){{ $active_subuser }} @endif">
+                            <li class="submenu-item @if(isset($active_sideuser)){{ $active_sideuser }} @endif">
+                                <a href="/tampiluser">List User</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="form-element-input.html">Profil</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
 
                 <li class="sidebar-title">Penatausahaan</li>
 
@@ -97,15 +98,22 @@
                         <span>Penerimaan</span>
                     </a>
                     <ul class="submenu @if(isset($active_sub)){{ $active_sub }} @endif">
-                        <li class="submenu-item @if(isset($active_sidebku)){{ $active_sidebku }} @endif">
-                            <a href="/tampilbku">BKU</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="/tampilrealisasi">Realisasi</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-widgets-todolist.html">Buku Pembantu Penerimaan</a>
-                        </li>
+                        @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                            <li class="submenu-item @if(isset($active_sidebku)){{ $active_sidebku }} @endif">
+                                <a href="/tampilbku">BKU</a>
+                            </li>
+                            <li class="submenu-item @if(isset($active_siderealisasi)){{ $active_siderealisasi }} @endif">
+                                <a href="/tampilrealisasi">Realisasi</a>
+                            </li>
+                            <li class="submenu-item @if(isset($active_sidebukupp)){{ $active_sidebukupp }} @endif">
+                                <a href="/tampilrekapanrek">Buku Pembantu Penerimaan</a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->role == 'User')
+                            <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
+                                <a href="/tampilrekapanrekuser">BUKU PEMBANTU PENERIMAAN</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 

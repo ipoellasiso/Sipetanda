@@ -23,10 +23,11 @@ class KamarControlleruser extends Controller
         $userId = Auth::guard('web')->user()->id;
         $data = array(
             'title'                => 'Buku Pembantu Penerimaan',
-            'active_sidepenerimaan'=> 'active',
-            'active_rekapan_rek'   => 'active',
-            'page_title'           => 'Penatausahaan',
-            'breadcumd1'           => 'Penerimaa',
+            'active_penerimaan'    => 'active',
+            'active_sub'           => 'active',
+            'active_sidebukuppuser'=> 'active',
+            'breadcumd'            => 'Penatausahaan',
+            'breadcumd1'           => 'Penerimaan',
             'breadcumd2'           => 'Buku Pembantu Penerimaan',
             'userx'                => UserModel::where('id',$userId)->first(['fullname','role','gambar','tahun']),
         );
@@ -50,7 +51,7 @@ class KamarControlleruser extends Controller
                     ->make(true);
         }
 
-        return view('Penatausahaan.Halaman_Rekapan_Rek_User.Tampilrekapanrekuser' ,$data);
+        return view('Penatausahaan.Penerimaan.Halaman_Rekapan_Rek_User.Tampilrekapanrekuser' ,$data);
     }
 
 }

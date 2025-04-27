@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BkuController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KamarController;
+use App\Http\Controllers\KamarControlleruser;
 use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\OpdController;
 use App\Http\Controllers\Realisasi_hd_Controller;
@@ -75,3 +77,9 @@ Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('rea
 
 // REALISASI HALAMAN DEPAN
 Route::get('/tampilrealisasi_hd', [Realisasi_hd_Controller::class, 'index'])->name('realisasi.index');
+
+// REKAPAN REKENING 
+Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+
+// REKAPAN REKENING USER
+Route::get('/tampilrekapanrekuser', [KamarControlleruser::class, 'index'])->middleware('auth:web','checkRole:User');
