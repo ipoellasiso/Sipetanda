@@ -17,25 +17,102 @@
       Render DataTable
       --------------------------------------------
       --------------------------------------------*/
-    var table = $('.tabelrekapan').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "/tampilrekapanrek",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'no_rekening', name: 'no_rekening'},
-            {data: 'rekening2', name: 'rekening2'},
-            {data: 'no_buku', name: 'no_buku'},
-            {data: 'tgl_transaksi', name: 'tgl_transaksi'},
-            {data: 'uraian', name: 'uraian'},
-            {data: 'nama_opd', name: 'nama_opd'},
-            {data: 'nama_bank', name: 'nama_bank'},
-            {data: 'nilai_transaksi', name: 'nilai_transaksi'},
-            {data: 'ket', name: 'ket'},
-            // {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+    // var table = $('.tabelrekapan').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: "/tampilrekapanrek",
+    //     columns: [
+    //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+    //         {data: 'no_rekening', name: 'no_rekening'},
+    //         {data: 'rekening2', name: 'rekening2'},
+    //         {data: 'no_buku', name: 'no_buku'},
+    //         {data: 'tgl_transaksi', name: 'tgl_transaksi'},
+    //         {data: 'uraian', name: 'uraian'},
+    //         {data: 'nama_opd', name: 'nama_opd'},
+    //         {data: 'nama_bank', name: 'nama_bank'},
+    //         {data: 'nilai_transaksi', name: 'nilai_transaksi'},
+    //         {data: 'ket', name: 'ket'},
+    //         // {data: 'action', name: 'action', orderable: false, searchable: false},
+    //     ]
+    // });
+
+    $(document).ready(function(){
+        $(document).ready(function () {
+            var tampilawal = '1';
+            $.ajax({
+                url: "{{ route('view.dataindex.index') }}" +'/' + tampilawal +'/tampilawal',
+                type: "GET",
+                data: 'tampilawal=' + tampilawal,
+                success: function (data) {
+                    $('.tampildata1').html(data);//menampilkan data ke dalam modal
+                }
+            });
+        });
     });
+
+    $('body').on('click', '.caribaru', function (e) {
+        e.preventDefault();
+        var id_rekening = $('#id_rekening').val();
+        var id_opd = $("#id_opd").val();
+        var tampilawal = '1';
+        $.ajax({
+            url: "{{ route('view.dataindex.index') }}" +'/' + tampilawal +'/tampil',
+            type: "GET",
+            data: 'id_rekening=' + id_rekening + '&id_opd=' + id_opd,
+                success: function (data) {
+                    $('.tampildata1').html(data);//menampilkan data ke dalam modal
+                }
+            });
+    });
+
+    $('#id_rekening').select2({
+	    placeholder: "Pilih Rekening",
+    	allowClear: true,
+        // dropdownParent: $('#tambahbku'),
+	    ajax: { 
+            url: "/bku/rekening",
+            type: "Get",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    searchRek: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+                cache: true
+            }
+    });
+
+    $('#id_opd').select2({
+	    placeholder: "Pilih Opd",
+    	allowClear: true,
+        // dropdownParent: $('#tambahbku'),
+	    ajax: { 
+            url: "/bku/opd",
+            type: "Get",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    searchOpd: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+                cache: true
+            }
+    });
+
 });
+
 
 function readURL(input, id) {
     id = id || '#modal-preview';

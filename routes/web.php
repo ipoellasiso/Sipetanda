@@ -79,7 +79,11 @@ Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('rea
 Route::get('/tampilrealisasi_hd', [Realisasi_hd_Controller::class, 'index'])->name('realisasi.index');
 
 // REKAPAN REKENING 
-Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->name('view.dataindex.index')->middleware('auth:web','checkRole:Admin');
+Route::get('/tampilrekapanrek/{id}/tampilawal', [KamarController::class, 'viewdataindex'])->name('view.data.tampil')->middleware('auth:web','checkRole:Admin');
+Route::get('/tampilrekapanrek/{id}/tampil', [KamarController::class, 'viewdataindex'])->name('view.data.tampil')->middleware('auth:web','checkRole:Admin');
+Route::get('/bku/rekening', [KamarController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
+Route::get('/bku/opd', [KamarController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
 
 // REKAPAN REKENING USER
 Route::get('/tampilrekapanrekuser', [KamarControlleruser::class, 'index'])->middleware('auth:web','checkRole:User');
