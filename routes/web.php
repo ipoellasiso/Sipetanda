@@ -11,6 +11,7 @@ use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\OpdController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\Realisasi_hd_Controller;
+use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\UserController;
@@ -77,8 +78,7 @@ Route::get('/bku/bank', [BkuController::class, 'getDatabank'])->middleware('auth
 Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('realisasi.index')->middleware('auth:web','checkRole:Admin');
 
 // REALISASI HALAMAN DEPAN
-Route::get('/tampilrealisasi_hd', [Realisasi_hd_Controller::class, 'index']);
-// Route::get('/tampilrealisasi_hd', 'App\Http\Controllers\Realisasi_hd_Controller@index');
+Route::get('/tampilrealisasi_hd', [ControllersRealisasi_HD_Controller::class, 'index']);
 
 // REKAPAN REKENING 
 Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->name('view.dataindex.index')->middleware('auth:web','checkRole:Admin');
