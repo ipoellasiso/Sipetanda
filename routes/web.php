@@ -9,6 +9,7 @@ use App\Http\Controllers\KamarController;
 use App\Http\Controllers\KamarControlleruser;
 use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\OpdController;
+use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
@@ -87,3 +88,9 @@ Route::get('/bku/opd', [KamarController::class, 'getDataopd'])->middleware('auth
 
 // REKAPAN REKENING USER
 Route::get('/tampilrekapanrekuser', [KamarControlleruser::class, 'index'])->middleware('auth:web','checkRole:User');
+
+// DATA PERIODE
+Route::get('/tampilperiode', [PeriodeController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/periode/store', [PeriodeController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/periode/edit/{id}', [PeriodeController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/periode/destroy/{id}', [PeriodeController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');

@@ -43,7 +43,7 @@
                                         <b><h5>PEMERINTAHAN KOTA PALU</b><br>
                                         <b><h5>LAPORAN TARGET DAN REALISASI PENDAPATAN DAERAH KOTA PALU</b>
                                         <b><h5>TAHUN ANGGARAN 2025</h4></b>
-                                        <b><h5>PERIODE</h6></b>
+                                        <b><h5>PERIODE {{ date('d', strtotime($periode1->awal)) }} {{ date('M', strtotime($periode1->awal)) }} {{ date('Y', strtotime($periode1->awal)) }} s/d {{ date('d', strtotime($periode1->periode)) }} {{ date('M', strtotime($periode1->periode)) }} {{ date('Y', strtotime($periode1->periode)) }} </h6></b>
                                     </div>
                                     <div class="col-3">
                                     </div>

@@ -71,6 +71,9 @@
                             <li class="submenu-item @if(isset($active_sideanggaran)){{ $active_sideanggaran }} @endif">
                                 <a href="/tampilanggaran">Anggaran</a>
                             </li>
+                            <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
+                                <a href="/tampilperiode">Periode</a>
+                            </li>
                         </ul>
                     </li>
 
