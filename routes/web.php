@@ -77,7 +77,7 @@ Route::get('/bku/bank', [BkuController::class, 'getDatabank'])->middleware('auth
 Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('realisasi.index')->middleware('auth:web','checkRole:Admin');
 
 // REALISASI HALAMAN DEPAN
-Route::get('/tampilrealisasi_hd', [Realisasi_hd_Controller::class, 'index'])->name('realisasi.index');
+Route::get('/tampilrealisasi_hd', [Realisasi_hd_Controller::class, 'index']);
 
 // REKAPAN REKENING 
 Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->name('view.dataindex.index')->middleware('auth:web','checkRole:Admin');
