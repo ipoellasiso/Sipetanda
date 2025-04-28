@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class Realisasi_HD_Controller extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     // Get data
     public function index(Request $request)
