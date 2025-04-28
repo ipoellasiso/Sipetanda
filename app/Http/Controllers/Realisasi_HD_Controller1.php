@@ -10,15 +10,16 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Realisasi_HD_Controller extends Controller
+
+class Realisasi_hd_Controller extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     // Get data
-    public function index(Request $request)
+        public function index(Request $request)
     {
         // $userId = Auth::guard('web')->user()->id;
         $data = array(
@@ -376,4 +377,5 @@ class Realisasi_HD_Controller extends Controller
 
         return view('Penatausahaan.Penerimaan.Realisasi_Halaman_Depan.Tampilrealisasi_hd', $data);
     }
+
 }
