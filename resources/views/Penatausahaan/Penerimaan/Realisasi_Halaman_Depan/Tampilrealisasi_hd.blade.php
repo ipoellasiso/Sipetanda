@@ -19,11 +19,11 @@
                                     <div class="col-1">
                                     </div>
                                     <div class="col-9 text-center">
-                                        <marquee scrolldelay='80'><a class="navbar-brand" href="#page-top">Selamat Datang di Sistem Informasi Penerimaan Pendapatan Daerah (SIPETANDA) Kota Palu</a></marquee>
+                                        <marquee scrolldelay='90'><a class="navbar-brand" href="#page-top">Selamat Datang di Sistem Informasi Penerimaan Pendapatan Daerah (SIPETANDA) Kota Palu</a></marquee>
                                     </div>
                                     <div class="col-2">
                                         {{-- <a type="button" class="btn btn-outline-secondary"> --}}
-                                            <a href="/" class="btn btn-outline-primary anticon anticon-undo"> Kembali ke Halaman Depan </a>
+                                            <a href="/" class="btn btn-outline-Danger anticon anticon-undo"> Kembali ke Halaman Depan </a>
                                         {{-- </a> --}}
                                     </div>
                                 </div>
