@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-2">
                                         {{-- <a type="button" class="btn btn-outline-secondary"> --}}
-                                            <a href="/" class="btn btn-outline-Danger anticon anticon-undo"> Kembali ke Halaman Depan </a>
+                                            <a href="/" class="btn btn-outline-danger anticon anticon-undo"> Kembali ke Halaman Depan </a>
                                         {{-- </a> --}}
                                     </div>
                                 </div>
