@@ -207,7 +207,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_apr) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -216,7 +216,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_apr_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -225,7 +225,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_apr_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -234,7 +234,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_apr_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +247,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_mei) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -256,7 +256,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_mei_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -265,7 +265,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_mei_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -274,7 +274,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_mei_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jun) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -296,7 +296,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jun_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -305,7 +305,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jun_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -314,9 +314,8 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jun_btn) }}</p>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-3 card">
@@ -327,7 +326,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jul) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -336,7 +335,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jul_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -345,7 +344,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jul_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -354,7 +353,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jul_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +366,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_ags) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -376,7 +375,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_ags_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -385,7 +384,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_ags_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -394,7 +393,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_ags_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +406,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_sep) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -416,7 +415,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_sep_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -425,7 +424,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_sep_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -434,7 +433,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_sep_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -447,7 +446,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_okt) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -456,7 +455,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_okt_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -465,7 +464,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_okt_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -474,7 +473,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_okt_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -487,7 +486,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_nov) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -496,7 +495,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_nov_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -505,7 +504,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_nov_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -514,7 +513,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_nov_btn) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -527,7 +526,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_des) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -536,7 +535,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_des_mandiri) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -545,7 +544,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_des_bpd) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -554,7 +553,7 @@
                                             <div id="total_pajak"></div>
                                     </div>
                                     <div>
-                                        <p class="m-b-0"></p>
+                                        <p class="m-b-0">Rp. {{ number_format($total_des_btn) }}</p>
                                     </div>
                                 </div>
                             </div>

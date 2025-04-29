@@ -46,14 +46,61 @@ class BkuController extends Controller
             'total_jan_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-01-01', '2025-01-31'])->sum('nilai_transaksi'),
             'total_jan_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-01-01', '2025-01-31'])->sum('nilai_transaksi'),
             'total_jan'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-01-01', '2025-01-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
             'total_mar_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-03-01', '2025-03-31'])->sum('nilai_transaksi'),
             'total_mar_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-03-01', '2025-03-31'])->sum('nilai_transaksi'),
             'total_mar_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-03-01', '2025-03-31'])->sum('nilai_transaksi'),
             'total_mar'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-03-01', '2025-03-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
             'total_feb_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-02-01', '2025-02-28'])->sum('nilai_transaksi'),
             'total_feb_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-02-01', '2025-02-28'])->sum('nilai_transaksi'),
             'total_feb_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-02-01', '2025-02-28'])->sum('nilai_transaksi'),
             'total_feb'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-02-01', '2025-02-28'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_apr_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-04-01', '2025-04-30'])->sum('nilai_transaksi'),
+            'total_apr_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-04-01', '2025-04-30'])->sum('nilai_transaksi'),
+            'total_apr_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-04-01', '2025-04-30'])->sum('nilai_transaksi'),
+            'total_apr'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-04-01', '2025-04-30'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_mei_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-05-01', '2025-05-31'])->sum('nilai_transaksi'),
+            'total_mei_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-05-01', '2025-05-31'])->sum('nilai_transaksi'),
+            'total_mei_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-05-01', '2025-05-31'])->sum('nilai_transaksi'),
+            'total_mei'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-05-01', '2025-05-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_jun_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
+            'total_juni_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
+            'total_jun_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
+            'total_jun'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_jul_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-07-01', '2025-07-31'])->sum('nilai_transaksi'),
+            'total_jul_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-07-01', '2025-07-31'])->sum('nilai_transaksi'),
+            'total_jul_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-07-01', '2025-07-31'])->sum('nilai_transaksi'),
+            'total_jul'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-07-01', '2025-07-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_ags_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-08-01', '2025-08-31'])->sum('nilai_transaksi'),
+            'total_ags_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-08-01', '2025-08-31'])->sum('nilai_transaksi'),
+            'total_ags_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-08-01', '2025-08-31'])->sum('nilai_transaksi'),
+            'total_ags'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-08-01', '2025-08-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_sep_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-09-01', '2025-09-30'])->sum('nilai_transaksi'),
+            'total_sep_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-09-01', '2025-09-30'])->sum('nilai_transaksi'),
+            'total_sep_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-09-01', '2025-09-30'])->sum('nilai_transaksi'),
+            'total_sep'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-09-01', '2025-09-30'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_okt_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-10-01', '2025-10-31'])->sum('nilai_transaksi'),
+            'total_okt_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-10-01', '2025-10-31'])->sum('nilai_transaksi'),
+            'total_okt_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-10-01', '2025-10-31'])->sum('nilai_transaksi'),
+            'total_okt'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-10-01', '2025-10-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_nov_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-11-01', '2025-11-30'])->sum('nilai_transaksi'),
+            'total_nov_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-11-01', '2025-11-30'])->sum('nilai_transaksi'),
+            'total_nov_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-11-01', '2025-11-30'])->sum('nilai_transaksi'),
+            'total_nov'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-11-01', '2025-11-30'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
+
+            'total_des_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-12-01', '2025-12-31'])->sum('nilai_transaksi'),
+            'total_des_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-12-01', '2025-12-31'])->sum('nilai_transaksi'),
+            'total_des_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-12-01', '2025-12-31'])->sum('nilai_transaksi'),
+            'total_des'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-12-01', '2025-12-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
         );
 
         if ($request->ajax()) {
