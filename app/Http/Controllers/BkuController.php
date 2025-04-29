@@ -68,7 +68,7 @@ class BkuController extends Controller
             'total_mei'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-05-01', '2025-05-31'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
 
             'total_jun_mandiri'    => bkusModel::where('id_bank', '1')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
-            'total_juni_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
+            'total_jun_bpd'        => bkusModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
             'total_jun_btn'        => bkusModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->sum('nilai_transaksi'),
             'total_jun'            => bkusModel::whereBetween('tb_transaksi.tgl_transaksi', ['2025-06-01', '2025-06-30'])->where('tahun', auth()->user()->tahun)->sum('nilai_transaksi'),
 
