@@ -2548,14 +2548,14 @@
                                                                                         <span> {{ number_format($tanggaran_ptfiskal, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($total_ptfiskal, 2) }}</span>
+                                                                                        <span> {{ number_format($total_ptfiskalfiskal, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_ptfiskal - $total_ptfiskal, 2) }}</span>
+                                                                                        <span> {{ number_format($tanggaran_ptfiskal - $total_ptfiskalfiskal, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_ptfiskal > 0 && $tanggaran_ptfiskal > 0)
-                                                                                            <span> {{ number_format($total_ptfiskal / $tanggaran_ptfiskal * 100, 2) }} %</span>
+                                                                                            <span> {{ number_format($total_ptfiskalfiskal / $tanggaran_ptfiskal * 100, 2) }} %</span>
                                                                                         @endif
                                                                                     </div>
                                                                                 </div>
