@@ -331,7 +331,7 @@ class Realisasi_HD_Controller extends Controller
             'total_ptkabkota'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.01.09.02.0033')->sum('nilai_transaksi'),
 
             // FISKAL
-            'total_ptfiskal'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.ket3', '4.2.01.06')->sum('nilai_transaksi'),
+            'total_ptfiskal'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.ket3', '4.2.01.06.03.0001')->sum('nilai_transaksi'),
             'total_ptfiskalfiskal'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.01.06.03.0001')->sum('nilai_transaksi'),
 
             // DBH
