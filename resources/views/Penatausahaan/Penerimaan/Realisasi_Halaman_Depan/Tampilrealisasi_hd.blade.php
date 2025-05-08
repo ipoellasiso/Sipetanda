@@ -2545,7 +2545,7 @@
                                                                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Insentif Fiskal</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_ptfiskal, 2) }}</span>
+                                                                                        <span> {{ number_format($tanggaran_ptfiskalfiskal, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
                                                                                         <span> {{ number_format($total_ptfiskalfiskal, 2) }}</span>
