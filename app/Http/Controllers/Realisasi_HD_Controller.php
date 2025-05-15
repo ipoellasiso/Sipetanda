@@ -73,7 +73,7 @@ class Realisasi_HD_Controller extends Controller
             'tanggaran_rdpertanianbt'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.11.0001')->sum('nilai'),
             'tanggaran_rdpertanianbi'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.11.0003')->sum('nilai'),
             'tanggaran_rdkoperasi'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->join('tb_opd', 'tb_opd.id', 'tb_anggaran.id_opd')->where('tb_opd.nama_opd', 'Dinas Koperasi, UMKM dan Tenaga Kerja')->sum('nilai'),
-            'tanggaran_rdkoperasialat'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.00072')->sum('nilai'),
+            'tanggaran_rdkoperasialat'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.0007')->sum('nilai'),
             'tanggaran_rdkoperasipasar'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.12.0001')->sum('nilai'),
             'tanggaran_rdkoperasiimta'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.03.08.0001')->sum('nilai'),
             'tanggaran_rdperindag'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->join('tb_opd', 'tb_opd.id', 'tb_anggaran.id_opd')->where('tb_opd.nama_opd', 'Dinas Perdagangan dan Perindustrian')->sum('nilai'),
@@ -81,7 +81,7 @@ class Realisasi_HD_Controller extends Controller
             'tanggaran_rdpu'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->join('tb_opd', 'tb_opd.id', 'tb_anggaran.id_opd')->where('tb_opd.nama_opd', 'Dinas Pekerjaan Umum')->sum('nilai'),
             'tanggaran_rdpukakus'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.01.09.0001')->sum('nilai'),
             'tanggaran_rdpulab'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.0004')->sum('nilai'),
-            'tanggaran_rdpualat'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.0007')->sum('nilai'),
+            'tanggaran_rdpualat'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.00007')->sum('nilai'),
 
             // PENGELOLAAN KEKAYAAN DAERAH
             'tanggaran_hpkddividen'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.ket2', '4.1.03')->sum('nilai'),
@@ -235,7 +235,7 @@ class Realisasi_HD_Controller extends Controller
             'total_rdpertanianbt'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.11.0001')->sum('nilai_transaksi'),
             'total_rdpertanianbi'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.11.0003')->sum('nilai_transaksi'),
             'total_rdkoperasi'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->join('tb_opd', 'tb_opd.id', 'tb_transaksi.id_opd')->where('tb_opd.nama_opd', 'Dinas Koperasi, UMKM dan Tenaga Kerja')->sum('nilai_transaksi'),
-            'total_rdkoperasialat'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.00072')->sum('nilai_transaksi'),
+            'total_rdkoperasialat'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.0007')->sum('nilai_transaksi'),
             'total_rdkoperasipasar'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.12.0001')->sum('nilai_transaksi'),
             'total_rdkoperasiimta'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.03.08.0001')->sum('nilai_transaksi'),
             'total_rdperindag'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->join('tb_opd', 'tb_opd.id', 'tb_transaksi.id_opd')->where('tb_opd.nama_opd', 'Dinas Perdagangan dan Perindustrian')->sum('nilai_transaksi'),
