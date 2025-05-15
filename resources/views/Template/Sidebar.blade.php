@@ -74,6 +74,9 @@
                             <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
                                 <a href="/tampilperiode">Periode</a>
                             </li>
+                            <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
+                                <a href="/tampilsp2dsipd">Tarik SP2D SIPD</a>
+                            </li>
                         </ul>
                     </li>
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\TarikSp2dController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -95,3 +96,6 @@ Route::get('/tampilperiode', [PeriodeController::class, 'index'])->middleware('a
 Route::post('/periode/store', [PeriodeController::class, 'store'])->middleware('auth:web','checkRole:Admin');
 Route::get('/periode/edit/{id}', [PeriodeController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
 Route::delete('/periode/destroy/{id}', [PeriodeController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+
+// TARIK SP2D SIPD
+Route::get('/tampilsp2dsipd', [TarikSp2dController::class, 'index'])->middleware('auth:web','checkRole:Admin');
