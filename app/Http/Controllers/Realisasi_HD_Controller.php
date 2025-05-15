@@ -243,7 +243,7 @@ class Realisasi_HD_Controller extends Controller
             'total_rdpu'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->join('tb_opd', 'tb_opd.id', 'tb_transaksi.id_opd')->where('tb_opd.nama_opd', 'Dinas Pekerjaan Umum')->sum('nilai_transaksi'),
             'total_rdpukakus'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.01.09.0001')->sum('nilai_transaksi'),
             'total_rdpulab'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.0004')->sum('nilai_transaksi'),
-            'total_rdpualat'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.0007')->sum('nilai_transaksi'),
+            'total_rdpualat'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.02.02.01.00007')->sum('nilai_transaksi'),
 
 
             // PENGELOLAAN KEKAYAAN DAERAH
