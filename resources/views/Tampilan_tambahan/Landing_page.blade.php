@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="/landing_page/styles.css">
     <title>SiPETANDA</title>
+    <link rel="shortcut icon" href="/app/assets/images/1.png" type="image/x-icon">
 </head>
 <body>
     <nav>
