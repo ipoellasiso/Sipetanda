@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('Tampilan_tambahan.Landing_page');
 // });
 
-// Route::get('/', [Landing_pageController::class, 'index']);
+Route::get('/', [Landing_pageController::class, 'index']);
 
 // AUTH
 Route::get('/register', [AuthController::class, 'register']);
@@ -102,4 +102,4 @@ Route::delete('/periode/destroy/{id}', [PeriodeController::class, 'destroy'])->m
 Route::get('/tampilsp2dsipd', [TarikSp2dController::class, 'index'])->middleware('auth:web','checkRole:Admin');
 
 // MAINTENANCE
-Route::get('/', [MaintenanceController::class, 'index']);
+// Route::get('/', [MaintenanceController::class, 'index']);
