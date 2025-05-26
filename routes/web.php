@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\KamarControlleruser;
 use App\Http\Controllers\Landing_pageController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\OpdController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\Realisasi_hd_Controller;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('Tampilan_tambahan.Landing_page');
 // });
 
-Route::get('/', [Landing_pageController::class, 'index']);
+// Route::get('/', [Landing_pageController::class, 'index']);
 
 // AUTH
 Route::get('/register', [AuthController::class, 'register']);
@@ -99,3 +100,6 @@ Route::delete('/periode/destroy/{id}', [PeriodeController::class, 'destroy'])->m
 
 // TARIK SP2D SIPD
 Route::get('/tampilsp2dsipd', [TarikSp2dController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+
+// MAINTENANCE
+Route::get('/', [MaintenanceController::class, 'index']);
