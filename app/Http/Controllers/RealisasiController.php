@@ -175,6 +175,8 @@ class RealisasiController extends Controller
             // DBH
             'tanggaran_ptad'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.ket2', '4.2.02')->sum('nilai'),
             'tanggaran_ptadbhp'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.ket3', '4.2.02.01')->sum('nilai'),
+            'tanggaran_ptadbhpkb'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0001')->sum('nilai'),
+            'tanggaran_ptadbhbbnkp'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0002')->sum('nilai'),
             'tanggaran_ptadbhpbbkp'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0003')->sum('nilai'),
             'tanggaran_ptbhpair'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0004')->sum('nilai'),
             'tanggaran_ptadbhprokok'    => AnggaranModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_anggaran.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0005')->sum('nilai'),
@@ -336,6 +338,8 @@ class RealisasiController extends Controller
             // DBH
             'total_ptad'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.ket2', '4.2.02')->sum('nilai_transaksi'),
             'total_ptadbhp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.ket3', '4.2.02.01')->sum('nilai_transaksi'),
+            'total_ptadbhpkb'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0001')->sum('nilai_transaksi'),
+            'total_ptadbhbbnkp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0002')->sum('nilai_transaksi'),
             'total_ptadbhpbbkp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0003')->sum('nilai_transaksi'),
             'total_ptbhpair'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0004')->sum('nilai_transaksi'),
             'total_ptadbhprokok'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.01.01.0005')->sum('nilai_transaksi'),
