@@ -2635,6 +2635,45 @@
                                                                             <div id="collapsept211" class="collapse" data-parent="#pt211">
                                                                                 <div class="row col-md-12">
                                                                                     <div class="col-md-5 table-bordered">
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan Bagi Hasil Pajak Kendaraan Bermotor</i>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($tanggaran_ptadbhpkb, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($total_ptadbhpkb, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span>{{ number_format($tanggaran_ptadbhpkb - $total_ptadbhpkb, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-1 table-bordered" align="right">
+                                                                                        @if ($total_ptadbhpkb > 0 && $tanggaran_ptadbhpkb > 0)
+                                                                                            <span>{{ number_format($total_ptadbhpkb / $tanggaran_ptadbhpkb * 100, 2) }} %</span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row col-md-12">
+                                                                                    <div class="col-md-5 table-bordered">
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan Bagi Hasil Pajak Bea Balik Nama</i><br>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kendaraan Bermotor</i>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($tanggaran_ptadbhbbnkp, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($total_ptadbhbbnkp, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span>{{ number_format($tanggaran_ptadbhbbnkp - $total_ptadbhbbnkp, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-1 table-bordered" align="right">
+                                                                                        @if ($total_ptadbhbbnkp > 0 && $tanggaran_ptadbhbbnkp > 0)
+                                                                                            <span>{{ number_format($total_ptadbhbbnkp / $tanggaran_ptadbhbbnkp * 100, 2) }} %</span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row col-md-12">
+                                                                                    <div class="col-md-5 table-bordered">
                                                                                         <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan Bagi Hasil Pajak Bahan Bakar </i><br>
                                                                                         <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kendaraan Bermotor</i>
                                                                                     </div>
