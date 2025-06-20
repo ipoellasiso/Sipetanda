@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('Tampilan_tambahan.Landing_page');
 // });
 
-Route::get('/', [Landing_pageController::class, 'index']);
+Route::get('/', [MaintenanceController::class, 'index']);
 
 // AUTH
 Route::get('/register', [AuthController::class, 'register']);

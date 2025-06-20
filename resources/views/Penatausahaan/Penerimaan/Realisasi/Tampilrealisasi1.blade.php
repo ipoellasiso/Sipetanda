@@ -30,6 +30,14 @@
                 <h2 class="accordion-header" id="pd1">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cpd1" aria-expanded="true" aria-controls="cpd1">
                         <div class="row col-md-12 col-md-12">
+                            <?php
+                                $angka = $total_pendapatandaerah - $tanggaran_pendapatandaerah;
+                                // echo ($angka < 0 ? "(".abs($angka).")" : $angka);
+                                // $formatted_angka = number_format($angka, 2, '.', ',');
+                                // $format1 = $angka < 0 ? "(".abs($angka).")" : $angka;
+                                $format1 = $angka < 0 ? $angka : $angka;
+                                $formatted_angka = number_format($format1, 2, '.', ',');
+                            ?>
                             <div class="col-md-5">
                                 <b>Pendapatan Daerah</b>
                             </div>
@@ -40,7 +48,8 @@
                                 <span> {{ number_format($total_pendapatandaerah, 2) }}</span>
                             </div>
                             <div class="col-md-2" align="right">
-                                <span> {{ number_format($tanggaran_pendapatandaerah - $total_pendapatandaerah, 2) }}</span>
+                                <!-- <span> {{ number_format($total_pendapatandaerah - $tanggaran_pendapatandaerah, 2) }}</span> -->
+                                <span> {{ "(".$formatted_angka.")" }}</span>
                             </div>
                             <div class="col-md-1" align="right">
                                 @if ($total_pendapatandaerah > 0 && $tanggaran_pendapatandaerah > 0)
