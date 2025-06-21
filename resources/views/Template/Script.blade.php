@@ -6,6 +6,8 @@
     <script src="/assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="/assets/static/js/pages/dashboard.js"></script>
 
+    {{-- <script src="https://cdn.jsdelivr.net/npm/numbro@2.3.1/dist/numbro.min.js"></script> --}}
+
 
     <div class="container my-3">
         @if (@session('success'))
@@ -82,5 +84,15 @@
                 })
             </script>
         @endif
+
+        <script>
+            function numberToBrackets(number) {
+            if (number < 0) {
+                return `(${Math.abs(number)})`;
+            }
+            return number;
+            }
+        </script>
+        
     </div>
     
