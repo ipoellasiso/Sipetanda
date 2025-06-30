@@ -25,6 +25,7 @@ class AnggaranImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'id_rekening' => $row['id_rekening'],
             'id_opd' => $row['id_opd'],
             'nilai' => $row['nilai'],
+            'tahun' => $row['tahun'],
         ]);
     }
 
