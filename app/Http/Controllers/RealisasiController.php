@@ -356,6 +356,8 @@ class RealisasiController extends Controller
 
             'total_llpjknfktp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.3.03.02.01.0001')->sum('nilai_transaksi'),
 
+            'total_llpdyslainya'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.ket3', '4.3.01.04')->sum('nilai_transaksi'),
+            'total_llpdyslainya2'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.3.01.04.01.0001')->sum('nilai_transaksi'),
 
         );
 
