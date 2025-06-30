@@ -282,9 +282,9 @@ class Realisasi_HD_Controller extends Controller
             'total_llpbludhks'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.04.16.04.0001')->sum('nilai_transaksi'),
             'total_llpbludjg'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.04.16.06.0001')->sum('nilai_transaksi'),
             'total_llpdperwali'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.1.04.21.01.0001')->sum('nilai_transaksi'),
-            'total_llpllp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.02.02.1111')->sum('nilai_transaksi'),
-            'total_llppengembalianp3'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.02.02.1112')->sum('nilai_transaksi'),
-            'total_llppengembalianhtp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4.2.02.02.02.1113')->sum('nilai_transaksi'),
+            'total_llpllp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4 .2 .02 .02 .02 .1111')->sum('nilai_transaksi'),
+            'total_llppengembalianp3'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4 .2 .02 .02 .02 .1112')->sum('nilai_transaksi'),
+            'total_llppengembalianhtp'    => bkusModel::join('tb_rekening', 'tb_rekening.id_rekening', 'tb_transaksi.id_rekening')->where('tb_rekening.no_rekening', '4 .2 .02 .02 .02 .1113')->sum('nilai_transaksi'),
 
             // == Dana Transfer ==
             // DBH
