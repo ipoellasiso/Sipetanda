@@ -2826,18 +2826,18 @@
                                                                 <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan Hibah dari Badan/Lembaga/ Organisasi Dalam Negeri</i>
                                                             </div>
                                                             <div class="col-md-2 table-bordered" align="right">
-                                                                {{-- <span> {{ number_format($tanggaran_llpdyslainya2, 2) }}</span> --}}
+                                                                <span> {{ number_format($tanggaran_llpdyslainya2, 2) }}</span>
                                                             </div>
                                                             <div class="col-md-2 table-bordered" align="right">
-                                                                {{-- <span> {{ number_format($total_llpdyslainya2, 2) }}</span> --}}
+                                                                <span> {{ number_format($total_llpdyslainya2, 2) }}</span>
                                                             </div>
                                                             <div class="col-md-2 table-bordered" align="right">
-                                                                {{-- <span>{{ number_format($tanggaran_llpdyslainya2 - $total_llpdyslainya2, 2) }}</span> --}}
+                                                                <span>{{ number_format($tanggaran_llpdyslainya2 - $total_llpdyslainya2, 2) }}</span>
                                                             </div>
                                                             <div class="col-md-1 table-bordered" align="right">
-                                                                {{-- @if ($total_llpdyslainya2 > 0 && $tanggaran_llpdyslainya2 > 0) --}}
-                                                                    {{-- <span>{{ number_format($total_llpdyslainya2 / $tanggaran_llpdyslainya2 * 100, 2) }} %</span> --}}
-                                                                {{-- @endif --}}
+                                                                @if ($total_llpdyslainya2 > 0 && $tanggaran_llpdyslainya2 > 0)
+                                                                    <span>{{ number_format($total_llpdyslainya2 / $tanggaran_llpdyslainya2 * 100, 2) }} %</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
