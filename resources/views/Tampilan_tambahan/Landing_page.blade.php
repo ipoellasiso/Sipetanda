@@ -13,7 +13,7 @@
     <nav>
         <div class="nav-container">
             <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
-                BPKAD <span>Kota Palu</span>
+                <!-- BPKAD <span>Kota Palu</span> -->
             </div>
             <div class="links">
                 <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="/login">Login</a></div>
@@ -34,6 +34,9 @@
             <div class="image" data-aos="zoom-out" data-aos-duration="3000">
                 <img src="/landing_page/assets/main.jpg" alt="">
             </div>
+             <!-- <div class="video" autoplay muted loop id="bg-video">
+                <source src="/app/assets/images/21.mp4" type="video/mp4" />
+            </div> -->
             <div class="content">
                 <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">Hello Selamat <span>Datang di</span></h1>
                 <div class="typewriter" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900"><span class="typewriter-text"></span><label for="">|</label></div>
