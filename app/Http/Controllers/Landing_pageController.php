@@ -358,7 +358,7 @@ class Landing_pageController extends Controller
                     ->make(true);
         }
 
-        return view('Tampilan_tambahan.Landing_page2', $data);
+        return view('Tampilan_tambahan.Landing_page', $data);
     }
 
 }
