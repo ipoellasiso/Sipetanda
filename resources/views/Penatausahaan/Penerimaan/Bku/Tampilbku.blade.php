@@ -6,7 +6,6 @@
 
     <div class="tab-content m-t-15" id="myTabContentJustified">
         <div class="tab-pane fade show active" id="bku" role="tabpanel" aria-labelledby="home-tab-justified">
-            
             <div class="card">
                 <div class="card-body">
 
@@ -316,10 +315,10 @@
                                     <div>
                                         <p class="m-b-0">Rp. {{ number_format($total_jun_btn) }}</p>
                                     </div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <!-- <div class="col-md-3 card">
+                        <div class="col-md-3 card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -358,8 +357,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
-                        <!-- <div class="col-md-3 card">
+                        </div>
+                        <div class="col-md-3 card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -558,7 +557,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     
                 </div>
