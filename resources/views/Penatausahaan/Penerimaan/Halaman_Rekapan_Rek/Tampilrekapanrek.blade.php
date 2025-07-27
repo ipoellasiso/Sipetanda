@@ -57,7 +57,7 @@
             </div>
             <div class="col-sm-1">
                 <div class="form-group mb-3">
-                    <button type="submit" id="saveBtn" value="create" class="btn btn-outline-danger">
+                    <button type="submit" id="saveBtn" value="create" class="btn btn-outline-danger reset">
                         <i class="fa fa-undo"></i><br>  Reset
                     </button>
                 </div>

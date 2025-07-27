@@ -67,6 +67,21 @@
             });
     });
 
+    $('body').on('click', '.resetuser', function () {
+        $('#id_rekening22').val('').trigger('change');
+        $('#tgl_awal1').val('').trigger('change');
+        $('#tgl_akhir1').val('').trigger('change');
+        var tampilawal = '1';
+        $.ajax({
+                url: "{{ route('view.dataindexuser.index') }}" +'/' + tampilawal +'/tampilawal',
+                type: "GET",
+                data: 'tampilawal=' + tampilawal,
+                success: function (data) {
+                    $('.tampildata1user').html(data);//menampilkan data ke dalam modal
+                }
+        });
+    });
+
     $('#id_rekening22').select2({
 	    placeholder: "Pilih Rekening",
     	allowClear: true,

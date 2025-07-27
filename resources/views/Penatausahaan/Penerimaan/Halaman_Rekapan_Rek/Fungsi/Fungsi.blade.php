@@ -50,6 +50,22 @@
         });
     });
 
+    $('body').on('click', '.reset', function () {
+        $('#id_rekening').val('').trigger('change');
+        $('#id_opd').val('').trigger('change');
+        $('#tgl_awal').val('').trigger('change');
+        $('#tgl_akhir').val('').trigger('change');
+        var tampilawal = '1';
+        $.ajax({
+                url: "{{ route('view.dataindex.index') }}" +'/' + tampilawal +'/tampilawal',
+                type: "GET",
+                data: 'tampilawal=' + tampilawal,
+                success: function (data) {
+                    $('.tampildata1').html(data);//menampilkan data ke dalam modal
+                }
+        });
+    });
+
     $('body').on('click', '.caribaruadmin', function (e) {
         e.preventDefault();
         var id_rekening = $('#id_rekening').val();
