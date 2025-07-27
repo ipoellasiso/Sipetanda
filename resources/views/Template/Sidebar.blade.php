@@ -117,7 +117,7 @@
                         @endif
                         @if(Auth::user()->role == 'User')
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
-                                <a href="/tampilrekapanrekuser">BUKU PEMBANTU PENERIMAAN</a>
+                                <a href="/tampilrekapanrekuser">Buku Pembantu Penerimaan</a>
                             </li>
                         @endif
                     </ul>

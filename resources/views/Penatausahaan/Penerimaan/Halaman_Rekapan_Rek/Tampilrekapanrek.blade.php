@@ -35,7 +35,7 @@
             <div class="col-sm-12">
                 <div class="form-group mb-3">
                     <label for="roundText">Pilih Rekening</label>
-                    <select class="form-select" name="id_rekening2" id="id_rekening2" style="width: 100%" required>
+                    <select class="form-select" name="id_rekening" id="id_rekening" style="width: 100%" required>
                         <option></option>
                     </select>
                 </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-sm-1">
                 <div class="form-group mb-3">
-                    <button type="button" class="btn btn-outline-primary caribaru" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-outline-primary caribaruadmin" data-bs-dismiss="modal">
                         <i class="fa fa-check"></i> Terapkan
                     </button>
                 </div>

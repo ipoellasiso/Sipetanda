@@ -50,9 +50,9 @@
         });
     });
 
-    $('body').on('click', '.caribaru', function (e) {
+    $('body').on('click', '.caribaruadmin', function (e) {
         e.preventDefault();
-        var id_rekening2 = $('#id_rekening2').val();
+        var id_rekening = $('#id_rekening').val();
         var id_opd = $("#id_opd").val();
         var tgl_awal = $("#tgl_awal").val();
         var tgl_akhir = $("#tgl_akhir").val();
@@ -60,14 +60,14 @@
         $.ajax({
             url: "{{ route('view.dataindex.index') }}" +'/' + tampilawal +'/tampil',
             type: "GET",
-            data: '&tgl_awal=' + tgl_awal + '&tgl_akhir=' + tgl_akhir + '&id_rekening2=' + id_rekening2 + '&id_opd=' + id_opd,
+            data: '&tgl_awal=' + tgl_awal + '&tgl_akhir=' + tgl_akhir + '&id_rekening=' + id_rekening + '&id_opd=' + id_opd,
                 success: function (data) {
                     $('.tampildata1').html(data);//menampilkan data ke dalam modal
                 }
             });
     });
 
-    $('#id_rekening2').select2({
+    $('#id_rekening').select2({
 	    placeholder: "Pilih Rekening",
     	allowClear: true,
         // dropdownParent: $('#tambahbku'),

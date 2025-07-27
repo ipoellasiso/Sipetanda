@@ -88,7 +88,7 @@ class KamarController extends Controller
                             ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
                             ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
                             ->where('tb_transaksi.id_opd','like', "%".$request->id_opd."%")
-                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening2."%")
+                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening."%")
                             ->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir])
                             // ->limit(10)
                             ->get();
@@ -99,7 +99,7 @@ class KamarController extends Controller
                             ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
                             ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
                             ->where('tb_transaksi.id_opd','like', "%".$request->id_opd."%")
-                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening2."%")
+                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening."%")
                             ->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir])
                             // ->where('sp2d.nama_skpd','like', "%".$request->nama_skpd."%")
                             ->first();
