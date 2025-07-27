@@ -77,33 +77,34 @@ class KamarController extends Controller
                             ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
                             ->where('tb_opd.nama_opd','like', "%".$request->id_opd."%")
                             ->where('tb_rekening.rekening2','like', "%".$request->id_rekening."%")
-                            ->limit(10)
+                            // ->limit(10)
                             ->get();
 
-            return view('Penatausahaan.Penerimaan.Halaman_Rekapan_Rek.Viewdataindex',['datarealisasi' => $datarealisasi,]);
+            return view('Penatausahaan.Penerimaan.Halaman_Rekapan_Rek.Viewdatacari',['datarealisasi' => $datarealisasi,]);
         } else {
             $datarealisasi = DB::table('tb_transaksi')
-                            ->select('tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', )
+                            ->select('tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', 'tb_transaksi.id_rekening', 'tb_transaksi.id_opd' )
                             ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
                             ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
                             ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
-                            ->where('tb_opd.nama_opd','like', "%".$request->id_opd."%")
-                            ->where('tb_rekening.rekening2','like', "%".$request->id_rekening."%")
-                            ->limit(10)
+                            ->where('tb_transaksi.id_opd','like', "%".$request->id_opd."%")
+                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening2."%")
+                            ->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir])
+                            // ->limit(10)
                             ->get();
             
             $data1 = DB::table('tb_transaksi')
-                            ->select('tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', )
+                            ->select('tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi',  'tb_transaksi.id_rekening')
                             ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
                             ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
                             ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
-                            ->where('tb_opd.nama_opd','like', "%".$request->id_opd."%")
-                            ->where('tb_rekening.rekening2','like', "%".$request->id_rekening."%")
-                            // ->where('sp2d.nama_skpd','like', "%".$request->nama_skpd."%")
+                            ->where('tb_transaksi.id_opd','like', "%".$request->id_opd."%")
+                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening2."%")
+                            ->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir])
                             // ->where('sp2d.nama_skpd','like', "%".$request->nama_skpd."%")
                             ->first();
             
-            return view('Penatausahaan.Penerimaan.Halaman_Rekapan_Rek.Viewdatacari',[
+            return view('Penatausahaan.Penerimaan.Halaman_Rekapan_Rek.Viewdataindex',[
                 'data' => $data,
                 'datarealisasi' => $datarealisasi,
                 'data1' => $data1,

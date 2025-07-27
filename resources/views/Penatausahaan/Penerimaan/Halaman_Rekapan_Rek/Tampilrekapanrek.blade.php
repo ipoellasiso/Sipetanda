@@ -20,13 +20,13 @@
             <div class="col-sm-3">
                 <div class="form-group mb-3">
                     <label for="roundText">Tanggal Awal</label>
-                    <input type="date" class="form-control mb-3 flatpickr-no-config" placeholder="Select date..">
+                    <input type="date" name="tgl_awal" id="tgl_awal" class="form-control mb-3 flatpickr-no-config" placeholder="Select date..">
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group mb-3">
                     <label for="roundText">Tanggal Akhir</label>
-                    <input type="date" class="form-control mb-3 flatpickr-no-config" placeholder="Select date..">
+                    <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control mb-3 flatpickr-no-config" placeholder="Select date..">
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col-sm-12">
                 <div class="form-group mb-3">
                     <label for="roundText">Pilih Rekening</label>
-                    <select class="form-select" name="id_rekening" id="id_rekening" style="width: 100%" required>
+                    <select class="form-select" name="id_rekening2" id="id_rekening2" style="width: 100%" required>
                         <option></option>
                     </select>
                 </div>
@@ -58,7 +58,7 @@
             <div class="col-sm-1">
                 <div class="form-group mb-3">
                     <button type="submit" id="saveBtn" value="create" class="btn btn-outline-danger">
-                        <i class="fa fa-undo"></i>  Reset
+                        <i class="fa fa-undo"></i><br>  Reset
                     </button>
                 </div>
             </div>
