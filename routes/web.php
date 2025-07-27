@@ -90,10 +90,10 @@ Route::get('/bku/rekening', [KamarController::class, 'getDatarek'])->middleware(
 Route::get('/bku/opd', [KamarController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
 
 // REKAPAN REKENING USER
-// Route::get('/tampilrekapanrekuser', [KamarControlleruser::class, 'index'])->name('view.dataindexuser.index')->middleware('auth:web','checkRole:User');
-// Route::get('/tampilrekapanrekuser/{id}/tampilawal', [KamarControlleruser::class, 'viewdataindexuser'])->name('view.datauser.tampil')->middleware('auth:web','checkRole:User');
-// Route::get('/tampilrekapanrekuser/{id}/tampil', [KamarControlleruser::class, 'viewdataindexuser'])->name('view.datauser.tampil')->middleware('auth:web','checkRole:User');
-// Route::get('/bku/rekening2', [KamarControlleruser::class, 'getDatarek'])->middleware('auth:web','checkRole:User');
+Route::get('/tampilrekapanrekuser', [KamarControlleruser::class, 'index'])->name('view.dataindexuser.index')->middleware('auth:web','checkRole:User');
+Route::get('/tampilrekapanrekuser/{id}/tampilawal', [KamarControlleruser::class, 'viewdataindexuser'])->name('view.datauser.tampil')->middleware('auth:web','checkRole:User');
+Route::get('/tampilrekapanrekuser/{id}/tampil', [KamarControlleruser::class, 'viewdataindexuser'])->name('view.datauser.tampil')->middleware('auth:web','checkRole:User');
+Route::get('/bku/rekening2', [KamarControlleruser::class, 'getDatarek'])->middleware('auth:web','checkRole:User');
 
 // DATA PERIODE
 Route::get('/tampilperiode', [PeriodeController::class, 'index'])->middleware('auth:web','checkRole:Admin');
