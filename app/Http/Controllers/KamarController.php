@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DataExport2;
 use App\Models\AnggaranModel;
 use App\Models\bkusModel;
 use App\Models\OpdModel;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KamarController extends Controller
 {
@@ -153,5 +155,35 @@ class KamarController extends Controller
 
         return response()->json($response); 
     } 
+
+    public function Exportexcells(Request $request)
+    {
+        $datarealisasi = DB::table('tb_transaksi')
+                            ->select('tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', 'tb_transaksi.id_rekening', 'tb_transaksi.id_opd' )
+                            ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
+                            ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
+                            ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
+                            ->where('tb_transaksi.id_opd','like', "%".$request->id_opd."%")
+                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening."%")
+                            ->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir])
+                            // ->limit(10)
+                            ->get();
+            
+            $data1 = DB::table('tb_transaksi')
+                            ->select('tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi',  'tb_transaksi.id_rekening')
+                            ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
+                            ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
+                            ->join('tb_bank', 'tb_bank.id_bank', 'tb_transaksi.id_bank')
+                            ->where('tb_transaksi.id_opd','like', "%".$request->id_opd."%")
+                            ->where('tb_transaksi.id_rekening','like', "%".$request->id_rekening."%")
+                            ->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir])
+                            // ->where('sp2d.nama_skpd','like', "%".$request->nama_skpd."%")
+                            ->first();
+
+        if ($request->page == 'downloadexcel'){
+            return Excel::download(new DataExport2($datarealisasi, $data1), 'Buku_Pembantu_Penerimaan.xlsx');
+            // return view('Laporan_LS.cetakisilaporanls', $data, compact('cetakpajakls', 'cetakbulan'));
+        }
+    }
 
 }

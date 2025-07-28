@@ -1,3 +1,21 @@
+<div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+    </div>
+    <div class="col-2">
+        <!-- <button id="cetakpdfls" target="blank" type="button" class="btn btn-outline-primary m-b-xs text-center" style="text-align: center">
+            <i class="fa fa-enter" ></i>PDF  
+        </button> -->
+        <button class="btn btn-outline-info m-b-xs" onclick="tablesToExcel(['tbl1'], ['Pajak_Ls'], 'Pajakls.xls', 'Excel')">
+            <i class="fa fa-enter" ></i>Excel
+        </button>
+        <!-- <button id="cetakexcells1" target="blank" type="button" class="btn btn-outline-info m-b-xs">
+            <i class="fa fa-enter"></i>Excel
+        </button> -->
+    </div>
+</div>
+
 <div class="row col-md-12">
     <div class="col-md-4">
         <div class="avatar-image  m-h-15 m-r-25">
@@ -59,5 +77,19 @@
         </tfoot>
     </table>
 </div>
+
+<!-- <script>
+$(document).ready(function(){
+    $("#cetakexcells1").click(function(e){
+        var id_rekening = $('#id_rekening').val();
+        var id_opd = $("#id_opd").val();
+        var tgl_awal = $("#tgl_awal").val();
+        var tgl_akhir = $("#tgl_akhir").val();
+        // alert( nama_skpd + "" + periode + "" + akun_pajak + "" + status2);
+        params = "?page=downloadexcel&tgl_awal=" + tgl_awal + "&tgl_akhir=" + tgl_akhir + "&id_rekening=" + id_rekening + "&id_opd=" + id_opd
+        window.open("/laporan.downloadlaporanexcel1"+params,"_blank");
+    });
+});
+</script> -->
 
 {{-- @include('Penatausahaan.Penerimaan.Halaman_Rekapan_Rek.Fungsi.Fungsi') --}}
