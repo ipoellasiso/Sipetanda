@@ -51,14 +51,14 @@
             <div class="col-sm-1">
                 <div class="form-group mb-3">
                     <button type="button" class="btn btn-outline-primary caribaruadmin" data-bs-dismiss="modal">
-                        <i class="fa fa-check"></i> Terapkan
+                        <i class="fa fa-check"></i><br> Terapkan
                     </button>
                 </div>
             </div>
             <div class="col-sm-1">
                 <div class="form-group mb-3">
                     <button type="submit" id="saveBtn" value="create" class="btn btn-outline-danger reset">
-                        <i class="fa fa-undo"></i><br>  Reset
+                        <i class="fa fa-undo"></i><br>  R e s e t
                     </button>
                 </div>
             </div>

@@ -28,7 +28,7 @@
                 <th class="text-center">Opd</th>
                 <th class="text-center">Bank</th>
                 <th class="text-center">Jumlah</th>
-                <th class="text-center">Ket</th>
+                <!-- <th class="text-center">Ket</th> -->
                 {{-- <th class="text-center" width="100px">Action</th> --}}
             </tr>
         </thead>
@@ -46,11 +46,17 @@
                     <td>{{ $d->nama_opd }}</td>
                     <td>{{ $d->nama_bank }}</td>
                     <td>{{ number_format($d->nilai_transaksi) }}</td>
-                    <td>{{ $d->ket }}</td>
+                    <!-- <td>{{ $d->ket }}</td> -->
                 </tr>
                 
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="8" style="text-align: right">Total Penerimaan</th>
+                <td style="text-align: right"><strong> {{ number_format($total = $datarealisasiuser1->sum('nilai_transaksi'), 0) }}</td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
