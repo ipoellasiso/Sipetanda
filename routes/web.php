@@ -89,7 +89,7 @@ Route::get('/tampilrekapanrek/{id}/tampil', [KamarController::class, 'viewdatain
 Route::get('/bku/rekening', [KamarController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
 Route::get('/bku/opd', [KamarController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
 
-Route::get('/downloadlaporanexcel1', [KamarController::class, 'Exportexcells'])->name('laporan.downloadlaporanexcel1')->middleware('auth:web','checkRole:Admin');
+// Route::get('/downloadlaporanexcel1', [KamarController::class, 'Exportexcells'])->name('laporan.downloadlaporanexcel1')->middleware('auth:web','checkRole:Admin');
 
 
 // REKAPAN REKENING USER
