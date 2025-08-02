@@ -12,7 +12,7 @@
             <div class="col-sm-6">
                 <div class="form-group mb-3">
                     <label for="roundText">Pilih Opd</label>
-                    <select class="form-select" name="id_opd" id="id_opd" style="width: 100%" required>
+                    <select class="form-select" name="nama_opd" id="nama_opd" style="width: 100%" required>
                         <option></option>
                     </select>
                 </div>

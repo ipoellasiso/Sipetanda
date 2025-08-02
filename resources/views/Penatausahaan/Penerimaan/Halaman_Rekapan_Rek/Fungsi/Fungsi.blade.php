@@ -52,7 +52,7 @@
 
     $('body').on('click', '.reset', function () {
         $('#id_rekening').val('').trigger('change');
-        $('#id_opd').val('').trigger('change');
+        $('#nama_opd').val('').trigger('change');
         $('#tgl_awal').val('').trigger('change');
         $('#tgl_akhir').val('').trigger('change');
         var tampilawal = '1';
@@ -69,14 +69,14 @@
     $('body').on('click', '.caribaruadmin', function (e) {
         e.preventDefault();
         var id_rekening = $('#id_rekening').val();
-        var id_opd = $("#id_opd").val();
+        var nama_opd = $("#nama_opd").val();
         var tgl_awal = $("#tgl_awal").val();
         var tgl_akhir = $("#tgl_akhir").val();
         var tampilawal = '1';
         $.ajax({
             url: "{{ route('view.dataindex.index') }}" +'/' + tampilawal +'/tampil',
             type: "GET",
-            data: '&tgl_awal=' + tgl_awal + '&tgl_akhir=' + tgl_akhir + '&id_rekening=' + id_rekening + '&id_opd=' + id_opd,
+            data: '&tgl_awal=' + tgl_awal + '&tgl_akhir=' + tgl_akhir + '&id_rekening=' + id_rekening + '&nama_opd=' + nama_opd,
                 success: function (data) {
                     $('.tampildata1').html(data);//menampilkan data ke dalam modal
                 }
@@ -108,7 +108,7 @@
             }
     });
 
-    $('#id_opd').select2({
+    $('#nama_opd').select2({
 	    placeholder: "Pilih Opd",
     	allowClear: true,
         // dropdownParent: $('#tambahbku'),

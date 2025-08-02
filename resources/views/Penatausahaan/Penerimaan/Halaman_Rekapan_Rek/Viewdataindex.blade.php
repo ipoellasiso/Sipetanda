@@ -34,7 +34,7 @@
 <br><br>
 
 <div class="m-t-25 table-responsive">
-    <table id="table2" class="tabelrekapan table table-hover table-bordered datatable-minimal">
+    <table id="tbl1" class="tabelrekapan table table-hover table-bordered datatable-minimal">
         <thead class="table-danger">
             <tr>
                 <th class="text-center">No</th>
