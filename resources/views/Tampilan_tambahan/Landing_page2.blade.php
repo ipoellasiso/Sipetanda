@@ -9,7 +9,7 @@
     <meta name="author" content="TemplateMo">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>Sipetanda1 - Home</title>
+    <title>Sipetanda - Home</title>
     <link rel="shortcut icon" href="/theme/assets/images/logo244.png">
 
     <!-- Bootstrap core CSS -->
