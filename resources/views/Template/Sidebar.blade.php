@@ -123,7 +123,7 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-title">Laporan</li>
+                <!-- <li class="sidebar-title">Laporan</li>
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-printer-fill"></i>
@@ -136,7 +136,7 @@
                         </ul>
                     </li>
                 
-                </li>
+                </li> -->
 
             </ul>
         </div>
