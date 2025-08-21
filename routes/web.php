@@ -4,6 +4,7 @@ use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BkuController;
+use App\Http\Controllers\BkuOpdController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\KamarControlleruser;
@@ -109,3 +110,13 @@ Route::get('/tampilsp2dsipd', [TarikSp2dController::class, 'index'])->middleware
 
 // MAINTENANCE
 // Route::get('/', [MaintenanceController::class, 'index']);
+
+// DATA BKU
+Route::get('/tampilbkuopd', [BkuOpdController::class, 'index'])->middleware('auth:web','checkRole:User');
+Route::post('/bkuopd/store', [BkuOpdController::class, 'store'])->middleware('auth:web','checkRole:User');
+// Route::get('/bku/edit/{id_transaksi}', [BkuController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+// Route::delete('/bku/destroy/{id_transaksi}', [BkuController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+// Route::post('bku', [BkuController::class, 'import'])->name('bku.import')->middleware('auth:web','checkRole:Admin');
+Route::get('/bkuopd/rekening', [BkuOpdController::class, 'getDatarek'])->middleware('auth:web','checkRole:User');
+Route::get('/bkuopd/opd', [BkuOpdController::class, 'getDataopd'])->middleware('auth:web','checkRole:User');
+Route::get('/bkuopd/bank', [BkuOpdController::class, 'getDatabank'])->middleware('auth:web','checkRole:User');
