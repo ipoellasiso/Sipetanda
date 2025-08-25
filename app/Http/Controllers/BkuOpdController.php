@@ -12,6 +12,7 @@ use App\Models\BankModel;
 use App\Models\BkuopdModel;
 use App\Models\OpdModel;
 use App\Models\RekeningModel;
+use Illuminate\Support\Carbon;
 
 class BkuOpdController extends Controller
 {
@@ -138,12 +139,28 @@ class BkuOpdController extends Controller
 
     public function store(Request $request)
     {
-        $id_transaksi = BkuopdModel::getId();
-        foreach($id_transaksi as $d);
-        $idlama = $d->id_transaksi;
-        $idbaru = $idlama + 1;
+        $now = Carbon::now();
+        $thnBulan = $now->year . $now->month;
+        $cek = BkuopdModel::count();
+        // dd($cek);
+        if ($cek == 0) {
+            $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+            foreach($ambilopd1 as $d)
+            $ambilopd  = $d->status1;
+            $urut = 100001;
+            $nomor = $ambilopd . '-' . $thnBulan . $urut;
+            // dd($nomor);
+        } else {
+            // echo 'sdas';
+            $ambil     = BkuopdModel::all()->last();
+            $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+            foreach($ambilopd1 as $d)
+            $ambilopd  = $d->status1;
+            $urut      = (int)substr($ambil->no_buku, -6) + 1;
+            $nomor     = $ambilopd . '-' . $thnBulan . $urut;
+            // dd($nomor);
+        }
 
-        $no_buku = $idbaru;
 
         $bkuId = $request->id_transaksi;
 
@@ -158,7 +175,7 @@ class BkuOpdController extends Controller
                 'id_bank'           => $request->id_bank,
                 'uraian'            => $request->uraian,
                 'ket'               => $request->ket,
-                'no_buku'           => $request->$no_buku,
+                'no_buku'           => $nomor,
                 'tgl_transaksi'     => $request->tgl_transaksi,
                 'nilai_transaksi'   => str_replace('.','',$request->nilai_transaksi),
                 'tahun'             => date('Y'),
