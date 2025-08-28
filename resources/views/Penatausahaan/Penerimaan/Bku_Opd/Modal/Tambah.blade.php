@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>OPD</label>
-                                    <select class="form-select" name="id_opd" id="id_opdopd" style="width: 100%" required>
+                                    <select class="form-select" name="id_opd" id="id_opdopd" style="width: 100%">
                                         <option></option>
                                     </select>
                                 </div>

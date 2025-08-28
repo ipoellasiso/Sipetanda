@@ -140,25 +140,43 @@ class BkuOpdController extends Controller
     public function store(Request $request)
     {
         $now = Carbon::now();
-        $thnBulan = $now->year . $now->month;
-        $cek = BkuopdModel::count();
-        // dd($cek);
-        if ($cek == 0) {
-            $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-            foreach($ambilopd1 as $d)
-            $ambilopd  = $d->status1;
-            $urut = 100001;
-            $nomor = $ambilopd . '-' . $thnBulan . $urut;
-            // dd($nomor);
+        $Thn = $now->year;
+        $Bulan =  $now->month;
+        $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+             foreach($ambilopd1 as $d)
+             $ambilopd  = $d->status1;
+        $ambilopd2 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+             foreach($ambilopd2 as $d)
+             $ambilopd2  = $d->id;
+        // $cek = BkuopdModel::count();
+        // // dd($cek);
+        // if ($cek == 0) {
+        //     $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+        //     foreach($ambilopd1 as $d)
+        //     $ambilopd  = $d->status1;
+        //     // $urut = 100001;
+        //     $urut = $request->no_buku;
+        //     $nomor = $ambilopd . '-' . $thnBulan . '-' . $urut;
+        //     // dd($nomor);
+        // } else {
+        //     // echo 'sdas';
+        //     $ambil     = BkuopdModel::all()->last();
+        //     $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+        //     foreach($ambilopd1 as $d)
+        //     $ambilopd  = $d->status1;
+        //     $urut      = (int)substr($ambil->no_buku, -7) + 1;
+        //     $nomor     = $ambilopd . '-' . $thnBulan . '-' . $urut;
+        //     // dd($nomor);
+        // }
+
+        $cek = DB::table("tb_bkuopd")->select(DB::raw("COUNT(no_buku) as jumlah"))->where('id_opd', auth()->user()->id_opd)->groupBy('id_opd');
+        if ($cek ->count() >0){
+            foreach($cek->get() as $k){
+                $nourut = sprintf("%04s", abs( ((int)$k->jumlah) +1 )). '/' . $ambilopd . '/' . $Thn;
+            }
         } else {
-            // echo 'sdas';
-            $ambil     = BkuopdModel::all()->last();
-            $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-            foreach($ambilopd1 as $d)
-            $ambilopd  = $d->status1;
-            $urut      = (int)substr($ambil->no_buku, -6) + 1;
-            $nomor     = $ambilopd . '-' . $thnBulan . $urut;
-            // dd($nomor);
+            $num = 1;
+            $nourut = sprintf("%04s", $num) . '/' . $ambilopd . '/' . $Thn;
         }
 
 
@@ -171,11 +189,11 @@ class BkuOpdController extends Controller
         } else {
             $details = [
                 'id_rekening'       => $request->id_rekening,
-                'id_opd'            => $request->id_opd,
+                'id_opd'            => $ambilopd2,
                 'id_bank'           => $request->id_bank,
                 'uraian'            => $request->uraian,
                 'ket'               => $request->ket,
-                'no_buku'           => $nomor,
+                'no_buku'           => $nourut,
                 'tgl_transaksi'     => $request->tgl_transaksi,
                 'nilai_transaksi'   => str_replace('.','',$request->nilai_transaksi),
                 'tahun'             => date('Y'),
