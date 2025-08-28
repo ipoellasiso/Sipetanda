@@ -196,7 +196,7 @@ class BkuController extends Controller
     {
         $file = $request->file('file')->store('public/import');
         $import = new BkusImport();
-        $import->import1($file);
+        $import->import($file);
 
         // dd($import->failures());
         if ($import->failures()->isNotEmpty())
