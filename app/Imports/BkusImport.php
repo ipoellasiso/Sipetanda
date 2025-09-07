@@ -31,6 +31,7 @@ class BkusImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFail
             'id_bank' => $row['id_bank'],
             'nilai_transaksi' => $row['nilai_transaksi'],
             'tahun' => $row['tahun'],
+            'status3' => $row['status3'],
         ]);
     }
 
