@@ -9,11 +9,11 @@ class JenisModel extends Model
 {
     use HasFactory;
     protected $table = "tb_jenis";
-    protected $primaryKey = "id";
+    protected $primaryKey = "id_jen";
     protected $fillable = [
         'id_akun',
         'id_kelompok',
-        'no_rek',
-        'rek',
+        'no_rek_jen',
+        'rek_jen',
     ];
 }

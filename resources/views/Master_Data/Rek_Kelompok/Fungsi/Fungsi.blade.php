@@ -23,7 +23,7 @@
         ajax: "/tampilrekkelompok",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'id_akun', name: 'id_akun'},
+            {data: 'rek', name: 'rek'},
             {data: 'no_rek_kel', name: 'no_rek_kel'},
             {data: 'rek_kel', name: 'rek_kel'},
             {data: 'action', name: 'action', orderable: false, searchable: false},

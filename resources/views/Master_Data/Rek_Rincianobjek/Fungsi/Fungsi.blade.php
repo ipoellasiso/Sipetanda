@@ -17,52 +17,55 @@
       Render DataTable
       --------------------------------------------
       --------------------------------------------*/
-    var table = $('.tabelrekjenis').DataTable({
+    var table = $('.tabelrekrincianobjek').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "/tampilrekjenis",
+        ajax: "/tampilrekrincianobjek",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'rek', name: 'rek'},
             {data: 'rek_kel', name: 'rek_kel'},
-            {data: 'no_rek_jen', name: 'no_rek_jen'},
             {data: 'rek_jen', name: 'rek_jen'},
+            {data: 'rek_o', name: 'rek_o'},
+            {data: 'no_rek_ro', name: 'no_rek_ro'},
+            {data: 'rek_ro', name: 'rek_ro'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
 
     // tambah data
-     $('#createRekjenis').click(function (){
-         $('#saveBtn').val("create-rekjenis");
+     $('#createRekrincianobjek').click(function (){
+         $('#saveBtn').val("create-rekrincianobjek");
          $('#id6').val('');
          $('#userForm').trigger("reset");
-         $('#tambahrekjenis').modal('show');
+         $('#tambahrekrincianobjek').modal('show');
          $('#modal-preview').attr('src', 'https://via/placeholder.com/150');
 
     });
 
     // edit data
-    $('body').on('click', '.editRekjenis', function(e)  {
-        var id_jen = $(this).data('id_jen');
-        $.get("/rekjenis/edit/"+id_jen, function (data) {
-            $('#saveBtn').val("edit-rekjenis");
-            $('#tambahrekjenis').modal('show');
+    $('body').on('click', '.editRekrincianobjek', function(e)  {
+        var id_ro = $(this).data('id_ro');
+        $.get("/rekrincianobjek/edit/"+id_ro, function (data) {
+            $('#saveBtn').val("edit-rekrincianobjek");
+            $('#tambahrekrincianobjek').modal('show');
         
-            $('#id6').val(data.id_jen);
+            $('#id6').val(data.id_ro);
             $('#id_akun').html('<option value = "'+data.id+'" selected >'+data.rek+'</option>');
             $('#id_kelompok').html('<option value = "'+data.id_kel+'" selected >'+data.rek_kel+'</option>');
-            // $('#id_kelompok').val(data.id_kelompok);
-            $('#no_rek_jen').val(data.no_rek_jen);
-            $('#rek_jen').val(data.rek_jen);
+            $('#id_jenis').html('<option value = "'+data.id_jen+'" selected >'+data.rek_jen+'</option>');
+            $('#id_objek').html('<option value = "'+data.id_o+'" selected >'+data.rek_o+'</option>');
+            $('#no_rek_ro').val(data.no_rek_ro);
+            $('#rek_ro').val(data.rek_ro);
         })
     });
 
     // Import data
-    $('#createimportrekjenis').click(function (){
+    $('#createimportrekrincianobjek').click(function (){
         $('#saveBtn').val("create-import");
         $('#id6').val('');
         $('#userForm1').trigger("reset");
-        $('#tambahimportrekjenis').modal('show');
+        $('#tambahimportrekrincianobjek').modal('show');
         $('#modal-preview').attr('src', 'https://via/placeholder.com/150');
 
     });
@@ -78,7 +81,7 @@
 
         $.ajax({
             type:'POST',
-            url: "/rekjenis/store",
+            url: "/rekrincianobjek/store",
             data: formData,
             cacha: false,
             contentType: false,
@@ -87,7 +90,7 @@
                 if(data.success)
                 {
                     $('#userForm').trigger("reset");
-                    $('#tambahrekjenis').modal('hide');
+                    $('#tambahrekrincianobjek').modal('hide');
                     $('#saveBtn').html('Simpan');
 
                     Swal.fire({
@@ -101,7 +104,7 @@
                 else
                 {
                     $('#userForm').trigger("reset");
-                    $('#tambahrekjenis').modal('hide');
+                    $('#tambahrekrincianobjek').modal('hide');
                     $('#saveBtn').html('Simpan');
 
                     Swal.fire({
@@ -121,13 +124,13 @@
     });
 
     // hapus data
-    $('body').on('click', '.deleteRekjenis', function () {
+    $('body').on('click', '.deleteRekrincianobjek', function () {
 
-        var id_jen = $(this).data("id_jen");
+        var id_ro = $(this).data("id_ro");
 
         Swal.fire({
             title: 'Warning ?',
-            text: "Hapus Data Ini ?"  +id_jen,
+            text: "Hapus Data Ini ?"  +id_ro,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -137,7 +140,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "/rekjenis/destroy/"+id_jen,
+                    url: "/rekrincianobjek/destroy/"+id_ro,
                     dataType: "JSON",
                     success: function(data)
                     {
@@ -161,7 +164,7 @@
 
     $('#id_akun').select2({
         placeholder: "Pilih Akun",
-        dropdownParent: $('#tambahrekjenis'),
+        dropdownParent: $('#tambahrekrincianobjek'),
         ajax: {
             url: "{{route('akun.index')}}",
             processResults: function({data}){
@@ -182,9 +185,9 @@
 
         $('#id_kelompok').select2({
             placeholder: "Pilih Kelompok",
-            dropdownParent: $('#tambahrekjenis'),
+            dropdownParent: $('#tambahrekrincianobjek'),
             ajax: {
-                url: "{{url('rekkelompok/jenis')}}/"+id,
+                url: "{{url('rekkelompok/rincianobjek')}}/"+id,
                 processResults: function({data}){
                     return {
                         results: $.map(data, function(item){
@@ -200,53 +203,51 @@
 
     });
 
-    //  //Get Data Akun
-    // $('#id_akun').select2({
-	//     placeholder: "Pilih Akun",
-    // 	allowClear: true,
-    //     dropdownParent: $('#tambahrekjenis'),
-	//     ajax: { 
-    //         url: "/rekakun/jenis",
-    //         type: "Get",
-    //         dataType: 'json',
-    //         delay: 250,
-    //         data: function (params2) {
-    //             return {
-    //                 searchAkun: params2.term2 // search term
-    //             };
-    //         },
-    //         processResults: function (response) {
-    //             return {
-    //                 results: response
-    //             };
-    //         },
-    //             cache: true
-    //         }
-    // });
+    $('#id_kelompok').change(function(){
+        let id = $('#id_kelompok').val();
 
-    //  //Get Data Kelompok
-    // $('#id_kelompok').select2({
-	//     placeholder: "Pilih Kelompok",
-    // 	allowClear: true,
-    //     dropdownParent: $('#tambahrekjenis'),
-	//     ajax: { 
-    //         url: "/rekkelompok/jenis",
-    //         type: "Get",
-    //         dataType: 'json',
-    //         delay: 250,
-    //         data: function (params2) {
-    //             return {
-    //                 searchKel: params2.term2 // search term
-    //             };
-    //         },
-    //         processResults: function (response) {
-    //             return {
-    //                 results: response
-    //             };
-    //         },
-    //             cache: true
-    //         }
-    // });
+        $('#id_jenis').select2({
+            placeholder: "Pilih Jenis",
+            dropdownParent: $('#tambahrekrincianobjek'),
+            ajax: {
+                url: "{{url('rekjenis/rincianobjek')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_jen,
+                                text:item.rek_jen
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
+
+    $('#id_jenis').change(function(){
+        let id = $('#id_jenis').val();
+
+        $('#id_objek').select2({
+            placeholder: "Pilih Objek",
+            dropdownParent: $('#tambahrekrincianobjek'),
+            ajax: {
+                url: "{{url('rekobjek/rincianobjek')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_o,
+                                text:item.rek_o
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
 
 });
 

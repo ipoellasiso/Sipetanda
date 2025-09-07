@@ -37,9 +37,9 @@ class KelompokController extends Controller
         if ($request->ajax()) {
 
             $datarek = DB::table('tb_kelompok')
-                        ->select('tb_kelompok.id_kel', 'tb_kelompok.id_akun', 'tb_kelompok.no_rek_kel', 'tb_kelompok.rek_kel')
-                        // ->join('tb_akun', 'tb_akun.id', 'tb_kelompok.id',)
-                        ->get();
+                    ->select('tb_kelompok.id_kel', 'tb_kelompok.id_akun', 'tb_kelompok.no_rek_kel', 'tb_kelompok.rek_kel', 'tb_akun.no_rek', 'tb_akun.rek', 'tb_akun.id')
+                    ->join('tb_akun', 'tb_akun.id', '=', 'tb_kelompok.id_akun')
+                    ->get();
 
             return Datatables::of($datarek)
                     ->addIndexColumn()

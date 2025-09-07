@@ -13,12 +13,15 @@ use App\Http\Controllers\KamarControlleruser;
 use App\Http\Controllers\KelompokController;
 use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\ObjekController;
 use App\Http\Controllers\OpdController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\RincianObjekController;
+use App\Http\Controllers\SubRincianObjekController;
 use App\Http\Controllers\TarikSp2dController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -140,12 +143,52 @@ Route::delete('/rekkelompok/destroy/{id_kel}', [KelompokController::class, 'dest
 Route::post('rekkelompok', [KelompokController::class, 'import'])->name('rekkelompok.import')->middleware('auth:web','checkRole:Admin');
 Route::get('/rekkelompok/akun', [KelompokController::class, 'getDataakun'])->middleware('auth:web','checkRole:Admin');
 
-
 // JENIS
 Route::get('/tampilrekjenis', [JenisController::class, 'index'])->middleware('auth:web','checkRole:Admin');
 Route::post('/rekjenis/store', [JenisController::class, 'store'])->middleware('auth:web','checkRole:Admin');
-Route::get('/rekjenis/edit/{id}', [JenisController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
-Route::delete('/rekjenis/destroy/{id}', [JenisController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekjenis/edit/{id_jen}', [JenisController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/rekjenis/destroy/{id_jen}', [JenisController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
 Route::post('rekjenis', [JenisController::class, 'import'])->name('rekjenis.import')->middleware('auth:web','checkRole:Admin');
+
+Route::get('/rekakun/jenis', [JenisController::class, 'getDataakun'])->name('akun.index')->middleware('auth:web','checkRole:Admin');
+Route::get('/rekkelompok/jenis/{id}', [JenisController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:Admin');
+
+// OBJEK
+Route::get('/tampilrekobjek', [ObjekController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/rekobjek/store', [ObjekController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekobjek/edit/{id_o}', [ObjekController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/rekobjek/destroy/{id_o}', [ObjekController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::post('rekobjek', [ObjekController::class, 'import'])->name('rekobjek.import')->middleware('auth:web','checkRole:Admin');
+
+Route::get('/rekakun/objek', [ObjekController::class, 'getDataakun'])->name('akun.index')->middleware('auth:web','checkRole:Admin');
+Route::get('/rekkelompok/objek/{id}', [ObjekController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekjenis/objek/{id}', [ObjekController::class, 'getDatajenis'])->middleware('auth:web','checkRole:Admin');
+
+// RINCIAN OBJEK
+Route::get('/tampilrekrincianobjek', [RincianObjekController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/rekrincianobjek/store', [RincianObjekController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekrincianobjek/edit/{id_ro}', [RincianObjekController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/rekrincianobjek/destroy/{id_ro}', [RincianObjekController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::post('rekrincianobjek', [RincianObjekController::class, 'import'])->name('rekrincianobjek.import')->middleware('auth:web','checkRole:Admin');
+
+Route::get('/rekakun/rincianobjek', [RincianObjekController::class, 'getDataakun'])->name('akun.index')->middleware('auth:web','checkRole:Admin');
+Route::get('/rekkelompok/rincianobjek/{id}', [RincianObjekController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekjenis/rincianobjek/{id}', [RincianObjekController::class, 'getDatajenis'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekobjek/rincianobjek/{id}', [RincianObjekController::class, 'getDataobjek'])->middleware('auth:web','checkRole:Admin');
+
+// SUB RINCIAN OBJEK
+Route::get('/tampilreksubrincianobjek', [SubRincianObjekController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/reksubrincianobjek/store', [SubRincianObjekController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/reksubrincianobjek/edit/{id_ro}', [SubRincianObjekController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/reksubrincianobjek/destroy/{id_ro}', [SubRincianObjekController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::post('reksubrincianobjek', [SubRincianObjekController::class, 'import'])->name('reksubrincianobjek.import')->middleware('auth:web','checkRole:Admin');
+
+Route::get('/rekakun/subrincianobjek', [SubRincianObjekController::class, 'getDataakun'])->name('akun.index')->middleware('auth:web','checkRole:Admin');
+Route::get('/rekkelompok/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekjenis/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDatajenis'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekobjek/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDataobjek'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekrincianobjek/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDatarincianobjek'])->middleware('auth:web','checkRole:Admin');
+
+
 
 

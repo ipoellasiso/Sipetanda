@@ -17,52 +17,54 @@
       Render DataTable
       --------------------------------------------
       --------------------------------------------*/
-    var table = $('.tabelrekjenis').DataTable({
+    var table = $('.tabelrekobjek').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "/tampilrekjenis",
+        ajax: "/tampilrekobjek",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'rek', name: 'rek'},
             {data: 'rek_kel', name: 'rek_kel'},
-            {data: 'no_rek_jen', name: 'no_rek_jen'},
             {data: 'rek_jen', name: 'rek_jen'},
+            {data: 'no_rek_o', name: 'no_rek_o'},
+            {data: 'rek_o', name: 'rek_o'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
 
     // tambah data
-     $('#createRekjenis').click(function (){
-         $('#saveBtn').val("create-rekjenis");
+     $('#createRekobjek').click(function (){
+         $('#saveBtn').val("create-rekobjek");
          $('#id6').val('');
          $('#userForm').trigger("reset");
-         $('#tambahrekjenis').modal('show');
+         $('#tambahrekobjek').modal('show');
          $('#modal-preview').attr('src', 'https://via/placeholder.com/150');
 
     });
 
     // edit data
-    $('body').on('click', '.editRekjenis', function(e)  {
-        var id_jen = $(this).data('id_jen');
-        $.get("/rekjenis/edit/"+id_jen, function (data) {
-            $('#saveBtn').val("edit-rekjenis");
-            $('#tambahrekjenis').modal('show');
+    $('body').on('click', '.editRekobjek', function(e)  {
+        var id_o = $(this).data('id_o');
+        $.get("/rekobjek/edit/"+id_o, function (data) {
+            $('#saveBtn').val("edit-rekobjek");
+            $('#tambahrekobjek').modal('show');
         
-            $('#id6').val(data.id_jen);
+            $('#id6').val(data.id_o);
             $('#id_akun').html('<option value = "'+data.id+'" selected >'+data.rek+'</option>');
             $('#id_kelompok').html('<option value = "'+data.id_kel+'" selected >'+data.rek_kel+'</option>');
+            $('#id_jenis').html('<option value = "'+data.id_jen+'" selected >'+data.rek_jen+'</option>');
             // $('#id_kelompok').val(data.id_kelompok);
-            $('#no_rek_jen').val(data.no_rek_jen);
-            $('#rek_jen').val(data.rek_jen);
+            $('#no_rek_o').val(data.no_rek_o);
+            $('#rek_o').val(data.rek_o);
         })
     });
 
     // Import data
-    $('#createimportrekjenis').click(function (){
+    $('#createimportrekobjek').click(function (){
         $('#saveBtn').val("create-import");
         $('#id6').val('');
         $('#userForm1').trigger("reset");
-        $('#tambahimportrekjenis').modal('show');
+        $('#tambahimportrekobjek').modal('show');
         $('#modal-preview').attr('src', 'https://via/placeholder.com/150');
 
     });
@@ -78,7 +80,7 @@
 
         $.ajax({
             type:'POST',
-            url: "/rekjenis/store",
+            url: "/rekobjek/store",
             data: formData,
             cacha: false,
             contentType: false,
@@ -87,7 +89,7 @@
                 if(data.success)
                 {
                     $('#userForm').trigger("reset");
-                    $('#tambahrekjenis').modal('hide');
+                    $('#tambahrekobjek').modal('hide');
                     $('#saveBtn').html('Simpan');
 
                     Swal.fire({
@@ -101,7 +103,7 @@
                 else
                 {
                     $('#userForm').trigger("reset");
-                    $('#tambahrekjenis').modal('hide');
+                    $('#tambahrekobjek').modal('hide');
                     $('#saveBtn').html('Simpan');
 
                     Swal.fire({
@@ -121,13 +123,13 @@
     });
 
     // hapus data
-    $('body').on('click', '.deleteRekjenis', function () {
+    $('body').on('click', '.deleteRekobjek', function () {
 
-        var id_jen = $(this).data("id_jen");
+        var id_o = $(this).data("id_o");
 
         Swal.fire({
             title: 'Warning ?',
-            text: "Hapus Data Ini ?"  +id_jen,
+            text: "Hapus Data Ini ?"  +id_o,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -137,7 +139,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "/rekjenis/destroy/"+id_jen,
+                    url: "/rekobjek/destroy/"+id_o,
                     dataType: "JSON",
                     success: function(data)
                     {
@@ -161,7 +163,7 @@
 
     $('#id_akun').select2({
         placeholder: "Pilih Akun",
-        dropdownParent: $('#tambahrekjenis'),
+        dropdownParent: $('#tambahrekobjek'),
         ajax: {
             url: "{{route('akun.index')}}",
             processResults: function({data}){
@@ -182,9 +184,9 @@
 
         $('#id_kelompok').select2({
             placeholder: "Pilih Kelompok",
-            dropdownParent: $('#tambahrekjenis'),
+            dropdownParent: $('#tambahrekobjek'),
             ajax: {
-                url: "{{url('rekkelompok/jenis')}}/"+id,
+                url: "{{url('rekkelompok/objek')}}/"+id,
                 processResults: function({data}){
                     return {
                         results: $.map(data, function(item){
@@ -200,13 +202,36 @@
 
     });
 
+    $('#id_kelompok').change(function(){
+        let id = $('#id_kelompok').val();
+
+        $('#id_jenis').select2({
+            placeholder: "Pilih Jenis",
+            dropdownParent: $('#tambahrekobjek'),
+            ajax: {
+                url: "{{url('rekjenis/objek')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_jen,
+                                text:item.rek_jen
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
+
     //  //Get Data Akun
     // $('#id_akun').select2({
 	//     placeholder: "Pilih Akun",
     // 	allowClear: true,
-    //     dropdownParent: $('#tambahrekjenis'),
+    //     dropdownParent: $('#tambahrekobjek'),
 	//     ajax: { 
-    //         url: "/rekakun/jenis",
+    //         url: "/rekakun/objek",
     //         type: "Get",
     //         dataType: 'json',
     //         delay: 250,
@@ -228,9 +253,9 @@
     // $('#id_kelompok').select2({
 	//     placeholder: "Pilih Kelompok",
     // 	allowClear: true,
-    //     dropdownParent: $('#tambahrekjenis'),
+    //     dropdownParent: $('#tambahrekobjek'),
 	//     ajax: { 
-    //         url: "/rekkelompok/jenis",
+    //         url: "/rekkelompok/objek",
     //         type: "Get",
     //         dataType: 'json',
     //         delay: 250,

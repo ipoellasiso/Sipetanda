@@ -1,4 +1,4 @@
-<div class="modal fade" id="tambahrekjenis" data-bs-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal fade" id="tambahrekobjek" data-bs-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         
         <div class="modal-content">
@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <form id="userForm" name="userForm" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <input type="hidden" name="id_jen" id="id6">
+                        <input type="hidden" name="id_o" id="id6">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -28,12 +28,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>Jenis</label>
+                                    <select class="form-select" name="id_jenis" id="id_jenis" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Nomor Rekening</label>
-                                    <input type="text" class="form-control" name="no_rek_jen" id="no_rek_jen" value="" placeholder="" required>
+                                    <input type="text" class="form-control" name="no_rek_o" id="no_rek_o" value="" placeholder="" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Rekening</label>
-                                    <input class="form-control" id="rek_jen" name="rek_jen" required>
+                                    <input class="form-control" id="rek_o" name="rek_o" required>
                                     </input>
                                 </div>
                             </div>

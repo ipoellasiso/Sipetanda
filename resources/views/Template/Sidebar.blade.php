@@ -100,13 +100,13 @@
                                             <a href="/tampilrekjenis" class="submenu-link">Jenis</a>
                                         </li>
                                         <li class="submenu-item @if(isset($active_sideo)){{ $active_sideo }} @endif">
-                                            <a href="/tampilreko" class="submenu-link">Objek</a>
+                                            <a href="/tampilrekobjek" class="submenu-link">Objek</a>
                                         </li>
                                         <li class="submenu-item @if(isset($active_sidero)){{ $active_sidero }} @endif">
-                                            <a href="/tampilrekro" class="submenu-link">Rincian Objek</a>
+                                            <a href="/tampilrekrincianobjek" class="submenu-link">Rincian Objek</a>
                                         </li>
                                         <li class="submenu-item @if(isset($active_sidesro)){{ $active_sidesro }} @endif">
-                                            <a href="/tampilreksubro" class="submenu-link">Sub Rincian Objek</a>
+                                            <a href="/tampilreksubrincianobjek" class="submenu-link">Sub Rincian Objek</a>
                                         </li>
                                     </ul>
                             </li>
