@@ -46,7 +46,7 @@
             <div class="card widget-todo">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                     <h4 class="card-title d-flex">
-                        <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Progress
+                        <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Rincian Rekening (total nilai rekening sudah rekon)
                     </h4>
 
                 </div>
@@ -119,7 +119,7 @@
             <div class="card widget-todo">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                     <h4 class="card-title d-flex">
-                        <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Progress
+                        <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Rincian Rekening (nilai ini harus nol)
                     </h4>
 
                 </div>

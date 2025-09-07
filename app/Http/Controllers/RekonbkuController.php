@@ -21,7 +21,7 @@ class RekonbkuController extends Controller
         $userId = Auth::guard('web')->user()->id;
         $data = array(
             'title'                 => 'Data Rekon',
-            'active_master_data'    => 'active',
+            'active_penerimaan'     => 'active',
             'active_subopd'         => 'active',
             'active_siderekon'      => 'active',
             'breadcumd'             => 'Penatausahaan',
@@ -38,25 +38,9 @@ class RekonbkuController extends Controller
                                     ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
                                     ->select([ 'tb_subrincianobjek.rek_sro',
                                         DB::raw('sum(tb_bkuopd.nilai_transaksi) as nilai_transaksi'),
-                                        // DB::raw('DATE(tb_bkuopd.tgl_transaksi) as tgl_transaksi')
-                                        
                                       ])
                                     ->groupBy('tb_subrincianobjek.rek_sro')
                                     ->get(),
-                                    
-                                    // ->dd($dataq),
-            
-            // 'dataq'                 => DB::table('tb_bkuopd')
-            //                         ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
-            //                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
-            //                         ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
-            //                         ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
-            //                         ->whereIn('tb_bkuopd.status1', ['Input'])
-            //                         ->where('tb_bkuopd.tahun', auth()->user()->tahun)
-            //                         ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
-            //                         ->groupBy('tb_subrincianobjek.rek_sro')
-            //                         ->select('tb_subrincianobjek.rek_sro')
-            //                         ->get(),
 
             'dataq1'                => DB::table('tb_transaksi')
                                     ->select('tb_opd.nama_opd', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', 'tb_transaksi.status3', 'tb_transaksi.id_rekening', 'tb_rekening.rekening2')
@@ -68,8 +52,6 @@ class RekonbkuController extends Controller
                                     ->where('tb_transaksi.id_opd', auth()->user()->id_opd)
                                     ->select([ 'tb_rekening.rekening2',
                                         DB::raw('sum(tb_transaksi.nilai_transaksi) as nilai_transaksi'),
-                                        // DB::raw('DATE(tb_bkuopd.tgl_transaksi) as tgl_transaksi')
-                                        
                                       ])
                                     ->groupBy('tb_rekening.rekening2')
                                     ->get(),
@@ -108,7 +90,7 @@ class RekonbkuController extends Controller
                         ->select('tb_opd.nama_opd', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', 'tb_transaksi.status3')
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
                         ->orderBy('no_buku', 'asc')
-                        ->whereIn('tb_transaksi.status3', ['0'])
+                        ->whereIn('tb_transaksi.status3', [])
                         ->where('tb_transaksi.tahun', auth()->user()->tahun)
                         ->where('tb_transaksi.id_opd', auth()->user()->id_opd)
                         ->get();
