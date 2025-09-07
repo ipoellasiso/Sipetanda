@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\bkusModel;
+use App\Models\AkunModel;
+use App\Models\jenisModel;
+use App\Models\KelompokModel;
+use App\Models\ObjekModel;
+use App\Models\RincianObjekModel;
+use App\Models\SubRincianObjekModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -98,9 +104,9 @@ class BkuOpdController extends Controller
         if ($request->ajax()) {
 
             $databku = DB::table('tb_bkuopd')
-                        ->select('tb_rekening.id_rekening', 'tb_rekening.no_rekening', 'tb_rekening.rekening', 'tb_rekening.rekening2', 'tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', )
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
-                        ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_bkuopd.id_rekening')
+                        ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
                         ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
                         ->orderBy('no_buku', 'asc')
                         ->where('tb_bkuopd.tahun', auth()->user()->tahun)
@@ -126,11 +132,51 @@ class BkuOpdController extends Controller
                         return $btn;
                     })
 
+                    ->addColumn('action2', function($row){
+                        if($row->status1 == 'Input')
+                        {
+                        $btn1 = '
+                                    
+                                ';
+                        }else if($row->status2 == 'Batal'){
+                        
+                            $btn1 = '
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id_transaksi="'.$row->id_transaksi.'" class="ubahbkuopd btn btn-outline-success m-b-xs btn-sm">Ubah
+                                    </a>
+                                ';
+                        }else{
+                        
+                            $btn1 = '
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id_transaksi="'.$row->id_transaksi.'" class="tambahbkuopd btn btn-outline-danger m-b-xs btn-sm">Input No Kas Bpkad
+                                    </a>
+                                ';
+                        }
+
+                        return $btn1;
+                    })
+
+                    ->addColumn('action3', function($row){
+                        if($row->status2 == 'Input' | $row->status1 == 'Input')
+                        {
+                        $btn2 = '
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id_transaksi="'.$row->id_transaksi.'" class="batalbkuopd btn btn-outline-primary m-b-xs btn-sm">Batalkan
+                                    </a>
+                                ';
+                        }else{
+                        
+                        $btn2 = '
+                               
+                            ';
+                        }
+
+                        return $btn2;
+                    })
+
                     ->addColumn('nilai_transaksi', function($row) {
                         return number_format($row->nilai_transaksi);
                     })
 
-                    ->rawColumns(['nilai_transaksi', 'action'])
+                    ->rawColumns(['nilai_transaksi', 'action', 'action2', 'action3'])
                     ->make(true);
         }
 
@@ -148,26 +194,6 @@ class BkuOpdController extends Controller
         $ambilopd2 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
              foreach($ambilopd2 as $d)
              $ambilopd2  = $d->id;
-        // $cek = BkuopdModel::count();
-        // // dd($cek);
-        // if ($cek == 0) {
-        //     $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-        //     foreach($ambilopd1 as $d)
-        //     $ambilopd  = $d->status1;
-        //     // $urut = 100001;
-        //     $urut = $request->no_buku;
-        //     $nomor = $ambilopd . '-' . $thnBulan . '-' . $urut;
-        //     // dd($nomor);
-        // } else {
-        //     // echo 'sdas';
-        //     $ambil     = BkuopdModel::all()->last();
-        //     $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-        //     foreach($ambilopd1 as $d)
-        //     $ambilopd  = $d->status1;
-        //     $urut      = (int)substr($ambil->no_buku, -7) + 1;
-        //     $nomor     = $ambilopd . '-' . $thnBulan . '-' . $urut;
-        //     // dd($nomor);
-        // }
 
         $cek = DB::table("tb_bkuopd")->select(DB::raw("COUNT(no_buku) as jumlah"))->where('id_opd', auth()->user()->id_opd)->groupBy('id_opd');
         if ($cek ->count() >0){
@@ -188,15 +214,21 @@ class BkuOpdController extends Controller
             return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
         } else {
             $details = [
-                'id_rekening'       => $request->id_rekening,
-                'id_opd'            => $ambilopd2,
-                'id_bank'           => $request->id_bank,
-                'uraian'            => $request->uraian,
-                'ket'               => $request->ket,
-                'no_buku'           => $nourut,
-                'tgl_transaksi'     => $request->tgl_transaksi,
-                'nilai_transaksi'   => str_replace('.','',$request->nilai_transaksi),
-                'tahun'             => date('Y'),
+                'id_akun'            => $request->id_akun,
+                'id_kelompok'        => $request->id_kelompok,
+                'id_jenis'           => $request->id_jenis,
+                'id_objek'           => $request->id_objek,
+                'id_rincianobjek'    => $request->id_rincianobjek,
+                'id_subrincianobjek' => $request->id_subrincianobjek,
+                'id_rekening'        => $request->id_rekening,
+                'id_opd'             => $ambilopd2,
+                'id_bank'            => $request->id_bank,
+                'uraian'             => $request->uraian,
+                'ket'                => $request->ket,
+                'no_buku'            => $nourut,
+                'tgl_transaksi'      => $request->tgl_transaksi,
+                'nilai_transaksi'    => str_replace('.','',$request->nilai_transaksi),
+                'tahun'              => date('Y'),
             ];
         }
         
@@ -267,5 +299,145 @@ class BkuOpdController extends Controller
 
         return response()->json($response); 
     } 
+
+    public function getDataakun1(){
+        $data1 = AkunModel::where('rek', 'LIKE', '%'.request('q').'%')->paginate(10);
+
+        return response()->json($data1);
+    }
+
+    public function getDatakelompok($id){
+        $data = KelompokModel::where('id_akun', $id)->where('rek_kel', 'LIKE', '%'.request('q').'%')->paginate(10);
+
+        return response()->json($data);
+    }
+
+    public function getDatajenis($id){
+        $data = jenisModel::where('id_kelompok', $id)->where('rek_jen', 'LIKE', '%'.request('q').'%')->paginate(10);
+
+        return response()->json($data);
+    }
+
+    public function getDataobjek($id){
+        $data = ObjekModel::where('id_jenis', $id)->where('rek_o', 'LIKE', '%'.request('q').'%')->paginate(10);
+
+        return response()->json($data);
+    }
+
+    public function getDatarincianobjek($id){
+        $data = RincianObjekModel::where('id_objek', $id)->where('rek_ro', 'LIKE', '%'.request('q').'%')->paginate(10);
+
+        return response()->json($data);
+    }
+
+    public function getDatasubrincianobjek($id){
+        $data = SubRincianObjekModel::where('id_rincianobjek', $id)->where('rek_sro', 'LIKE', '%'.request('q').'%')->paginate(10);
+
+        return response()->json($data);
+    }
+
+    public function tambahkasbpkad($id)
+    {
+        $where = array('tb_bkuopd.id_transaksi' => $id);
+        $data = DB::table('tb_bkuopd')
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
+                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
+                        ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
+                        ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
+                        ->orderBy('no_buku', 'asc')
+                        ->where('tb_bkuopd.tahun', auth()->user()->tahun)
+                        ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
+                        ->where($where)
+                        ->first();
+
+        return response()->json($data);
+    }
+
+    public function simpankasbpkad(Request $request, string $idhalaman)
+    {
+
+        bkusModel::where('no_buku',$request->get('no_kas_bpkad'))
+        ->update([
+            'status3' => 1,
+        ]);
+
+        BkuopdModel::where('id_transaksi',$request->get('id_transaksi'))
+        ->update([
+            'no_kas_bpkad'  => $request->no_kas_bpkad,
+            'status1'       => 'Input',
+            'status2'       => 'Input',
+        ]);
+
+            return redirect('/tampilbkuopd')->with('success','Data Berhasil DiUpdate');
+    }
+
+    public function batalkasbpkad($id)
+    {
+        $where = array('tb_bkuopd.id_transaksi' => $id);
+        $data = DB::table('tb_bkuopd')
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
+                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
+                        ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
+                        ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
+                        ->orderBy('no_buku', 'asc')
+                        ->where('tb_bkuopd.tahun', auth()->user()->tahun)
+                        ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
+                        ->where($where)
+                        ->first();
+
+        return response()->json($data);
+    }
+
+    public function simpanbatalkasbpkad(Request $request, string $idhalaman)
+    {
+
+        bkusModel::where('no_buku',$request->get('no_kas_bpkad'))
+        ->update([
+            'status3' => 0,
+        ]);
+
+        BkuopdModel::where('id_transaksi',$request->get('id_transaksi'))
+        ->update([
+            'status1'       => 'Batal',
+            'status2'       => 'Batal',
+        ]);
+
+            return redirect('/tampilbkuopd')->with('success','Data Berhasil DiUpdate');
+    }
+
+    public function ubahkasbpkad($id)
+    {
+        $where = array('tb_bkuopd.id_transaksi' => $id);
+        $data = DB::table('tb_bkuopd')
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
+                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
+                        ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
+                        ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
+                        ->orderBy('no_buku', 'asc')
+                        ->where('tb_bkuopd.tahun', auth()->user()->tahun)
+                        ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
+                        ->where($where)
+                        ->first();
+
+        return response()->json($data);
+    }
+
+    public function simpanubahkasbpkad(Request $request, string $idhalaman)
+    {
+
+        bkusModel::where('no_buku',$request->get('no_kas_bpkad'))
+        ->update([
+            'status3' => 1,
+        ]);
+
+        BkuopdModel::where('id_transaksi',$request->get('id_transaksi'))
+        ->update([
+            'no_kas_bpkad'  => $request->no_kas_bpkad,
+            'status1'       => 'Input',
+            'status2'       => 'Input',
+        ]);
+
+            return redirect('/tampilbkuopd')->with('success','Data Berhasil DiUpdate');
+    }
 
 }

@@ -15,28 +15,64 @@
                         <input type="hidden" name="id_transaksi" id="id_transaksi">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Rekening</label>
                                     <select class="form-select" name="id_rekening" id="id_rekeningopd" style="width: 100%" required>
                                         <option></option>
                                     </select>
+                                </div> --}}
+                                <div class="form-group">
+                                    <label>Akun</label>
+                                    <select class="form-select" name="id_akun" id="id_akun" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>Kelompok</label>
+                                    <select class="form-select" name="id_kelompok" id="id_kelompok" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Jenis</label>
+                                    <select class="form-select" name="id_jenis" id="id_jenis" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Objek</label>
+                                    <select class="form-select" name="id_objek" id="id_objek" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rincian Objek</label>
+                                    <select class="form-select" name="id_rincianobjek" id="id_rincianobjek" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sub Rincian Objek</label>
+                                    <select class="form-select" name="id_subrincianobjek" id="id_subrincianobjek" style="width: 100%" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                {{-- <div class="form-group">
                                     <label>OPD</label>
                                     <select class="form-select" name="id_opd" id="id_opdopd" style="width: 100%">
                                         <option></option>
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label>BANK</label>
                                     <select class="form-select" name="id_bank" id="id_bankopd" style="width: 100%" required>
                                         <option></option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Nomor BKU</label>
                                     <input type="text" class="form-control" name="no_buku" id="no_buku" value="" placeholder="">
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label>Tanggal BKU</label>
                                     <input type="date" class="form-control" name="tgl_transaksi" id="tgl_transaksi" value="" placeholder="" required>

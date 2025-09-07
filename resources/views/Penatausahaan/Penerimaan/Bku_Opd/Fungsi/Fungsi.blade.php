@@ -23,15 +23,17 @@
         ajax: "/tampilbkuopd",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'no_rekening', name: 'no_rekening'},
-            {data: 'rekening2', name: 'rekening2'},
+            {data: 'no_rek_sro', name: 'no_rek_sro'},
+            {data: 'rek_sro', name: 'rek_sro'},
+            {data: 'no_kas_bpkad', name: 'no_kas_bpkad'},
             {data: 'no_buku', name: 'no_buku'},
             {data: 'tgl_transaksi', name: 'tgl_transaksi'},
             {data: 'uraian', name: 'uraian'},
             {data: 'nama_opd', name: 'nama_opd'},
             {data: 'nama_bank', name: 'nama_bank'},
             {data: 'nilai_transaksi', name: 'nilai_transaksi'},
-            // {data: 'ket', name: 'ket'},
+            {data: 'action2', name: 'action2'},
+            {data: 'action3', name: 'action3'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -44,6 +46,161 @@
         $('#tambahbku').modal('show');
         $('#modal-preview').attr('src', 'https://via/placeholder.com/150');
 
+    });
+
+    // tambah data no kas bpkad
+    $('body').on('click', '.tambahbkuopd', function()  {
+        var iduser = $(this).data('id_transaksi');
+        $.get("/bkuopd5/edit/"+iduser, function (data) {
+            $('#saveBtn').val("tambah-bkuopd");
+            $('#tambahkasbpkad').modal('show');
+            $('#id_transaksi5').val(data.id_transaksi);
+            $('#no_buku5').val(data.no_buku);
+            $('.bd-example-modal-xl').modal('hide');
+        })
+    });
+
+    // simpan data no kas bpkad
+    $('body').on('submit', '#userFormSimpan', function(e){
+        e.preventDefault();
+
+        var id_transaksi2 = $(this).data("id_transaksi");
+        var actionType = $('#saveBtn').val();
+        $('#saveBtn').html('Sabar Ya.....');
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: "/bkukasbpkad/update/"+id_transaksi2,
+            data: formData,
+            cacha: false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+
+                $('#userFormSimpan').trigger("reset");
+                $('#tambahkasbpkad').modal('hide');
+                $('#saveBtn').html('Terima');
+                // $('.bd-example-modal-xl').modal('hide');
+
+                Swal.fire({
+                    icon: "success",
+                    title: "success",
+                    text: "Data Berhasil DiSimpan"
+                })
+
+                table.draw();
+            },
+            error: function(data){
+                console.log('Error:', data);
+                $('saveBtn').html('Terima');
+            }
+        });
+    });
+
+    // Batal data no kas bpkad
+    $('body').on('click', '.batalbkuopd', function()  {
+        var iduser = $(this).data('id_transaksi');
+        $.get("/bkuopd5/edit/"+iduser, function (data) {
+            $('#saveBtn').val("batal-bkuopd");
+            $('#batalbkukasbpkad').modal('show');
+            $('#id_transaksi6').val(data.id_transaksi);
+            $('#no_buku6').val(data.no_buku);
+            $('#no_kas_bpkad6').val(data.no_kas_bpkad);
+            $('.bd-example-modal-xl').modal('hide');
+        })
+    });
+
+    // simpan data batal  no kas bpkad
+    $('body').on('submit', '#userFormBatal', function(e){
+        e.preventDefault();
+
+        var id_transaksi2 = $(this).data("id_transaksi");
+        var actionType = $('#saveBtn').val();
+        $('#saveBtn').html('Sabar Ya.....');
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: "/bkukasbpkad/updatebatal/"+id_transaksi2,
+            data: formData,
+            cacha: false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+
+                $('#userFormBatal').trigger("reset");
+                $('#batalbkukasbpkad').modal('hide');
+                $('#saveBtn').html('Terima');
+                // $('.bd-example-modal-xl').modal('hide');
+
+                Swal.fire({
+                    icon: "success",
+                    title: "success",
+                    text: "Data Berhasil DiSimpan"
+                })
+
+                table.draw();
+            },
+            error: function(data){
+                console.log('Error:', data);
+                $('saveBtn').html('Terima');
+            }
+        });
+    });
+
+    // ubah data no kas bpkad
+    $('body').on('click', '.ubahbkuopd', function()  {
+        var iduser = $(this).data('id_transaksi');
+        $.get("/bkuopd5/ubah/"+iduser, function (data) {
+            $('#saveBtn').val("ubah-bkuopd");
+            $('#ubahkasbpkad').modal('show');
+            $('#id_transaksi7').val(data.id_transaksi);
+            $('#no_buku7').val(data.no_buku);
+            $('#no_kas_bpkad7').val(data.no_kas_bpkad);
+            $('.bd-example-modal-xl').modal('hide');
+        })
+    });
+
+    // simpan data no kas bpkad
+    $('body').on('submit', '#userFormUbah', function(e){
+        e.preventDefault();
+
+        var id_transaksi2 = $(this).data("id_transaksi");
+        var actionType = $('#saveBtn').val();
+        $('#saveBtn').html('Sabar Ya.....');
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: "/bkukasbpkad/updateubah/"+id_transaksi2,
+            data: formData,
+            cacha: false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+
+                $('#userFormUbah').trigger("reset");
+                $('#ubahkasbpkad').modal('hide');
+                $('#saveBtn').html('Terima');
+                // $('.bd-example-modal-xl').modal('hide');
+
+                Swal.fire({
+                    icon: "success",
+                    title: "success",
+                    text: "Data Berhasil DiSimpan"
+                })
+
+                table.draw();
+            },
+            error: function(data){
+                console.log('Error:', data);
+                $('saveBtn').html('Terima');
+            }
+        });
     });
 
     // edit data
@@ -240,6 +397,140 @@
             },
                 cache: true
             }
+    });
+
+
+    $('#id_akun').select2({
+        placeholder: "Pilih Akun1",
+        dropdownParent: $('#tambahbku'),
+        ajax: {
+            url: "{{route('akun1.index')}}",
+            processResults: function({data}){
+                return {
+                    results: $.map(data, function(item){
+                        return {
+                            id: item.id,
+                            text:item.rek
+                        }
+                    })
+                }
+            }
+        }
+    });
+
+    $('#id_akun').change(function(){
+        let id = $('#id_akun').val();
+
+        $('#id_kelompok').select2({
+            placeholder: "Pilih Kelompok",
+            dropdownParent: $('#tambahbku'),
+            ajax: {
+                url: "{{url('rekkelompok/bkuopd')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_kel,
+                                text:item.rek_kel
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
+
+    $('#id_kelompok').change(function(){
+        let id = $('#id_kelompok').val();
+
+        $('#id_jenis').select2({
+            placeholder: "Pilih Jenis",
+            dropdownParent: $('#tambahbku'),
+            ajax: {
+                url: "{{url('rekjenis/bkuopd')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_jen,
+                                text:item.rek_jen
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
+
+    $('#id_jenis').change(function(){
+        let id = $('#id_jenis').val();
+
+        $('#id_objek').select2({
+            placeholder: "Pilih Objek",
+            dropdownParent: $('#tambahbku'),
+            ajax: {
+                url: "{{url('rekobjek/bkuopd')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_o,
+                                text:item.rek_o
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
+
+    $('#id_objek').change(function(){
+        let id = $('#id_objek').val();
+
+        $('#id_rincianobjek').select2({
+            placeholder: "Pilih Rincian Objek",
+            dropdownParent: $('#tambahbku'),
+            ajax: {
+                url: "{{url('rekrincianobjek/bkuopd')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_ro,
+                                text:item.rek_ro
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+    });
+
+    $('#id_rincianobjek').change(function(){
+        let id = $('#id_rincianobjek').val();
+
+        $('#id_subrincianobjek').select2({
+            placeholder: "Pilih Sub Rincian Objek",
+            dropdownParent: $('#tambahbku'),
+            ajax: {
+                url: "{{url('reksubrincianobjek/bkuopd')}}/"+id,
+                processResults: function({data}){
+                    return {
+                        results: $.map(data, function(item){
+                            return {
+                                id: item.id_sro,
+                                text:item.rek_sro
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
     });
 
 });

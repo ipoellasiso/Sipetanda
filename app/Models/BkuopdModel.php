@@ -13,6 +13,12 @@ class BkuopdModel extends Model
     protected $primaryKey = "id_transaksi";
     protected $fillable = [
         'id_rekening',
+        'id_akun',
+        'id_kelompok',
+        'id_jenis',
+        'id_objek',
+        'id_rincianobjek',
+        'id_subrincianobjek',
         'id_opd',
         'id_bank',
         'uraian',

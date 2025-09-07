@@ -117,15 +117,26 @@ Route::get('/tampilsp2dsipd', [TarikSp2dController::class, 'index'])->middleware
 // MAINTENANCE
 // Route::get('/', [MaintenanceController::class, 'index']);
 
-// DATA BKU
+// DATA BKU OPD
 Route::get('/tampilbkuopd', [BkuOpdController::class, 'index'])->middleware('auth:web','checkRole:User');
 Route::post('/bkuopd/store', [BkuOpdController::class, 'store'])->middleware('auth:web','checkRole:User');
-// Route::get('/bku/edit/{id_transaksi}', [BkuController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
-// Route::delete('/bku/destroy/{id_transaksi}', [BkuController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
-// Route::post('bku', [BkuController::class, 'import'])->name('bku.import')->middleware('auth:web','checkRole:Admin');
 Route::get('/bkuopd/rekening', [BkuOpdController::class, 'getDatarek'])->middleware('auth:web','checkRole:User');
 Route::get('/bkuopd/opd', [BkuOpdController::class, 'getDataopd'])->middleware('auth:web','checkRole:User');
 Route::get('/bkuopd/bank', [BkuOpdController::class, 'getDatabank'])->middleware('auth:web','checkRole:User');
+
+Route::get('/rekakun/bkuopd', [BkuOpdController::class, 'getDataakun1'])->name('akun1.index')->middleware('auth:web','checkRole:User');
+Route::get('/rekkelompok/bkuopd/{id}', [BkuOpdController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:User');
+Route::get('/rekjenis/bkuopd/{id}', [BkuOpdController::class, 'getDatajenis'])->middleware('auth:web','checkRole:User');
+Route::get('/rekobjek/bkuopd/{id}', [BkuOpdController::class, 'getDataobjek'])->middleware('auth:web','checkRole:User');
+Route::get('/rekrincianobjek/bkuopd/{id}', [BkuOpdController::class, 'getDatarincianobjek'])->middleware('auth:web','checkRole:User');
+Route::get('/reksubrincianobjek/bkuopd/{id}', [BkuOpdController::class, 'getDatasubrincianobjek'])->middleware('auth:web','checkRole:User');
+
+Route::get('/bkuopd5/edit/{id_transaksi}', [BkuOpdController::class, 'tambahkasbpkad'])->middleware('auth:web','checkRole:User');
+Route::post('/bkukasbpkad/update/{id_transaksi}', [BkuOpdController::class, 'simpankasbpkad'])->middleware('auth:web','checkRole:User');
+Route::get('/bkukasbpkad/batal/{id_transaksi}', [BkuOpdController::class, 'batalkasbpkad'])->middleware('auth:web','checkRole:User');
+Route::post('/bkukasbpkad/updatebatal/{id_transaksi}', [BkuOpdController::class, 'simpanbatalkasbpkad'])->middleware('auth:web','checkRole:User');
+Route::get('/bkuopd5/ubah/{id_transaksi}', [BkuOpdController::class, 'ubahkasbpkad'])->middleware('auth:web','checkRole:User');
+Route::post('/bkukasbpkad/updateubah/{id_transaksi}', [BkuOpdController::class, 'simpanubahkasbpkad'])->middleware('auth:web','checkRole:User');
 
 // DATA REK PENERIMAAN PENDAPATAN
 //AKUN

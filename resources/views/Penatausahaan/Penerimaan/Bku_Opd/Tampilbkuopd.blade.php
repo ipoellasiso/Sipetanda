@@ -63,14 +63,16 @@
                                     <th class="text-center">No</th>
                                     <th class="text-center" width="100px">Nomor Rekening</th>
                                     <th class="text-center" width="200px">Rekening</th>
+                                    <th class=""></th>
                                     <th class="">Nomor Bukti</th>
                                     <th class="text-center">Tanggal</th>
                                     <th width="200px">Uraian</th>
                                     <th class="text-center">Opd</th>
                                     <th class="text-center">Bank</th>
                                     <th class="text-right" width="100px">Jumlah</th>
-                                    {{-- <th class="text-center">Ket</th> --}}
-                                    <th width="100px">Action</th>
+                                    <th class="text-center"></th>
+                                    <th class="text-center"></th>
+                                    <th width="100px"></th>
                                 </tr>
                             </thead>
                         </table>
@@ -570,6 +572,9 @@
 @include('Penatausahaan.Penerimaan.Bku_Opd.Fungsi.Fungsi2')
 @include('Penatausahaan.Penerimaan.Bku_Opd.Modal.Tambah')
 @include('Penatausahaan.Penerimaan.Bku_Opd.Fungsi.Fungsi')
+@include('Penatausahaan.Penerimaan.Bku_Opd.Modal.tambahkasbpkd')
+@include('Penatausahaan.Penerimaan.Bku_Opd.Modal.Batal')
+@include('Penatausahaan.Penerimaan.Bku_Opd.Modal.ubahkasbpkd')
 
 
 @endsection
