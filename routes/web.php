@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BkuController;
 use App\Http\Controllers\BkuOpdController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JenisController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\KamarControlleruser;
+use App\Http\Controllers\KelompokController;
 use App\Http\Controllers\Landing_pageController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\OpdController;
@@ -120,3 +123,29 @@ Route::post('/bkuopd/store', [BkuOpdController::class, 'store'])->middleware('au
 Route::get('/bkuopd/rekening', [BkuOpdController::class, 'getDatarek'])->middleware('auth:web','checkRole:User');
 Route::get('/bkuopd/opd', [BkuOpdController::class, 'getDataopd'])->middleware('auth:web','checkRole:User');
 Route::get('/bkuopd/bank', [BkuOpdController::class, 'getDatabank'])->middleware('auth:web','checkRole:User');
+
+// DATA REK PENERIMAAN PENDAPATAN
+//AKUN
+Route::get('/tampilrekakun', [AkunController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/rekakun/store', [AkunController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekakun/edit/{id}', [AkunController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/rekakun/destroy/{id}', [AkunController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::post('rekakun', [AkunController::class, 'import'])->name('rekakun.import')->middleware('auth:web','checkRole:Admin');
+
+// KELOMPOK
+Route::get('/tampilrekkelompok', [KelompokController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/rekkelompok/store', [KelompokController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekkelompok/edit/{id_kel}', [KelompokController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/rekkelompok/destroy/{id_kel}', [KelompokController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::post('rekkelompok', [KelompokController::class, 'import'])->name('rekkelompok.import')->middleware('auth:web','checkRole:Admin');
+Route::get('/rekkelompok/akun', [KelompokController::class, 'getDataakun'])->middleware('auth:web','checkRole:Admin');
+
+
+// JENIS
+Route::get('/tampilrekjenis', [JenisController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/rekjenis/store', [JenisController::class, 'store'])->middleware('auth:web','checkRole:Admin');
+Route::get('/rekjenis/edit/{id}', [JenisController::class, 'edit'])->middleware('auth:web','checkRole:Admin');
+Route::delete('/rekjenis/destroy/{id}', [JenisController::class, 'destroy'])->middleware('auth:web','checkRole:Admin');
+Route::post('rekjenis', [JenisController::class, 'import'])->name('rekjenis.import')->middleware('auth:web','checkRole:Admin');
+
+

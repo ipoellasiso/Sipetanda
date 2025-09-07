@@ -77,6 +77,40 @@
                             <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
                                 <a href="/tampilsp2dsipd">Tarik SP2D SIPD</a>
                             </li>
+                            {{-- <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
+                                <a href="/tampilrekakun">Akun</a>
+                            </li>
+
+                            <ul class="submenu submenu-level-2 @if(isset($active_subopd)){{ $active_subopd }} @endif">
+                                <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
+                                    <a href="/tampilrekakun">Akun</a>
+                                </li>
+                            </ul> --}}
+
+                            <li class="submenu-item active has-sub">
+                                <a href="#" class="submenu-link">Rekening</a>
+                                    <ul class="submenu submenu-level-2 ">
+                                        <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
+                                            <a href="/tampilrekakun" class="submenu-link">Akun</a>
+                                        </li>
+                                        <li class="submenu-item @if(isset($active_side)){{ $active_side }} @endif">
+                                            <a href="/tampilrekkelompok" class="submenu-link">Kelompok</a>
+                                        </li>
+                                        <li class="submenu-item @if(isset($active_sidejenis)){{ $active_sidejenis }} @endif">
+                                            <a href="/tampilrekjenis" class="submenu-link">Jenis</a>
+                                        </li>
+                                        <li class="submenu-item @if(isset($active_sideo)){{ $active_sideo }} @endif">
+                                            <a href="/tampilreko" class="submenu-link">Objek</a>
+                                        </li>
+                                        <li class="submenu-item @if(isset($active_sidero)){{ $active_sidero }} @endif">
+                                            <a href="/tampilrekro" class="submenu-link">Rincian Objek</a>
+                                        </li>
+                                        <li class="submenu-item @if(isset($active_sidesro)){{ $active_sidesro }} @endif">
+                                            <a href="/tampilreksubro" class="submenu-link">Sub Rincian Objek</a>
+                                        </li>
+                                    </ul>
+                            </li>
+
                         </ul>
                     </li>
 
