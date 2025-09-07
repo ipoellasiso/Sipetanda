@@ -90,7 +90,7 @@ class RekonbkuController extends Controller
                         ->select('tb_opd.nama_opd', 'tb_transaksi.uraian', 'tb_transaksi.ket', 'tb_transaksi.uraian', 'tb_transaksi.no_buku', 'tb_transaksi.tgl_transaksi', 'tb_transaksi.nilai_transaksi', 'tb_transaksi.id_transaksi', 'tb_transaksi.status3')
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
                         ->orderBy('no_buku', 'asc')
-                        ->whereIn('tb_transaksi.status3', [])
+                        ->whereIn('tb_transaksi.status3', ['0'])
                         ->where('tb_transaksi.tahun', auth()->user()->tahun)
                         ->where('tb_transaksi.id_opd', auth()->user()->id_opd)
                         ->get();
