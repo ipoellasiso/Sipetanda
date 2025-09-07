@@ -229,6 +229,7 @@ class BkuOpdController extends Controller
                 'tgl_transaksi'      => $request->tgl_transaksi,
                 'nilai_transaksi'    => str_replace('.','',$request->nilai_transaksi),
                 'tahun'              => date('Y'),
+                // 'status3'            => 0,
             ];
         }
         

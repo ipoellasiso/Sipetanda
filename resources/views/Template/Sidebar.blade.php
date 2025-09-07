@@ -156,6 +156,9 @@
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
                                 <a href="/tampilrekapanrekuser">Buku Pembantu Penerimaan</a>
                             </li>
+                            <li class="submenu-item @if(isset($active_siderekon)){{ $active_siderekon }} @endif">
+                                <a href="/tampilrekon">Rekon</a>
+                            </li>
                         @endif
                     </ul>
                 </li>

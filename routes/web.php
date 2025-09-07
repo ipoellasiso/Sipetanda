@@ -20,6 +20,7 @@ use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\RekonbkuController;
 use App\Http\Controllers\RincianObjekController;
 use App\Http\Controllers\SubRincianObjekController;
 use App\Http\Controllers\TarikSp2dController;
@@ -199,6 +200,10 @@ Route::get('/rekkelompok/subrincianobjek/{id}', [SubRincianObjekController::clas
 Route::get('/rekjenis/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDatajenis'])->middleware('auth:web','checkRole:Admin');
 Route::get('/rekobjek/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDataobjek'])->middleware('auth:web','checkRole:Admin');
 Route::get('/rekrincianobjek/subrincianobjek/{id}', [SubRincianObjekController::class, 'getDatarincianobjek'])->middleware('auth:web','checkRole:Admin');
+
+// DATA REKON
+Route::get('/tampilrekon', [RekonbkuController::class, 'index'])->middleware('auth:web','checkRole:User');
+Route::get('/tampilrekon2', [RekonbkuController::class, 'index2'])->middleware('auth:web','checkRole:User');
 
 
 
