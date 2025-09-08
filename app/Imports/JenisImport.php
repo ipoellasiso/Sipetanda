@@ -26,15 +26,15 @@ class JenisImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFai
         return new JenisModel([
             'id_akun' => $row['id_akun'],
             'id_kelompok' => $row['id_kelompok'],
-            'no_rek' => $row['no_rek'],
-            'rek' => $row['rek'],
+            'no_rek_jen' => $row['no_rek_jen'],
+            'rek_jen' => $row['rek_jen'],
         ]);
     }
 
     public function rules(): array
     {
         return [
-            'no_rek' => 'required|unique:tb_jenis',
+            'no_rek_jen' => 'required|unique:tb_jenis',
             // 'rekening' => 'required|unique:tb_rekening',
             // 'rekening2' => 'required|unique:tb_rekening',
         ];

@@ -32,7 +32,7 @@ class KelompokImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
     public function rules(): array
     {
         return [
-            'no_rek' => 'required|unique:tb_kelompok',
+            'no_rek_kel' => 'required|unique:tb_kelompok',
             // 'rekening' => 'required|unique:tb_rekening',
             // 'rekening2' => 'required|unique:tb_rekening',
         ];
