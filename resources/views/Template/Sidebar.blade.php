@@ -182,7 +182,7 @@
                         @endif
                         @if(Auth::user()->role == 'User')
                             <li class="submenu-item">
-                                <a href="/tampilbkuopd">Realisasi</a>
+                                <a href="/tampilrealisasiopd">Realisasi</a>
                             </li>
                         @endif
                     </ul>

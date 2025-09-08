@@ -19,6 +19,7 @@ use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
+use App\Http\Controllers\RealisasiopdController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\RekonbkuController;
 use App\Http\Controllers\RincianObjekController;
@@ -205,6 +206,8 @@ Route::get('/rekrincianobjek/subrincianobjek/{id}', [SubRincianObjekController::
 Route::get('/tampilrekon', [RekonbkuController::class, 'index'])->middleware('auth:web','checkRole:User');
 Route::get('/tampilrekon2', [RekonbkuController::class, 'index2'])->middleware('auth:web','checkRole:User');
 
+// REALISASI OPD
+Route::get('/tampilrealisasiopd', [RealisasiopdController::class, 'index'])->name('realisasiopd.index')->middleware('auth:web','checkRole:User');
 
 
 
