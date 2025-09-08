@@ -163,6 +163,30 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-plus-fill"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <ul class="submenu">
+                        @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                            <li class="submenu-item">
+                                <a href="/tampilbku">BKU</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/tampilrealisasi">Realisasi</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/tampilrekapanrek">Buku Pembantu Penerimaan</a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->role == 'User')
+                            <li class="submenu-item">
+                                <a href="/tampilbkuopd">Realisasi</a>
+                            </li>
+                        @endif
+                    </ul>
+
                 <!-- <li class="sidebar-title">Laporan</li>
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
