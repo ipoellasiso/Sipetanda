@@ -136,7 +136,7 @@ class KamarController extends Controller
         return response()->json($response); 
     } 
 
-    public function getDataopd(Request $request)
+    public function getDataopd1(Request $request)
     {
         $search = $request->searchOpd;
   

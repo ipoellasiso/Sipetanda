@@ -90,7 +90,7 @@
     	allowClear: true,
         // dropdownParent: $('#tambahbku'),
 	    ajax: { 
-            url: "/bku/rekening",
+            url: "/kamar/rekening",
             type: "Get",
             dataType: 'json',
             delay: 250,
@@ -113,7 +113,7 @@
     	allowClear: true,
         // dropdownParent: $('#tambahbku'),
 	    ajax: { 
-            url: "/bku/opd",
+            url: "/kamar/opd",
             type: "Get",
             dataType: 'json',
             delay: 250,

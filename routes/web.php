@@ -95,8 +95,8 @@ Route::get('/tampilrealisasi_hd', [ControllersRealisasi_HD_Controller::class, 'i
 Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->name('view.dataindex.index')->middleware('auth:web','checkRole:Admin');
 Route::get('/tampilrekapanrek/{id}/tampilawal', [KamarController::class, 'viewdataindex'])->name('view.data.tampil')->middleware('auth:web','checkRole:Admin');
 Route::get('/tampilrekapanrek/{id}/tampil', [KamarController::class, 'viewdataindex'])->name('view.data.tampil')->middleware('auth:web','checkRole:Admin');
-Route::get('/bku/rekening', [KamarController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
-Route::get('/bku/opd', [KamarController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
+Route::get('/kamar/rekening', [KamarController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
+Route::get('/kamar/opd', [KamarController::class, 'getDataopd1'])->middleware('auth:web','checkRole:Admin');
 
 // Route::get('/downloadlaporanexcel1', [KamarController::class, 'Exportexcells'])->name('laporan.downloadlaporanexcel1')->middleware('auth:web','checkRole:Admin');
 
