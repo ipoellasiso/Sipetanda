@@ -151,13 +151,16 @@
                         @endif
                         @if(Auth::user()->role == 'User')
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
-                                <a href="/tampilbkuopd">BKU</a>
+                                <a href="/tampilbkuopd">Bku Penerimaan</a>
                             </li>
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
                                 <a href="/tampilrekapanrekuser">Buku Pembantu Penerimaan</a>
                             </li>
                             <li class="submenu-item @if(isset($active_siderekon)){{ $active_siderekon }} @endif">
                                 <a href="/tampilrekon">Rekon</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/tampilrealisasiopd">Realisasi</a>
                             </li>
                         @endif
                     </ul>
@@ -182,7 +185,7 @@
                         @endif
                         @if(Auth::user()->role == 'User')
                             <li class="submenu-item">
-                                <a href="/tampilrealisasiopd">Realisasi</a>
+                                <a href="">Realisasi</a>
                             </li>
                         @endif
                     </ul>

@@ -3,144 +3,97 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>Default</h4>
+        {{-- <h4>Default</h4> --}}
     </div>
     <div class="card-body">
         {{-- Header --}}
-        <div class="row col-md-12 col-md-12 table table-striped">
-            <div class="col-md-5" align="center">
-                <b>Uraian</b>
-            </div>
-            <div class="col-md-2" align="center">
-                <b>Anggaran</b>
-            </div>
-            <div class="col-md-2" align="center">
-                <b>Realisasi</b>
-            </div>
-            <div class="col-md-2" align="center">
-                <b>Sisa</b>
-            </div>
-            <div class="col-md-1" align="center">
-                <b>%</b>
-            </div>
-        </div>
-
-        <div class="accordion accordion-flush" id="pd">
+        <div class="accordion" id="">
             <div class="accordion-item">
-                <h2 class="accordion-header" id="pd1">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cpd1" aria-expanded="true" aria-controls="cpd1">
+                <h4 class="accordion-header" id="headingOne">
+                <div class="row col-md-12 col-md-12 table table-striped">
+                    <div class="col-md-5" align="center">
+                        <b>Uraian</b>
+                    </div>
+                    <div class="col-md-2" align="center">
+                        <b>Anggaran</b>
+                    </div>
+                    <div class="col-md-2" align="center">
+                        <b>Realisasi</b>
+                    </div>
+                    <div class="col-md-2" align="center">
+                        <b>Sisa</b>
+                    </div>
+                    <div class="col-md-1" align="center">
+                        <b>%</b>
+                    </div>
+                </div>
+                </h4>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="" aria-controls="collapseOne">
                         <div class="row col-md-12 col-md-12">
-                            <?php
-                                // $angka = $total_pendapatandaerah - $tanggaran_pendapatandaerah;
-                                // echo ($angka < 0 ? "(".abs($angka).")" : $angka);
-                                // $formatted_angka = number_format($angka, 2, '.', ',');
-                                // $format1 = $angka < 0 ? "(".abs($angka).")" : $angka;
-                                // $format1 = $angka < 0 ? $angka : $angka;
-                                // $formatted_angka = number_format($format1, 2, '.', ',');
-
-                            ?>
-                            <div class="col-md-5">
-                                <b>Pendapatan Daerah</b>
-                            </div>
-                            <div class="col-md-2" align="right">
-                            </div>
-                            <div class="col-md-2" align="right">
-                            </div>
-                            <div class="col-md-2" align="right">
-                            </div>
-                            <div class="col-md-1" align="right">
-                            </div>
-                        </div>
-                    </button>
-                </h2>
-                <div id="cpd1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-
-                        <div class="accordion accordion-flush" id="pad">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="pad1">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cpad1" aria-expanded="true" aria-controls="cpad1">
-                                        <div class="row col-md-12 col-md-12">
-                                            <div class="col-md-5 table-bordered">
-                                                <b>Pendapatan Asli Daerah (PAD)</b>
-                                            </div>
-                                            <div class="col-md-2 table-bordered" align="right">
-                                            </div>
-                                            <div class="col-md-2 table-bordered" align="right">
-                                            </div>
-                                            <div class="col-md-2 table-bordered" align="right">
-                                            </div>
-                                            <div class="col-md-1 table-bordered" align="right">
-                                            </div>
-                                        </div>
-                                    </button>
-                                </h2>
-                                <div id="cpad1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">   
-                                    <div class="accordion-body">
-                                        {{-- Pajak Daerah --}}
-                                        <div class="" id="pad11">
-                                            <div class="collapsed" data-bs-toggle="collapse" href="#collapsellpad11">
-                                                <div class="row col-md-12 col-md-12">
-                                                    <div class="col-md-5 table-bordered">
-                                                        <span>&nbsp;&nbsp;&nbsp; Pajak Daerah</span>
-                                                    </div>
-                                                    <div class="col-md-2 table-bordered" align="right">
-                                                    </div>
-                                                    <div class="col-md-2 table-bordered" align="right">
-                                                    </div>
-                                                    <div class="col-md-2 table-bordered" align="right">
-                                                    </div>
-                                                    <div class="col-md-1 table-bordered" align="right">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="collapsellpad11" class="collapse" data-parent="#pad11">
-                                                <div class="" id="pad111">
-                                                    <div class="collapsed" data-bs-toggle="collapse" href="#collapsellpad111">
-                                                        <div class="row col-md-12 col-md-12">
-                                                            <div class="col-md-5 table-bordered">
-                                                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Badan Pendapatan Daerah</span>
-                                                            </div>
-                                                            <div class="col-md-2 table-bordered" align="right">
-                                                            </div>
-                                                            <div class="col-md-2 table-bordered" align="right">
-                                                            </div>
-                                                            <div class="col-md-2 table-bordered" align="right">
-                                                            </div>
-                                                            <div class="col-md-1 table-bordered" align="right">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="collapsellpad111" class="collapse" data-parent="#pad111">
-                                                        <div class="row col-md-12 col-md-12">
-                                                            <div class="col-md-5 table-bordered">
-                                                                <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pajak Kendaraan Bermotor (PKB)</i>
-                                                            </div>
-                                                            <div class="col-md-2 table-bordered" align="right">
-                                                            </div>
-                                                            <div class="col-md-2 table-bordered" align="right">
-                                                            </div>
-                                                            <div class="col-md-2 table-bordered" align="right">
-                                                            </div>
-                                                            <div class="col-md-1 table-bordered" align="right">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            @if($dataq->count() > 0 )
+                                @foreach ($dataq as $d)
+                                    <div class="col-md-5">
+                                        <b>{{$d->rek}}</b>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="col-md-2" align="right">
+                                    </div>
+                                    <div class="col-md-2" align="right">{{number_format($d->nilai_transaksi, 0)}},00
+                                    </div>
+                                    <div class="col-md-2" align="right">
+                                    </div>
+                                    <div class="col-md-1" align="right">
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-                        
+                        </button>
+                    </h2>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="" aria-controls="collapseTwo">
+                            <b>&nbsp;&nbsp;&nbsp;Pendapatan Asli Daerah (PAD)</b>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="" aria-controls="collapseThree">
+                            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retribusi Daerah </b>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="" aria-controls="collapseThree">
+                            <div class="row col-md-12 col-md-12">
+                                @if($dataq6->count() > 0 )
+                                    @foreach ($dataq6 as $d)
+                                        <div class="col-md-5" style="text-align: justify; text-indent: px; padding-left: 40px;">
+                                            <b>{{$d->rek_sro}}</b>
+                                        </div>
+                                        <div class="col-md-2" align="right">
+                                        </div>
+                                        <div class="col-md-2" align="right">{{number_format($d->nilai_transaksi_sro, 0)}},00
+                                        </div>
+                                        <div class="col-md-2" align="right">
+                                        </div>
+                                        <div class="col-md-1" align="right">
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            </button>
+                        </h2>
                     </div>
                 </div>
             </div>
         </div>
-
-        
-
+    
     </div>
 </div>
 
