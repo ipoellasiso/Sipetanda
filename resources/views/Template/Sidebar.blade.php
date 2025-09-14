@@ -50,7 +50,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                
                     <li class="sidebar-title">Pengaturan</li>
 
                     <li class="sidebar-item  has-sub @if(isset($active_master_data)){{ $active_master_data }} @endif">
@@ -59,76 +59,86 @@
                             <span>Master Data</span>
                         </a>
                         <ul class="submenu @if(isset($active_subopd)){{ $active_subopd }} @endif">
-                            <li class="submenu-item @if(isset($active_sideopd)){{ $active_sideopd }} @endif">
-                                <a href="/tampilopd">Opd</a>
-                            </li>
-                            <li class="submenu-item @if(isset($active_siderek)){{ $active_siderek }} @endif">
-                                <a href="/tampilrekening">Rekening</a>
-                            </li>
-                            <li class="submenu-item @if(isset($active_sidebank)){{ $active_sidebank }} @endif">
-                                <a href="/tampilbank">Bank</a>
-                            </li>
-                            <li class="submenu-item @if(isset($active_sideanggaran)){{ $active_sideanggaran }} @endif">
-                                <a href="/tampilanggaran">Anggaran</a>
-                            </li>
-                            <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
-                                <a href="/tampilperiode">Periode</a>
-                            </li>
-                            <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
-                                <a href="/tampilsp2dsipd">Tarik SP2D SIPD</a>
-                            </li>
-                            {{-- <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
-                                <a href="/tampilrekakun">Akun</a>
-                            </li>
-
-                            <ul class="submenu submenu-level-2 @if(isset($active_subopd)){{ $active_subopd }} @endif">
-                                <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
+                            @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                                <li class="submenu-item @if(isset($active_sideopd)){{ $active_sideopd }} @endif">
+                                    <a href="/tampilopd">Opd</a>
+                                </li>
+                                <li class="submenu-item @if(isset($active_siderek)){{ $active_siderek }} @endif">
+                                    <a href="/tampilrekening">Rekening</a>
+                                </li>
+                                <li class="submenu-item @if(isset($active_sidebank)){{ $active_sidebank }} @endif">
+                                    <a href="/tampilbank">Bank</a>
+                                </li>
+                                <li class="submenu-item @if(isset($active_sideanggaran)){{ $active_sideanggaran }} @endif">
+                                    <a href="/tampilanggaran">Anggaran</a>
+                                </li>
+                                <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
+                                    <a href="/tampilperiode">Periode</a>
+                                </li>
+                                <li class="submenu-item @if(isset($active_sideperiode)){{ $active_sideperiode }} @endif">
+                                    <a href="/tampilsp2dsipd">Tarik SP2D SIPD</a>
+                                </li>
+                                {{-- <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
                                     <a href="/tampilrekakun">Akun</a>
                                 </li>
-                            </ul> --}}
 
-                            <li class="submenu-item active has-sub">
-                                <a href="#" class="submenu-link">Rekening</a>
-                                    <ul class="submenu submenu-level-2 ">
-                                        <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
-                                            <a href="/tampilrekakun" class="submenu-link">Akun</a>
-                                        </li>
-                                        <li class="submenu-item @if(isset($active_side)){{ $active_side }} @endif">
-                                            <a href="/tampilrekkelompok" class="submenu-link">Kelompok</a>
-                                        </li>
-                                        <li class="submenu-item @if(isset($active_sidejenis)){{ $active_sidejenis }} @endif">
-                                            <a href="/tampilrekjenis" class="submenu-link">Jenis</a>
-                                        </li>
-                                        <li class="submenu-item @if(isset($active_sideo)){{ $active_sideo }} @endif">
-                                            <a href="/tampilrekobjek" class="submenu-link">Objek</a>
-                                        </li>
-                                        <li class="submenu-item @if(isset($active_sidero)){{ $active_sidero }} @endif">
-                                            <a href="/tampilrekrincianobjek" class="submenu-link">Rincian Objek</a>
-                                        </li>
-                                        <li class="submenu-item @if(isset($active_sidesro)){{ $active_sidesro }} @endif">
-                                            <a href="/tampilreksubrincianobjek" class="submenu-link">Sub Rincian Objek</a>
-                                        </li>
-                                    </ul>
-                            </li>
+                                <ul class="submenu submenu-level-2 @if(isset($active_subopd)){{ $active_subopd }} @endif">
+                                    <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
+                                        <a href="/tampilrekakun">Akun</a>
+                                    </li>
+                                </ul> --}}
 
+                                <li class="submenu-item active has-sub">
+                                    <a href="#" class="submenu-link">Rekening</a>
+                                        <ul class="submenu submenu-level-2 ">
+                                            <li class="submenu-item @if(isset($active_sideakun)){{ $active_sideakun }} @endif">
+                                                <a href="/tampilrekakun" class="submenu-link">Akun</a>
+                                            </li>
+                                            <li class="submenu-item @if(isset($active_side)){{ $active_side }} @endif">
+                                                <a href="/tampilrekkelompok" class="submenu-link">Kelompok</a>
+                                            </li>
+                                            <li class="submenu-item @if(isset($active_sidejenis)){{ $active_sidejenis }} @endif">
+                                                <a href="/tampilrekjenis" class="submenu-link">Jenis</a>
+                                            </li>
+                                            <li class="submenu-item @if(isset($active_sideo)){{ $active_sideo }} @endif">
+                                                <a href="/tampilrekobjek" class="submenu-link">Objek</a>
+                                            </li>
+                                            <li class="submenu-item @if(isset($active_sidero)){{ $active_sidero }} @endif">
+                                                <a href="/tampilrekrincianobjek" class="submenu-link">Rincian Objek</a>
+                                            </li>
+                                            <li class="submenu-item @if(isset($active_sidesro)){{ $active_sidesro }} @endif">
+                                                <a href="/tampilreksubrincianobjek" class="submenu-link">Sub Rincian Objek</a>
+                                            </li>
+                                        </ul>
+                                </li>
+                            @endif
+                            @if(Auth::user()->role == 'User')
+                            <li class="submenu-item @if(isset($active_sideanggaranopd)){{ $active_sideanggaranopd }} @endif">
+                                    <a href="/tampilanggaranopd">Anggaran</a>
+                                </li>
+                            @endif
                         </ul>
+                        
                     </li>
 
-                    <li class="sidebar-item  has-sub @if(isset($active_kelola_user)){{ $active_kelola_user }} @endif">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-person-circle"></i>
-                            <span>Kelola User</span>
-                        </a>
-                        <ul class="submenu @if(isset($active_subuser)){{ $active_subuser }} @endif">
-                            <li class="submenu-item @if(isset($active_sideuser)){{ $active_sideuser }} @endif">
-                                <a href="/tampiluser">List User</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="form-element-input.html">Profil</a>
-                            </li>
-                        </ul>
-                    </li>
-                @endif
+                    @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                        <li class="sidebar-item  has-sub @if(isset($active_kelola_user)){{ $active_kelola_user }} @endif">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-person-circle"></i>
+                                <span>Kelola User</span>
+                            </a>
+                            <ul class="submenu @if(isset($active_subuser)){{ $active_subuser }} @endif">
+                                <li class="submenu-item @if(isset($active_sideuser)){{ $active_sideuser }} @endif">
+                                    <a href="/tampiluser">List User</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-element-input.html">Profil</a>
+                                </li>
+                            </ul>
+                        </li>
+                     @endif
+
+                
 
                 <li class="sidebar-title">Penatausahaan</li>
 

@@ -34,11 +34,196 @@
                         </table>
                     @endif
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h4 class="card-title">{{ $title }}</h4>
+                    {{-- <div class="row">
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="m-b-0">Januari</p>
+                                                <div id="total_pajak"></div>
+                                        </div>
+                                        <div>
+                                            <p class="m-b-0">Rp. {{ number_format($total_jan) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="m-b-0">Februari</p>
+                                                <div id="total_pajak"></div>
+                                        </div>
+                                        <div>
+                                            <p class="m-b-0">Rp. {{ number_format($total_feb) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="m-b-0">Maret</p>
+                                                <div id="total_pajak"></div>
+                                        </div>
+                                        <div>
+                                            <p class="m-b-0">Rp. {{ number_format($total_mar) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="m-b-0">April</p>
+                                                <div id="total_pajak"></div>
+                                        </div>
+                                        <div>
+                                            <p class="m-b-0">Rp. {{ number_format($total_apr) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="m-b-0">Mei</p>
+                                                <div id="total_pajak"></div>
+                                        </div>
+                                        <div>
+                                            <p class="m-b-0">Rp. {{ number_format($total_mei) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">Juni</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jun) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">Juli</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_jul) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">Agustus</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_ags) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">September</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_sep) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">Oktober</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_okt) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">November</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_nov) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="m-b-0">Desember</p>
+                                            <div id="total_pajak"></div>
+                                    </div>
+                                    <div>
+                                        <p class="m-b-0">Rp. {{ number_format($total_des) }}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3 class="d-flex justify-content-between align-items-center" style="color: rgb(68, 65, 65); background-color:rgb(251, 251, 255)">
+                                Total Bku Penerimaan &nbsp;&nbsp;&nbsp;Rp. {{ number_format($total_all) }},00
+                            </h3>
+                        </div>
+                        <div class="col-md-2">
                         </div>
                         <div class="col-md-1">
                             <div class="btn-group dropdown me-1 mb-1">
@@ -77,496 +262,411 @@
                             </thead>
                         </table>
                     </div>
-
-                    <br>
-                    <div class="row">
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Januari</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jan) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0"> Rp. {{ number_format($total_jan_mandiri) }} </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jan_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jan_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Februari</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_feb) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0"> Rp. {{ number_format($total_feb_mandiri) }} </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_feb_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_feb_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Maret</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mar) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mar_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mar_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mar_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">April</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_apr) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_apr_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_apr_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_apr_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mei</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mei) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mei_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mei_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_mei_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Juni</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jun) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jun_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jun_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jun_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Juli</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jul) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jul_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jul_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jul_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Agustus</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_ags) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_ags_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_ags_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_ags_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">September</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_sep) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_sep_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_sep_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_sep_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Oktober</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_okt) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_okt_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_okt_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_okt_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">November</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_nov) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_nov_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_nov_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_nov_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Desember</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_des) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Mandiri</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_des_mandiri) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BPD</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_des_bpd) }}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">BTN</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_des_btn) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+ 
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Januari</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_jan) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_jan_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_jan_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Februari</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_feb) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_feb_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_feb_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Maret</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_mar) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_mar_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_mar_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">April</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_apr) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_apr_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_apr_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 217)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mei</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_mei) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_mei_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_mei_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 239)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Juni</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_jun) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_jun_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_jun_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 229, 203)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Juli</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_jul) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_jul_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_jul_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 223, 246)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Agustus</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_ags) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_ags_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_ags_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 248, 187)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">September</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_sep) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_sep_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_sep_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 220)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Oktober</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_okt) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_okt_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_okt_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(213, 246, 203)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">November</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_nov) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_nov_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_nov_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Desember</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_des) }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">Mandiri</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0"> Rp. {{ number_format($total_des_mandiri) }} </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0">BPD</p>
+                                    <div id="total_pajak"></div>
+                            </div>
+                            <div>
+                                <p class="m-b-0">Rp. {{ number_format($total_des_bpd) }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-{{-- </div> --}}
 
 <!-- @include('Penatausahaan.Penerimaan.Bku_Opd.Modal.import') -->
 @include('Penatausahaan.Penerimaan.Bku_Opd.Fungsi.Fungsi2')

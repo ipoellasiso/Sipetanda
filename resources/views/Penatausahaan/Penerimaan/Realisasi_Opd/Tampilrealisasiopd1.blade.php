@@ -49,12 +49,11 @@
                     <table class="table table-hover">
 
                             <tr>
-                                <th style="text-align:center; background-color: #92c9e2;">Kode Rekening</th>
-                                <th style="text-align:center; word-wrap: break-word; overflow-wrap: break-word; background-color: #92c9e2;">URAIAN</th>
-                                <th style="text-align:center; background-color: #92c9e2;" width="200px">ANGGARAN</th>
-                                <th style="text-align:center; background-color: #92c9e2;" width="200px">REALISASI</th>
-                                <th style="text-align:center; background-color: #92c9e2;" width="200px">SISA</th>
-                                <th style="text-align:center; background-color: #92c9e2;" width="60px">%</th>
+                                <th style="text-align:center; word-wrap: break-word; overflow-wrap: break-word; background-color: #f7dfb2;">URAIAN</th>
+                                <th style="text-align:center; background-color: #f7dfb2;" width="200px">ANGGARAN</th>
+                                <th style="text-align:center; background-color: #f7dfb2;" width="200px">REALISASI</th>
+                                <th style="text-align:center; background-color: #f7dfb2;" width="200px">SISA</th>
+                                <th style="text-align:center; background-color: #f7dfb2;" width="60px">%</th>
                             </tr>
 
                         {{-- @if($dataq->count() > 0 )
@@ -98,12 +97,12 @@
                                 $persen = $dataanggaran > 0 ? ($d->nilai_transaksi_jen / $dataanggaran) * 100 : 0;
                             @endphp
                                 <tr>
-                                    <td style="text-align:left;">{{$d->no_rek_jen}}</td>
-                                    <td style="text-align: "><b>{{$d->rek_jen}}</b></td>
-                                    <td style="text-align:right;"><b>{{number_format($dataanggaran, 0)}},00</b></td>
-                                    <td style="text-align:right;"><b>{{number_format($d->nilai_transaksi_jen, 0)}},00</b></td>
-                                    <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
-                                    <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
+                                    {{-- <td style="text-align:left;">{{$d->no_rek_jen}}</td> --}}
+                                    <td style="text-align: ; background-color: #b0b8b87a;"><b>{{$d->rek_jen}}</b></td>
+                                    <td style="text-align:right; background-color: #b0b8b87a;"><b>{{number_format($dataanggaran, 0)}},00</b></td>
+                                    <td style="text-align:right; background-color: #b0b8b87a;"><b>{{number_format($d->nilai_transaksi_jen, 0)}},00</b></td>
+                                    <td style="text-align:right; background-color: #b0b8b87a;">{{ number_format($sisa, 2, ',', '.') }}</td>
+                                    <td style="text-align:right; background-color: #b0b8b87a;">{{ number_format($persen, 2) }}</td>
                                 </tr>
                             @endforeach
                         @endif  
@@ -115,8 +114,8 @@
                                 $persen = $d->nilai_anggaranopd > 0 ? ($d->nilai_transaksi_sro / $d->nilai_anggaranopd) * 100 : 0;
                             @endphp
                                 <tr>
-                                    <td style="text-align:left;">{{$d->no_rek_sro}}</td>
-                                    <td style="text-align: ">{{$d->rek_sro}}</td>
+                                    {{-- <td style="text-align:left;">{{$d->no_rek_sro}}</td> --}}
+                                    <td style="text-align: ; text-indent: px; padding-left: 20px;">{{$d->rek_sro}}</td>
                                     <td style="text-align:right;">{{ number_format($d->nilai_anggaranopd, 2, ',', '.') }}</td>
                                     <td style="text-align:right;">{{number_format($d->nilai_transaksi_sro, 0)}},00</td>
                                     <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>

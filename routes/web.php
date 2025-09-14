@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AnggaranController;
+use App\Http\Controllers\AnggaranopdController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BkuController;
@@ -208,6 +209,19 @@ Route::get('/tampilrekon2', [RekonbkuController::class, 'index2'])->middleware('
 
 // REALISASI OPD
 Route::get('/tampilrealisasiopd', [RealisasiopdController::class, 'index'])->name('realisasiopd.index')->middleware('auth:web','checkRole:User');
+
+// DATA ANGGARAN OPD
+Route::get('/tampilanggaranopd', [AnggaranopdController::class, 'index'])->middleware('auth:web','checkRole:User');
+Route::post('/anggaranopd/store', [AnggaranopdController::class, 'store'])->middleware('auth:web','checkRole:User');
+Route::get('/anggaranopd/edit/{id_anggaranopd}', [AnggaranopdController::class, 'edit'])->middleware('auth:web','checkRole:User');
+Route::delete('/anggaranopd/destroy/{id_anggaranopd}', [AnggaranopdController::class, 'destroy'])->middleware('auth:web','checkRole:User');
+
+Route::get('/rekakun/anggaranopd', [AnggaranopdController::class, 'getDataakun1'])->name('akun1.index')->middleware('auth:web','checkRole:User');
+Route::get('/rekkelompok/anggaranopd/{id}', [AnggaranopdController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:User');
+Route::get('/rekjenis/anggaranopd/{id}', [AnggaranopdController::class, 'getDatajenis'])->middleware('auth:web','checkRole:User');
+Route::get('/rekobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDataobjek'])->middleware('auth:web','checkRole:User');
+Route::get('/rekrincianobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDatarincianobjek'])->middleware('auth:web','checkRole:User');
+Route::get('/reksubrincianobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDatasubrincianobjek'])->middleware('auth:web','checkRole:User');
 
 
 

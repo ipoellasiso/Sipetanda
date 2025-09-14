@@ -80,7 +80,7 @@
             <div class="card widget-todo">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                     <h4 class="card-title d-flex">
-                        Data Tidak Ditemukan
+                        Data Belum Rekon
                     </h4>
                     <a class="text-end btn btn-outline-danger btn-tone m-r-5 btn-xs ml-auto">
                         Rp. {{ number_format($total = $dataq1->sum('nilai_transaksi'), 0) }},00

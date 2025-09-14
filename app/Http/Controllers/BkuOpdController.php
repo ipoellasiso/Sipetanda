@@ -99,6 +99,8 @@ class BkuOpdController extends Controller
             'total_des_bpd'        => BkuopdModel::where('id_bank', '2')->where('tahun', auth()->user()->tahun)->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->whereBetween('tb_bkuopd.tgl_transaksi', ['2025-12-01', '2025-12-31'])->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->sum('nilai_transaksi'),
             'total_des_btn'        => BkuopdModel::where('id_bank', '3')->where('tahun', auth()->user()->tahun)->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->whereBetween('tb_bkuopd.tgl_transaksi', ['2025-12-01', '2025-12-31'])->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->sum('nilai_transaksi'),
             'total_des'            => BkuopdModel::whereBetween('tb_bkuopd.tgl_transaksi', ['2025-12-01', '2025-12-31'])->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->where('tahun', auth()->user()->tahun)->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->sum('nilai_transaksi'),
+
+            'total_all'            => BkuopdModel::whereBetween('tb_bkuopd.tgl_transaksi', ['2025-01-01', '2025-12-31'])->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->where('tahun', auth()->user()->tahun)->where('tb_bkuopd.id_opd', auth()->user()->id_opd)->sum('nilai_transaksi'),
         );
 
         if ($request->ajax()) {
