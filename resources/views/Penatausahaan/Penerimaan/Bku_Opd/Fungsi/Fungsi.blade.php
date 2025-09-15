@@ -253,6 +253,12 @@
                     $('#userForm').trigger("reset");
                     $('#tambahbku').modal('hide');
                     $('#saveBtn').html('Simpan');
+                    $('#id_akun').val('').trigger('change');
+                    $('#id_kelompok').val('').trigger('change');
+                    $('#id_jenis').val('').trigger('change');
+                    $('#id_objek').val('').trigger('change');
+                    $('#id_rincianobjek').val('').trigger('change');
+                    $('#id_subrincianobjek').val('').trigger('change');
 
                     Swal.fire({
                         icon: "success",
@@ -267,6 +273,12 @@
                     $('#userForm').trigger("reset");
                     $('#tambahbku').modal('hide');
                     $('#saveBtn').html('Simpan');
+                    $('#id_akun').val('').trigger('change');
+                    $('#id_kelompok').val('').trigger('change');
+                    $('#id_jenis').val('').trigger('change');
+                    $('#id_objek').val('').trigger('change');
+                    $('#id_rincianobjek').val('').trigger('change');
+                    $('#id_subrincianobjek').val('').trigger('change');
 
                     Swal.fire({
                         icon: "error",
