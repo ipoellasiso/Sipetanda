@@ -56,7 +56,7 @@
                                 <th style="text-align:center; background-color: #f7dfb2;" width="60px">%</th>
                             </tr>
 
-                        {{-- @if($dataq->count() > 0 )
+                        @if($dataq->count() > 0 )
                             @foreach ($dataq as $d)
                             @php
                                 $sisa = $dataanggaran - $d->nilai_transaksi;
@@ -71,9 +71,9 @@
                                     <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
                                 </tr>
                             @endforeach
-                        @endif    --}}
+                        @endif
 
-                        {{-- @if($dataq2->count() > 0 )
+                        @if($dataq2->count() > 0 )
                             @foreach ($dataq2 as $d)
                             @php
                                 $sisa = $dataanggaran - $d->nilai_transaksi_kel;
@@ -81,14 +81,14 @@
                             @endphp
                                 <tr>
                                     <td style="text-align:left;">{{$d->no_rek_kel}}</td>
-                                    <td style="text-align: "><b>{{$d->rek_kel}}</b></td>
+                                    <td ><b>{{$d->rek_kel}}</b></td>
                                     <td style="text-align:right;"><b><b>{{number_format($dataanggaran, 0)}},00</b></td>
                                     <td style="text-align:right;"><b>{{number_format($d->nilai_transaksi_kel, 0)}},00</b></td>
                                    <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
                                     <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
                                 </tr>
                             @endforeach
-                        @endif   --}}
+                        @endif
                         
                         @if($dataq3->count() > 0 )
                             @foreach ($dataq3 as $d)
