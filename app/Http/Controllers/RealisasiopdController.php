@@ -58,11 +58,11 @@ class RealisasiopdController extends Controller
                                     // ->whereIn('tb_bkuopd.status1', ['Input'])
                                     ->where('tb_bkuopd.tahun', auth()->user()->tahun)
                                     ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
-                                    ->select([ 'tb_kelompok.rek_kel', 'tb_kelompok.no_rek_kel', 'tb_bkuopd.id_kelompok',
+                                    ->select([ 'tb_kelompok.rek_kel', 'tb_kelompok.no_rek_kel', 'tb_bkuopd.id_kelompok', 'tb_bkuopd.id_objek',
                                         DB::raw('sum(tb_bkuopd.nilai_transaksi) as nilai_transaksi_kel'),
-                                        // DB::raw('sum(tb_anggaranopd.nilai_anggaranopd) as nilai_anggaranopd2'),
+                                        DB::raw('sum(tb_anggaranopd.nilai_anggaranopd) as nilai_anggaranopd'),
                                       ])
-                                    ->groupBy(['tb_kelompok.rek_kel', 'tb_kelompok.no_rek_kel', 'tb_bkuopd.id_kelompok'])
+                                    ->groupBy(['tb_kelompok.rek_kel', 'tb_kelompok.no_rek_kel', 'tb_bkuopd.id_kelompok', 'tb_bkuopd.id_objek'])
                                     ->get(),
             
             'dataq3'                 => DB::table('tb_bkuopd')
@@ -87,16 +87,22 @@ class RealisasiopdController extends Controller
                                     ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro', 'tb_objek.rek_o')
 
                                     ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
-                                    ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
+                                    // ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
                                     ->join('tb_objek', 'tb_objek.id_o', '=', 'tb_bkuopd.id_objek')
                                     ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
+                                    // ->join('tb_anggaranopd', 'tb_anggaranopd.id_subrincianobjek', '=', 'tb_bkuopd.id_subrincianobjek')
                                     // ->whereIn('tb_bkuopd.status1', ['Input'])
                                     ->where('tb_bkuopd.tahun', auth()->user()->tahun)
                                     ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
-                                    ->select([ 'tb_objek.rek_o', 'tb_objek.no_rek_o', 'tb_bkuopd.id_objek', 'tb_bkuopd.id_jenis', 'tb_bkuopd.id_objek',
+                                    ->select([ 'tb_objek.rek_o',
+                                               'tb_objek.no_rek_o',
+                                               'tb_bkuopd.id_objek',
+                                               'tb_bkuopd.id_jenis',
+                                              //  'tb_anggaranopd.nilai_anggaranopd',
                                         DB::raw('sum(tb_bkuopd.nilai_transaksi) as nilai_transaksi_o'),
+                                        // DB::raw('sum(tb_anggaranopd.nilai_anggaranopd) as nilai_anggaranopd'),
                                       ])
-                                    ->groupBy(['tb_objek.rek_o', 'tb_objek.no_rek_o', 'tb_bkuopd.id_objek', 'tb_bkuopd.id_jenis', 'tb_bkuopd.id_objek'])
+                                    ->groupBy(['tb_objek.rek_o', 'tb_objek.no_rek_o', 'tb_bkuopd.id_objek', 'tb_bkuopd.id_jenis'])
                                     ->get(),
 
             'dataq5'                 => DB::table('tb_bkuopd')
@@ -106,13 +112,18 @@ class RealisasiopdController extends Controller
                                     ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
                                     ->join('tb_rincianobjek', 'tb_rincianobjek.id_ro', '=', 'tb_bkuopd.id_rincianobjek')
                                     ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
+                                    ->join('tb_anggaranopd', 'tb_anggaranopd.id_subrincianobjek', '=', 'tb_bkuopd.id_subrincianobjek')
                                     // ->whereIn('tb_bkuopd.status1', ['Input'])
                                     ->where('tb_bkuopd.tahun', auth()->user()->tahun)
                                     ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
-                                    ->select([ 'tb_rincianobjek.rek_ro', 'tb_rincianobjek.no_rek_ro', 'tb_bkuopd.id_objek', 'tb_bkuopd.id_rincianobjek',
+                                    ->select([ 'tb_rincianobjek.rek_ro',
+                                               'tb_rincianobjek.no_rek_ro',
+                                               'tb_bkuopd.id_objek',
+                                               'tb_bkuopd.id_rincianobjek',
+                                               'tb_anggaranopd.nilai_anggaranopd',
                                         DB::raw('sum(tb_bkuopd.nilai_transaksi) as nilai_transaksi_ro'),
                                       ])
-                                    ->groupBy(['tb_rincianobjek.rek_ro', 'tb_rincianobjek.no_rek_ro', 'tb_bkuopd.id_objek', 'tb_bkuopd.id_rincianobjek'])
+                                    ->groupBy(['tb_rincianobjek.rek_ro', 'tb_rincianobjek.no_rek_ro', 'tb_bkuopd.id_objek', 'tb_bkuopd.id_rincianobjek', 'tb_anggaranopd.nilai_anggaranopd'])
                                     ->get(),
 
             'dataq6'              => DB::table('tb_bkuopd')
@@ -120,12 +131,13 @@ class RealisasiopdController extends Controller
                                     ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
                                     ->join('tb_akun', 'tb_akun.id', '=', 'tb_bkuopd.id_akun')
                                     ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
-                                    ->join('tb_anggaranopd', 'tb_anggaranopd.id_subrincianobjek', '=', 'tb_subrincianobjek.id_sro')
+                                    ->join('tb_anggaranopd', 'tb_anggaranopd.id_subrincianobjek', '=', 'tb_bkuopd.id_subrincianobjek')
                                     ->where('tb_bkuopd.tahun', auth()->user()->tahun)
                                     ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
                                     ->select([ 'tb_subrincianobjek.rek_sro',
                                                'tb_subrincianobjek.no_rek_sro',
-                                               'tb_anggaranopd.nilai_anggaranopd', 'tb_bkuopd.id_rincianobjek',
+                                               'tb_anggaranopd.nilai_anggaranopd',
+                                               'tb_bkuopd.id_rincianobjek',
                                                 DB::raw('sum(tb_bkuopd.nilai_transaksi) as nilai_transaksi_sro'),
                                                 // DB::raw('SUM(tb_anggaranopd.nilai_anggaranopd) as nilai_anggaran_sro'),
                                       ])

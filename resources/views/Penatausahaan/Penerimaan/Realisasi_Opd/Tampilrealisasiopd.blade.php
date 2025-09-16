@@ -59,10 +59,10 @@
 
                         @if($dataq->count() > 0 )
                             @foreach ($dataq as $d)
-                            @php
-                                $sisa = $dataanggaran - $d->nilai_transaksi;
-                                $persen = $dataanggaran > 0 ? ($d->nilai_transaksi / $dataanggaran) * 100 : 0;
-                            @endphp
+                                @php
+                                    $sisa = $dataanggaran - $d->nilai_transaksi;
+                                    $persen = $dataanggaran > 0 ? ($d->nilai_transaksi / $dataanggaran) * 100 : 0;
+                                @endphp
                                 <tr>
                                     <td style="text-align:left;">{{$d->no_rek}}</td>
                                     <td><b>{{$d->rek}}</b></td>
@@ -72,125 +72,123 @@
                                     <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
                                 </tr>
                             
-                        @foreach ($dataq2 as $d)
-                            @if ($d->id_kelompok == '1')
-                                @if($dataq2->count() > 0 )
-                                
-                                @php
-                                    $sisa = $dataanggaran - $d->nilai_transaksi_kel;
-                                    $persen = $dataanggaran > 0 ? ($d->nilai_transaksi_kel / $dataanggaran) * 100 : 0;
-                                @endphp
-                                    <tr>
-                                        <td style="text-align:left;">{{$d->no_rek_kel}}</td>
-                                        <td ><b>{{$d->rek_kel}}</b></td>
-                                        <td style="text-align:right;"><b><b>{{number_format($dataanggaran, 0)}},00</b></td>
-                                        <td style="text-align:right;"><b>{{number_format($d->nilai_transaksi_kel, 0)}},00</b></td>
-                                    <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
-                                        <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
-                                    </tr>
+                                @foreach ($dataq2 as $d)
+                                    @if ($d->id_kelompok == '1')
+                                        @if ($d->id_objek == '12')
+                                            @if($dataq2->count() > 0 )
+                                            
+                                                @php
+                                                    $sisa = $d->nilai_anggaranopd - $d->nilai_transaksi_kel;
+                                                    $persen = $d->nilai_anggaranopd > 0 ? ($d->nilai_transaksi_kel / $d->nilai_anggaranopd) * 100 : 0;
+                                                @endphp
+                                                <tr>
+                                                    <td style="text-align:left;">{{$d->no_rek_kel}}</td>
+                                                    <td ><b>{{$d->rek_kel}}</b></td>
+                                                    <td style="text-align:right;"><b><b>{{number_format($d->nilai_anggaranopd, 0)}},00</b></td>
+                                                    <td style="text-align:right;"><b>{{number_format($d->nilai_transaksi_kel, 0)}},00</b></td>
+                                                <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
+                                                    <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
+                                                </tr>
 
-                            @foreach ($dataq3 as $d3)
-                                @if ($d->id_kelompok == '1')
-                                    @if($dataq3->count() > 0 )
-                                    
-                                    @php
-                                        $sisa = $dataanggaran - $d3->nilai_transaksi_jen;
-                                        $persen = $dataanggaran > 0 ? ($d3->nilai_transaksi_jen / $dataanggaran) * 100 : 0;
-                                    @endphp
-                                        <tr>
-                                            <td style="text-align:left;">{{$d3->no_rek_jen}}</td>
-                                            <td ><b>{{$d3->rek_jen}}</b></td>
-                                            <td style="text-align:right;"><b><b>{{number_format($dataanggaran, 0)}},00</b></td>
-                                            <td style="text-align:right;"><b>{{number_format($d3->nilai_transaksi_jen, 0)}},00</b></td>
-                                        <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
-                                            <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
-                                        </tr>
+                                                @foreach ($dataq3 as $d3)
+                                                    @if ($d->id_kelompok == '1')
+                                                        @if($dataq3->count() > 0 )
+                                                        
+                                                            @php
+                                                                $sisa = $dataanggaran - $d3->nilai_transaksi_jen;
+                                                                $persen = $dataanggaran > 0 ? ($d3->nilai_transaksi_jen / $dataanggaran) * 100 : 0;
+                                                            @endphp
+                                                            <tr>
+                                                                <td style="text-align:left;">{{$d3->no_rek_jen}}</td>
+                                                                <td ><b>{{$d3->rek_jen}}</b></td>
+                                                                <td style="text-align:right;"><b><b>{{number_format($dataanggaran, 0)}},00</b></td>
+                                                                <td style="text-align:right;"><b>{{number_format($d3->nilai_transaksi_jen, 0)}},00</b></td>
+                                                            <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
+                                                                <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
+                                                            </tr>
 
-                                        @foreach ($dataq4 as $d4)
-                                            @if ($d->id_kelompok == '1')
-                                                @if ($d3->id_jenis == $d4->id_jenis)
-                                                    @if($dataq4->count() > 0 )
-                                                    
-                                                    @php
-                                                        $sisa = $dataanggaran - $d4->nilai_transaksi_o;
-                                                        $persen = $dataanggaran > 0 ? ($d4->nilai_transaksi_o / $dataanggaran) * 100 : 0;
-                                                    @endphp
-                                                        <tr>
-                                                            <td style="text-align:left;">{{$d4->no_rek_o}}</td>
-                                                            <td ><b>{{$d4->rek_o}}</b></td>
-                                                            <td style="text-align:right;"><b><b>{{number_format($dataanggaran, 0)}},00</b></td>
-                                                            <td style="text-align:right;"><b>{{number_format($d4->nilai_transaksi_o, 0)}},00</b></td>
-                                                        <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
-                                                            <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
-                                                        </tr>
-
-                                                        @foreach ($dataq5 as $d5)
-                                                            @if ($d->id_kelompok == '1')
-                                                                @if ($d3->id_jenis == $d4->id_jenis)
-                                                                    @if ($d4->id_objek == $d5->id_objek)
-                                                                        @if($dataq5->count() > 0 )
-                                                                        
-                                                                        @php
-                                                                            $sisa = $dataanggaran - $d5->nilai_transaksi_ro;
-                                                                            $persen = $dataanggaran > 0 ? ($d5->nilai_transaksi_ro / $dataanggaran) * 100 : 0;
-                                                                        @endphp
-                                                                            <tr>
-                                                                                <td style="text-align:left;">{{$d5->no_rek_ro}}</td>
-                                                                                <td >{{$d5->rek_ro}}</td>
-                                                                                <td style="text-align:right;">{{number_format($dataanggaran, 0)}},00</td>
-                                                                                <td style="text-align:right;">{{number_format($d5->nilai_transaksi_ro, 0)}},00</td>
+                                                                @foreach ($dataq4 as $d4)
+                                                                    @if ($d->id_kelompok == '1')
+                                                                        @if ($d3->id_jenis == $d4->id_jenis)
+                                                                            @if($dataq4->count() > 0 )
+                                                                            
+                                                                                <tr>
+                                                                                    <td style="text-align:left;">{{$d4->no_rek_o}}</td>
+                                                                                    <td ><b>{{$d4->rek_o}}</b></td>
+                                                                                    <td style="text-align:right;"><b></td>
+                                                                                    <td style="text-align:right;"><b>{{number_format($d4->nilai_transaksi_o, 0)}},00</b></td>
                                                                                 <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
-                                                                                <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
-                                                                            </tr>
+                                                                                    <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
+                                                                                </tr>
 
-                                                                            @foreach ($dataq6 as $d6)
-                                                                                @if ($d->id_kelompok == '1')
-                                                                                    @if ($d3->id_jenis == $d4->id_jenis)
-                                                                                        @if ($d4->id_objek == $d5->id_objek)
-                                                                                            @if ($d5->id_rincianobjek == $d6->id_rincianobjek)
-                                                                                                @if($dataq6->count() > 0 )
-                                                                                                
-                                                                                                @php
-                                                                                                    $sisa = $dataanggaran - $d6->nilai_transaksi_sro;
-                                                                                                    $persen = $dataanggaran > 0 ? ($d6->nilai_transaksi_sro / $dataanggaran) * 100 : 0;
-                                                                                                @endphp
-                                                                                                    <tr>
-                                                                                                        <td style="text-align:left;">{{$d6->no_rek_sro}}</td>
-                                                                                                        <td >{{$d6->rek_sro}}</td>
-                                                                                                        <td style="text-align:right;">{{number_format($dataanggaran, 0)}},00</td>
-                                                                                                        <td style="text-align:right;">{{number_format($d6->nilai_transaksi_sro, 0)}},00</td>
-                                                                                                        <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
-                                                                                                        <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
-                                                                                                    </tr>
+                                                                                    @foreach ($dataq5 as $d5)
+                                                                                        @if ($d->id_kelompok == '1')
+                                                                                            @if ($d3->id_jenis == $d4->id_jenis)
+                                                                                                @if ($d4->id_objek == $d5->id_objek)
+                                                                                                    @if($dataq5->count() > 0 )
+                                                                                                    
+                                                                                                        @php
+                                                                                                            $sisa = $d5->nilai_anggaranopd - $d5->nilai_transaksi_ro;
+                                                                                                            $persen = $d5->nilai_anggaranopd > 0 ? ($d5->nilai_transaksi_ro / $d5->nilai_anggaranopd) * 100 : 0;
+                                                                                                        @endphp
+                                                                                                        <tr>
+                                                                                                            <td style="text-align:left;">{{$d5->no_rek_ro}}</td>
+                                                                                                            <td >{{$d5->rek_ro}}</td>
+                                                                                                            <td style="text-align:right;">{{number_format($d5->nilai_anggaranopd, 0)}},00</td>
+                                                                                                            <td style="text-align:right;">{{number_format($d5->nilai_transaksi_ro, 0)}},00</td>
+                                                                                                            <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
+                                                                                                            <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
+                                                                                                        </tr>
+
+                                                                                                            @foreach ($dataq6 as $d6)
+                                                                                                                @if ($d->id_kelompok == '1')
+                                                                                                                    @if ($d3->id_jenis == $d4->id_jenis)
+                                                                                                                        @if ($d4->id_objek == $d5->id_objek)
+                                                                                                                            @if ($d5->id_rincianobjek == $d6->id_rincianobjek)
+                                                                                                                                @if($dataq6->count() > 0 )
+                                                                                                                                
+                                                                                                                                    @php
+                                                                                                                                        $sisa = $d6->nilai_anggaranopd - $d6->nilai_transaksi_sro;
+                                                                                                                                        $persen = $d6->nilai_anggaranopd > 0 ? ($d6->nilai_transaksi_sro / $d6->nilai_anggaranopd) * 100 : 0;
+                                                                                                                                    @endphp
+                                                                                                                                    <tr>
+                                                                                                                                        <td style="text-align:left;">{{$d6->no_rek_sro}}</td>
+                                                                                                                                        <td >{{$d6->rek_sro}}</td>
+                                                                                                                                        <td style="text-align:right;">{{number_format($d6->nilai_anggaranopd, 0)}},00</td>
+                                                                                                                                        <td style="text-align:right;">{{number_format($d6->nilai_transaksi_sro, 0)}},00</td>
+                                                                                                                                        <td style="text-align:right;">{{ number_format($sisa, 2, ',', '.') }}</td>
+                                                                                                                                        <td style="text-align:right;">{{ number_format($persen, 2) }}</td>
+                                                                                                                                    </tr>
+
+                                                                                                                                @endif
+                                                                                                                            @endif
+                                                                                                                        @endif
+                                                                                                                    @endif
+                                                                                                                @endif
+                                                                                                            @endforeach
 
                                                                                                     @endif
                                                                                                 @endif
                                                                                             @endif
                                                                                         @endif
-                                                                                    @endif
-                                                                                @endforeach
+                                                                                    @endforeach
 
                                                                             @endif
                                                                         @endif
                                                                     @endif
-                                                                @endif
-                                                            @endforeach
+                                                                @endforeach
 
                                                         @endif
                                                     @endif
-                                                @endif
-                                            @endforeach
+                                                @endforeach
 
+                                            @endif
                                         @endif
                                     @endif
                                 @endforeach
-
-                                @endif
-                            @endif
-                        @endforeach
                         
-                    @endforeach
-                    @endif
+                            @endforeach
+                        @endif
                         
                     </table>
 
