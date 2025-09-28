@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\jenisImport;
+use App\Imports\JenisImport;
 use App\Models\AkunModel;
 use App\Models\jenisModel;
 use App\Models\KelompokModel;
