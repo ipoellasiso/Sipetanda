@@ -172,6 +172,9 @@
                             <li class="submenu-item">
                                 <a href="/tampilrealisasiopd">Realisasi</a>
                             </li>
+                            <li class="submenu-item @if(isset($active_sidebap)){{ $active_sidebap }} @endif">
+                                <a href="/tampilbaprekon">BAP Rekon</a>
+                            </li>
                         @endif
                     </ul>
                 </li>

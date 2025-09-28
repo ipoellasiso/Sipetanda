@@ -5,6 +5,7 @@ use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\AnggaranopdController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\BaprekonOpdController;
 use App\Http\Controllers\BkuController;
 use App\Http\Controllers\BkuOpdController;
 use App\Http\Controllers\HomeController;
@@ -224,6 +225,9 @@ Route::get('/rekjenis/anggaranopd/{id}', [AnggaranopdController::class, 'getData
 Route::get('/rekobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDataobjek'])->middleware('auth:web','checkRole:User');
 Route::get('/rekrincianobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDatarincianobjek'])->middleware('auth:web','checkRole:User');
 Route::get('/reksubrincianobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDatasubrincianobjek'])->middleware('auth:web','checkRole:User');
+
+// BAP REKON
+Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->middleware('auth:web','checkRole:User');
 
 
 

@@ -7,6 +7,30 @@
     <script src="/assets/static/js/pages/dashboard.js"></script>
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/numbro@2.3.1/dist/numbro.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // aman walau $labels tidak ada
+        const labels = @json($labels ?? []);
+        const realisasi = @json($realisasi ?? []);
+
+        const canvas = document.getElementById('realisasiChart');
+        if (canvas && labels.length) {
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Realisasi',
+                        data: realisasi,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+    </script>
 
 
     <div class="container my-3">
@@ -95,4 +119,6 @@
         </script>
         
     </div>
+
+    
     

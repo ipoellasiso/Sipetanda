@@ -3,76 +3,50 @@
 
 <section class="row">
     <div class="col-12 col-lg-12">
-        <div class="row">
-            <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stats-icon purple">
-                                    <i class="iconly-boldShow"></i>
+            @php
+                $colors = ['purple','blue','green','red','orange','teal'];
+                $icons = ['iconly-boldShow','iconly-boldProfile','iconly-boldBookmark','iconly-boldWork','iconly-boldCategory','iconly-boldStar'];
+            @endphp
+
+            <div class="row">
+                @foreach($cardRealisasi as $index => $item)
+                @php
+                    $color = $colors[$index % count($colors)];
+                    $icon = $icons[$index % count($icons)];
+                @endphp
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="me-3">
+                                <div class="stats-icon {{ $color }}">
+                                    <i class="iconly-boldWallet"></i>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Profile Views</h6>
-                                <h6 class="font-extrabold mb-0">112.000</h6>
+                            <div>
+                                <h6 class="text-muted small mb-1">{{ $item->nama }}</h6>
+                                <h5 class="fw-bold mb-0">Rp {{ number_format($item->total, 0, ',', '.') }}</h5>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stats-icon blue">
-                                    <i class="iconly-boldProfile"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Followers</h6>
-                                <h6 class="font-extrabold mb-0">183.000</h6>
-                            </div>
+
+            <br><br>
+            <div class="row">
+                <div class="col-12 col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Anggaran vs Realisasi</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="realisasiChart" height="100"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stats-icon green">
-                                    <i class="iconly-boldAdd-User"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Following</h6>
-                                <h6 class="font-extrabold mb-0">80.000</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stats-icon red">
-                                    <i class="iconly-boldBookmark"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Saved Post</h6>
-                                <h6 class="font-extrabold mb-0">112</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
 </section>
