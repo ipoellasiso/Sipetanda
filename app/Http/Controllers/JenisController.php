@@ -64,7 +64,7 @@ class JenisController extends Controller
                     ->make(true);
         }
 
-        return view('Master_Data.Rek_jenis.Tampilrekjenis', $data);
+        return view('Master_Data.Rek_Jenis.Tampilrekjenis', $data);
     }
 
      public function store(Request $request)
