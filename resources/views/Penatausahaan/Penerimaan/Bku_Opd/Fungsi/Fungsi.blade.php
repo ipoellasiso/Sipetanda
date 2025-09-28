@@ -206,17 +206,12 @@
     // edit data
     $('body').on('click', '.editBkuopd', function(e)  {
         var id_transaksi1 = $(this).data('id_transaksi');
-        $.get("/bku/edit/"+id_transaksi1, function (data) {
+        $.get("/bkuopd/edit/"+id_transaksi1, function (data) {
             $('#saveBtn').val("edit-bku");
             $('#tambahbku').modal('show');
-        
             $('#id_transaksi').val(data.id_transaksi);
-            $("#id_rekening").html('<option value = "'+data.id_rekening+'" selected >'+data.rekening2+'</option>');
-            // $('#id_rekening').val(data.id_rekening);
-            $('#id_opd').html('<option value = "'+data.id+'" selected >'+data.nama_opd+'</option>');
-            $('#id_bank').html('<option value = "'+data.id_bank+'" selected >'+data.nama_bank+'</option>');
+            // $('#id_bankopd').html('<option value = "'+data.id_bank+'" selected >'+data.nama_bank+'</option>');
             $('#uraian').val(data.uraian);
-            $('#no_buku').val(data.no_buku);
             $('#tgl_transaksi').val(data.tgl_transaksi);
             $('#nilai_transaksi').val(data.nilai_transaksi);
         })

@@ -126,7 +126,6 @@ class BkuOpdController extends Controller
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <li><a class="editBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="javascript:void(0)">Ubah</a></li>
                                                 <li><a class="deleteBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="javascript:void(0)">Delete</a></li>
-                                                <li><a class="lihatBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="/bkuopd/lihat/'.$row->id_transaksi.'">Lihat</a></li>
                                             </ul>
                                         </div>
                                 ';
@@ -185,59 +184,144 @@ class BkuOpdController extends Controller
         return view('Penatausahaan.Penerimaan.Bku_Opd.Tampilbkuopd', $data);
     }
 
+    // public function store(Request $request)
+    // {
+    //     $now = Carbon::now();
+    //     $Thn = $now->year;
+    //     $Bulan =  $now->month;
+            
+    //     $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+    //          foreach($ambilopd1 as $d)
+    //          $ambilopd  = $d->status1;
+    //     $ambilopd2 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
+    //          foreach($ambilopd2 as $d)
+    //          $ambilopd2  = $d->id;
+
+    //     $cek = DB::table("tb_bkuopd")->select(DB::raw("COUNT(no_buku) as jumlah"))->where('id_opd', auth()->user()->id_opd)->groupBy('id_opd');
+    //     if ($cek ->count() >0){
+    //         foreach($cek->get() as $k){
+    //             $nourut = sprintf("%04s", abs( ((int)$k->jumlah) +1 )). '/' . $ambilopd . '/' . $Thn;
+    //         }
+    //     } else {
+    //         $num = 1;
+    //         $nourut = sprintf("%04s", $num) . '/' . $ambilopd . '/' . $Thn;
+    //     }
+
+
+    //     $bkuId = $request->id_transaksi;
+
+    //     $cekbku = BkuopdModel::where('no_buku', $request->no_buku)->where('id_transaksi', '!=', $request->id_transaksi)->first();
+    //     if($cekbku)
+    //     {
+    //         return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
+    //     } else {
+    //         $details = [
+    //             'id_akun'            => $request->id_akun,
+    //             'id_kelompok'        => $request->id_kelompok,
+    //             'id_jenis'           => $request->id_jenis,
+    //             'id_objek'           => $request->id_objek,
+    //             'id_rincianobjek'    => $request->id_rincianobjek,
+    //             'id_subrincianobjek' => $request->id_subrincianobjek,
+    //             'id_rekening'        => $request->id_rekening,
+    //             'id_opd'             => $ambilopd2,
+    //             'id_bank'            => $request->id_bank,
+    //             'uraian'             => $request->uraian,
+    //             'ket'                => $request->ket,
+    //             'no_buku'            => $nourut,
+    //             'tgl_transaksi'      => $request->tgl_transaksi,
+    //             'nilai_transaksi'    => str_replace('.','',$request->nilai_transaksi),
+    //             'tahun'              => date('Y'),
+    //             // 'status3'            => 0,
+    //         ];
+    //     }
+        
+    //         BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $details);
+    //         // BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $no_buku);
+    //         return response()->json(['success' =>'Data Berhasil Disimpan']);
+    // }
+
     public function store(Request $request)
     {
         $now = Carbon::now();
         $Thn = $now->year;
-        $Bulan =  $now->month;
-        $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-             foreach($ambilopd1 as $d)
-             $ambilopd  = $d->status1;
-        $ambilopd2 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-             foreach($ambilopd2 as $d)
-             $ambilopd2  = $d->id;
 
-        $cek = DB::table("tb_bkuopd")->select(DB::raw("COUNT(no_buku) as jumlah"))->where('id_opd', auth()->user()->id_opd)->groupBy('id_opd');
-        if ($cek ->count() >0){
-            foreach($cek->get() as $k){
-                $nourut = sprintf("%04s", abs( ((int)$k->jumlah) +1 )). '/' . $ambilopd . '/' . $Thn;
-            }
-        } else {
-            $num = 1;
-            $nourut = sprintf("%04s", $num) . '/' . $ambilopd . '/' . $Thn;
-        }
-
+        // ambil status1 & id opd
+        $opd = OpdModel::select('id', 'status1')->where('id', auth()->user()->id_opd)->first();
+        $status1 = $opd->status1;
+        $idOpd   = $opd->id;
 
         $bkuId = $request->id_transaksi;
 
-        $cekbku = BkuopdModel::where('no_buku', $request->no_buku)->where('id_transaksi', '!=', $request->id_transaksi)->first();
-        if($cekbku)
-        {
-            return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
+        // cek apakah data sudah ada (edit mode)
+        $existing = BkuopdModel::find($bkuId);
+
+        if ($existing) {
+            // edit → pakai nomor lama
+            $nourut = $existing->no_buku;
         } else {
-            $details = [
-                'id_akun'            => $request->id_akun,
-                'id_kelompok'        => $request->id_kelompok,
-                'id_jenis'           => $request->id_jenis,
-                'id_objek'           => $request->id_objek,
-                'id_rincianobjek'    => $request->id_rincianobjek,
-                'id_subrincianobjek' => $request->id_subrincianobjek,
-                'id_rekening'        => $request->id_rekening,
-                'id_opd'             => $ambilopd2,
-                'id_bank'            => $request->id_bank,
-                'uraian'             => $request->uraian,
-                'ket'                => $request->ket,
-                'no_buku'            => $nourut,
-                'tgl_transaksi'      => $request->tgl_transaksi,
-                'nilai_transaksi'    => str_replace('.','',$request->nilai_transaksi),
-                'tahun'              => date('Y'),
-                // 'status3'            => 0,
-            ];
+            // tambah baru → generate nomor
+            $cek = DB::table("tb_bkuopd")
+                ->select(DB::raw("COUNT(no_buku) as jumlah"))
+                ->where('id_opd', auth()->user()->id_opd)
+                ->groupBy('id_opd');
+
+            if ($cek->count() > 0) {
+                foreach ($cek->get() as $k) {
+                    $nourut = sprintf("%04s", abs(((int)$k->jumlah) + 1)) . '/' . $status1 . '/' . $Thn;
+                }
+            } else {
+                $num = 1;
+                $nourut = sprintf("%04s", $num) . '/' . $status1 . '/' . $Thn;
+            }
         }
-        
-            BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $details);
-            // BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $no_buku);
-            return response()->json(['success' =>'Data Berhasil Disimpan']);
+
+        // validasi no_buku duplikat
+        $cekbku = BkuopdModel::where('no_buku', $nourut)
+            ->where('id_transaksi', '!=', $bkuId)
+            ->first();
+
+        if ($cekbku) {
+            return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
+        }
+
+        $details = [
+            'id_akun'            => $request->id_akun,
+            'id_kelompok'        => $request->id_kelompok,
+            'id_jenis'           => $request->id_jenis,
+            'id_objek'           => $request->id_objek,
+            'id_rincianobjek'    => $request->id_rincianobjek,
+            'id_subrincianobjek' => $request->id_subrincianobjek,
+            'id_rekening'        => $request->id_rekening,
+            'id_opd'             => $idOpd,
+            'id_bank'            => $request->id_bank,
+            'uraian'             => $request->uraian,
+            'ket'                => $request->ket,
+            'no_buku'            => $nourut,
+            'tgl_transaksi'      => $request->tgl_transaksi,
+            'nilai_transaksi'    => str_replace('.', '', $request->nilai_transaksi),
+            'tahun'              => $Thn,
+        ];
+
+        BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $details);
+
+        return response()->json(['success' =>'Data Berhasil Disimpan']);
+    }
+
+    public function editbkuopd($id)
+    {
+        $where = array('tb_bkuopd.id_transaksi' => $id);
+        $data = DB::table('tb_bkuopd')
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
+                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
+                        ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
+                        ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
+                        ->orderBy('no_buku', 'asc')
+                        ->where('tb_bkuopd.tahun', auth()->user()->tahun)
+                        ->where('tb_bkuopd.id_opd', auth()->user()->id_opd)
+                        ->where($where)
+                        ->first();
+
+        return response()->json($data);
     }
 
     public function getDatarek(Request $request)

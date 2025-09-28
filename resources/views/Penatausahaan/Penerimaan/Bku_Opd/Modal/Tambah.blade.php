@@ -2,25 +2,12 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">"document"> --}}
         
         <div class="modal-content">
-            {{-- <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel16">Tambah Data BKU</h4>
-                <button type="button" class="close" data-bs-dismiss="modal"
-                    aria-label="Close">
-                    <i data-feather="x"></i>
-                </button>
-            </div> --}}
             <div class="modal-body">
                 <form id="userForm" name="userForm" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="id_transaksi" id="id_transaksi">
                         <div class="row">
                             <div class="col-md-12">
-                                {{-- <div class="form-group">
-                                    <label>Rekening</label>
-                                    <select class="form-select" name="id_rekening" id="id_rekeningopd" style="width: 100%" required>
-                                        <option></option>
-                                    </select>
-                                </div> --}}
                                 <div class="form-group">
                                     <label>Akun</label>
                                     <select class="form-select" name="id_akun" id="id_akun" style="width: 100%" required>
@@ -57,22 +44,12 @@
                                         <option></option>
                                     </select>
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label>OPD</label>
-                                    <select class="form-select" name="id_opd" id="id_opdopd" style="width: 100%">
-                                        <option></option>
-                                    </select>
-                                </div> --}}
                                 <div class="form-group">
                                     <label>BANK</label>
                                     <select class="form-select" name="id_bank" id="id_bankopd" style="width: 100%" required>
                                         <option></option>
                                     </select>
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label>Nomor BKU</label>
-                                    <input type="text" class="form-control" name="no_buku" id="no_buku" value="" placeholder="">
-                                </div> --}}
                                 <div class="form-group">
                                     <label>Tanggal BKU</label>
                                     <input type="date" class="form-control" name="tgl_transaksi" id="tgl_transaksi" value="" placeholder="" required>

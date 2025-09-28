@@ -34,194 +34,9 @@
                         </table>
                     @endif
 
-                    {{-- <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="m-b-0">Januari</p>
-                                                <div id="total_pajak"></div>
-                                        </div>
-                                        <div>
-                                            <p class="m-b-0">Rp. {{ number_format($total_jan) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="m-b-0">Februari</p>
-                                                <div id="total_pajak"></div>
-                                        </div>
-                                        <div>
-                                            <p class="m-b-0">Rp. {{ number_format($total_feb) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="m-b-0">Maret</p>
-                                                <div id="total_pajak"></div>
-                                        </div>
-                                        <div>
-                                            <p class="m-b-0">Rp. {{ number_format($total_mar) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="m-b-0">April</p>
-                                                <div id="total_pajak"></div>
-                                        </div>
-                                        <div>
-                                            <p class="m-b-0">Rp. {{ number_format($total_apr) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="m-b-0">Mei</p>
-                                                <div id="total_pajak"></div>
-                                        </div>
-                                        <div>
-                                            <p class="m-b-0">Rp. {{ number_format($total_mei) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Juni</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jun) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Juli</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_jul) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Agustus</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_ags) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">September</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_sep) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(246, 203, 203)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Oktober</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_okt) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(245, 246, 203)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">November</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_nov) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(203, 246, 246)">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="m-b-0">Desember</p>
-                                            <div id="total_pajak"></div>
-                                    </div>
-                                    <div>
-                                        <p class="m-b-0">Rp. {{ number_format($total_des) }}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
                     <div class="row">
                         <div class="col-md-9">
-                            <h3 class="d-flex justify-content-between align-items-center" style="color: rgb(68, 65, 65); background-color:rgb(251, 251, 255)">
-                                Total Bku Penerimaan &nbsp;&nbsp;&nbsp;Rp. {{ number_format($total_all) }},00
-                            </h3>
+                            <h4 class="card-title">{{ $title }}</h4>
                         </div>
                         <div class="col-md-2">
                         </div>
@@ -238,8 +53,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {{-- class="m-t-25" --}}
+                    </div> 
+                    
                     <br><br>
                     <div class="m-t-25 table-responsive">
                         <table id="data-table" class="tabelbkuopd table table-hover" style="width:100%">
@@ -267,6 +82,22 @@
             </div>
 
             <div class="row">
+                <div class="col-12 col-lg-12 col-md-12">
+                    <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(237, 232, 232)">
+                        <div class="row col-md-12">
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8 text-center">
+                                <h1>
+                                    Total Bku Penerimaan &nbsp;&nbsp;&nbsp;Rp. {{ number_format($total_all) }},00
+                                </h1>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-6 col-lg-3 col-md-6">
                     <div class="card" style="color: rgb(0, 0, 0); background-color:rgb(179, 179, 248)">
                         <div class="card-body px-3 py-4-5">

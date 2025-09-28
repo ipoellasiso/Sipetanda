@@ -126,6 +126,8 @@ Route::post('/bkuopd/store', [BkuOpdController::class, 'store'])->middleware('au
 Route::get('/bkuopd/rekening', [BkuOpdController::class, 'getDatarek'])->middleware('auth:web','checkRole:User');
 Route::get('/bkuopd/opd', [BkuOpdController::class, 'getDataopd'])->middleware('auth:web','checkRole:User');
 Route::get('/bkuopd/bank', [BkuOpdController::class, 'getDatabank'])->middleware('auth:web','checkRole:User');
+Route::get('/bkuopd/edit/{id_transaksi}', [BkuOpdController::class, 'editbkuopd'])->middleware('auth:web','checkRole:User');
+
 
 Route::get('/rekakun/bkuopd', [BkuOpdController::class, 'getDataakun1'])->name('akun1.index')->middleware('auth:web','checkRole:User');
 Route::get('/rekkelompok/bkuopd/{id}', [BkuOpdController::class, 'getDatakelompok'])->middleware('auth:web','checkRole:User');
