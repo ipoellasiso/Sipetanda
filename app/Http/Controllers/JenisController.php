@@ -109,7 +109,7 @@ class JenisController extends Controller
     public function import(Request $request)
     {
         $file = $request->file('file')->store('public/import');
-        $import = new jenisImport();
+        $import = new JenisImport();
         $import->import($file);
 
         // dd($import->failures());
