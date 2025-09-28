@@ -1,6 +1,8 @@
-@extends('Template.Layout')
-@section('content')
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Berita Acara Rekonsiliasi</title>
     <style>
         body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; }
         .center { text-align: center; }
@@ -11,25 +13,10 @@
         .ttd { margin-top: 50px; width: 100%; }
         .ttd td { text-align: center; vertical-align: top; }
     </style>
+</head>
+<body>
 
-    
-
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-2">
-                {{-- <h4 class="card-title">{{ $title }}</h4> --}}
-            </div>
-            <div class="col-md-9">
-            </div>
-            <div class="col-md-1">
-                <a href="{{ route('baprekon.cetak') }}" class="btn btn-danger mb-3" target="_blank">
-                    <i class="bi bi-file-earmark-pdf"></i> Cetak PDF
-                </a>    
-            </div>
-        </div>
-
-        <h3 class="center"><u>BERITA ACARA REKONSILIASI</u></h3>
+    <h3 class="center"><u>BERITA ACARA REKONSILIASI</u></h3>
         <p class="center">Nomor : ....../BA-REKON/{{ date('Y') }}</p>
         <br>
 
@@ -42,37 +29,27 @@
         <table class="table table-bordered table-striped text-center">
             <thead class="table-dark">
                 <tr>
-                    <th style="text-align:center;" width="80px">No</th>
-                    <th style="text-align:center;" width="170px">No Rekening</th>
+                    <th>No</th>
+                    <th>No Rekening</th>
                     <th>Nama Rekening</th>
-                    <th style="text-align:center;" width="180px">Total BKU</th>
-                    <th style="text-align:center;" width="180px">Total Transaksi</th>
-                    <th style="text-align:center;" width="180px">Selisih</th>
+                    <th>Total BKU</th>
+                    <th>Total Transaksi</th>
                     <th>Status Rekon</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($rekonDetails as $i => $item)
-                @php
-                    $selisih = $item->total_transaksi - $item->total_bku;
-                @endphp
-                    <tr>    
+                    <tr>
                         <td>{{ $i+1 }}</td>
                         <td>{{ $item->no_rekening }}</td>
                         <td class="text-start">{{ $item->rekening2 }}</td>
                         <td class="text-end">{{ number_format($item->total_bku, 0, ',', '.') }}</td>
                         <td class="text-end">{{ number_format($item->total_transaksi, 0, ',', '.') }}</td>
-                        <td class="text-end">{{ number_format($selisih, 0, ',', '.') }}
-                        </td>
-                        <td class="text-center">
-                            @if($selisih == 0)
-                                <span style="color: white; background: green; padding: 2px 6px; border-radius: 3px;">
-                                    Sama
-                                </span>
+                        <td>
+                            @if($item->status_rekon == 'Sama')
+                                <span class="badge bg-success">Sama</span>
                             @else
-                                <span style="color: white; background: red; padding: 2px 6px; border-radius: 3px;">
-                                    Tidak Sama
-                                </span>
+                                <span class="badge bg-danger">Tidak Sama</span>
                             @endif
                         </td>
                     </tr>
@@ -109,15 +86,7 @@
                 </td>
             </tr>
         </table>
-
-        <br><br>
-        <p><i>Tembusan:</i></p>
-        <ol>
-            <li>Arsip</li>
-            <li>Pihak terkait</li>
-        </ol>
-        
-    </div>
 </div>
 
-@endsection
+</body>
+</html>

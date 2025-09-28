@@ -227,7 +227,8 @@ Route::get('/rekrincianobjek/anggaranopd/{id}', [AnggaranopdController::class, '
 Route::get('/reksubrincianobjek/anggaranopd/{id}', [AnggaranopdController::class, 'getDatasubrincianobjek'])->middleware('auth:web','checkRole:User');
 
 // BAP REKON
-Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->middleware('auth:web','checkRole:User');
+Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->name('baprekon.index')->middleware('auth:web','checkRole:User');
+Route::get('/baprekon/cetak', [BaprekonOpdController::class, 'cetakPdf'])->name('baprekon.cetak')->middleware('auth:web','checkRole:User');
 
 
 
