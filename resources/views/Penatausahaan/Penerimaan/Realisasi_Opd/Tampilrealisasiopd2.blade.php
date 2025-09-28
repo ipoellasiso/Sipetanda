@@ -5,7 +5,7 @@
     <div class="card-header">
         <div class="row col-md-12">
             <div class="col-2">
-                <div class="avatar-image  m-h-10 m-r-25">
+                <div style="padding-left:30px;" class="avatar-image  m-h-10 m-r-25">
                     <img src="/app/assets/images/logo/13.png"  width="40%">
                 </div>
             </div>
@@ -202,10 +202,10 @@
                             <tr style="background:#f7dfb2;">
                                 <td>{{ $akun->no_rek }}</td>
                                 <td><b>{{ $akun->rek }}</b></td>
-                                <td class="text-end">{{ number_format($akunTotal['anggaran'], 0, ',', '.') }}</td>
-                                <td class="text-end">{{ number_format($akunTotal['realisasi'], 0, ',', '.') }}</td>
-                                <td class="text-end">{{ number_format($akunTotal['sisa'], 0, ',', '.') }}</td>
-                                <td class="text-end">{{ $akunTotal['persen'] }}%</td>
+                                <td class="text-end"><b>{{ number_format($akunTotal['anggaran'], 0, ',', '.') }}</b></td>
+                                <td class="text-end"><b>{{ number_format($akunTotal['realisasi'], 0, ',', '.') }}</b></td>
+                                <td class="text-end"><b>{{ number_format($akunTotal['sisa'], 0, ',', '.') }}</b></td>
+                                <td class="text-end"><b>{{ $akunTotal['persen'] }}%</b></td>
                             </tr>
 
                             {{-- looping kelompok --}}
@@ -214,10 +214,10 @@
                                 <tr style="background:#f9efd5;">
                                     <td>{{ $kel->no_rek_kel }}</td>
                                     <td style="padding-left:20px;"><b>{{ $kel->rek_kel }}</b></td>
-                                    <td class="text-end">{{ number_format($kelTotal['anggaran'], 0, ',', '.') }}</td>
-                                    <td class="text-end">{{ number_format($kelTotal['realisasi'], 0, ',', '.') }}</td>
-                                    <td class="text-end">{{ number_format($kelTotal['sisa'], 0, ',', '.') }}</td>
-                                    <td class="text-end">{{ $kelTotal['persen'] }}%</td>
+                                    <td class="text-end"><b>{{ number_format($kelTotal['anggaran'], 0, ',', '.') }}</b></td>
+                                    <td class="text-end"><b>{{ number_format($kelTotal['realisasi'], 0, ',', '.') }}</b></td>
+                                    <td class="text-end"><b>{{ number_format($kelTotal['sisa'], 0, ',', '.') }}</b></td>
+                                    <td class="text-end"><b>{{ $kelTotal['persen'] }}%</b></td>
                                 </tr>
 
                                 {{-- looping jenis --}}
@@ -226,10 +226,10 @@
                                     <tr style="background:#fff7e6;">
                                         <td>{{ $jen->no_rek_jen }}</td>
                                         <td style="padding-left:40px;"><b>{{ $jen->rek_jen }}</b></td>
-                                        <td class="text-end">{{ number_format($jenTotal['anggaran'], 0, ',', '.') }}</td>
-                                        <td class="text-end">{{ number_format($jenTotal['realisasi'], 0, ',', '.') }}</td>
-                                        <td class="text-end">{{ number_format($jenTotal['sisa'], 0, ',', '.') }}</td>
-                                        <td class="text-end">{{ $jenTotal['persen'] }}%</td>
+                                        <td class="text-end"><b>{{ number_format($jenTotal['anggaran'], 0, ',', '.') }}</b></td>
+                                        <td class="text-end"><b>{{ number_format($jenTotal['realisasi'], 0, ',', '.') }}</b></td>
+                                        <td class="text-end"><b>{{ number_format($jenTotal['sisa'], 0, ',', '.') }}</b></td>
+                                        <td class="text-end"><b>{{ $jenTotal['persen'] }}%</b></td>
                                     </tr>
 
                                     {{-- looping objek --}}
@@ -238,10 +238,10 @@
                                         <tr style="background:#f4faff;">
                                             <td>{{ $obj->no_rek_o }}</td>
                                             <td style="padding-left:60px;"><b>{{ $obj->rek_o }}</b></td>
-                                            <td class="text-end">{{ number_format($objTotal['anggaran'], 0, ',', '.') }}</td>
-                                            <td class="text-end">{{ number_format($objTotal['realisasi'], 0, ',', '.') }}</td>
-                                            <td class="text-end">{{ number_format($objTotal['sisa'], 0, ',', '.') }}</td>
-                                            <td class="text-end">{{ $objTotal['persen'] }}%</td>
+                                            <td class="text-end"><b>{{ number_format($objTotal['anggaran'], 0, ',', '.') }}</b></td>
+                                            <td class="text-end"><b>{{ number_format($objTotal['realisasi'], 0, ',', '.') }}</b></td>
+                                            <td class="text-end"><b>{{ number_format($objTotal['sisa'], 0, ',', '.') }}</b></td>
+                                            <td class="text-end"><b>{{ $objTotal['persen'] }}%</b></td>
                                         </tr>
 
                                         {{-- looping rincian objek --}}
@@ -250,10 +250,10 @@
                                             <tr style="background:#fcfcfc;">
                                                 <td>{{ $rin->no_rek_ro }}</td>
                                                 <td style="padding-left:80px;">{{ $rin->rek_ro }}</td>
-                                                <td class="text-end">{{ number_format($rinTotal['anggaran'], 0, ',', '.') }}</td>
-                                                <td class="text-end">{{ number_format($rinTotal['realisasi'], 0, ',', '.') }}</td>
-                                                <td class="text-end">{{ number_format($rinTotal['sisa'], 0, ',', '.') }}</td>
-                                                <td class="text-end">{{ $rinTotal['persen'] }}%</td>
+                                                <td class="text-end"><b>{{ number_format($rinTotal['anggaran'], 0, ',', '.') }}</b></td>
+                                                <td class="text-end"><b>{{ number_format($rinTotal['realisasi'], 0, ',', '.') }}</b></td>
+                                                <td class="text-end"><b>{{ number_format($rinTotal['sisa'], 0, ',', '.') }}</b></td>
+                                                <td class="text-end"><b>{{ $rinTotal['persen'] }}%</b></td>
                                             </tr>
 
                                             {{-- looping sub rincian objek --}}
