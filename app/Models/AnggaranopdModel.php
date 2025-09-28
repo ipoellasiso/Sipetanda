@@ -28,4 +28,12 @@ class AnggaranopdModel extends Model
         'updated_at',
         'tahun',
     ];
+
+    public function bku()
+    {
+        return $this->hasMany(BkuopdModel::class, 'id_subrincianobjek', 'id_subrincianobjek')
+                    ->where('id_opd', auth()->user()->id_opd)   // filter OPD login
+                    ->where('tahun', auth()->user()->tahun);    // filter tahun login
+    }
+
 }

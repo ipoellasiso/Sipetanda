@@ -18,4 +18,15 @@ class RincianObjekModel extends Model
         'no_rek_ro',
         'rek_ro',
     ];
+
+    public function subrincian()
+    {
+        return $this->hasMany(SubRincianObjekModel::class, 'id_rincianobjek', 'id_ro');
+    }
+
+    public function anggaran()
+    {
+        return $this->hasMany(AnggaranopdModel::class, 'id_rincianobjek', 'id_ro');
+    }
+
 }

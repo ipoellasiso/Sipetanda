@@ -15,4 +15,15 @@ class KelompokModel extends Model
         'no_rek_kel',
         'rek_kel',
     ];
+
+    public function jenis()
+    {
+        return $this->hasMany(JenisModel::class, 'id_kelompok', 'id_kel');
+    }
+
+    public function anggaran()
+    {
+        return $this->hasMany(AnggaranopdModel::class, 'id_kelompok', 'id_kel');
+    }
+
 }

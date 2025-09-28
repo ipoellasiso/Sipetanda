@@ -34,8 +34,10 @@ class BkuopdModel extends Model
         'tahun',
     ];
 
-    public static function getId()
+    public function anggaran()
     {
-        return $getId = DB::table('tb_bkuopd')->orderBy('id_transaksi')->take(1)->get();
+        return $this->belongsTo(AnggaranopdModel::class, 'id_subrincianobjek', 'id_sro');
     }
+
+
 }

@@ -19,4 +19,22 @@ class SubRincianObjekModel extends Model
         'no_rek_sro',
         'rek_sro',
     ];
+
+    // public function anggaran()
+    // {
+    //     return $this->hasOne(AnggaranopdModel::class, 'id_subrincianobjek', 'id_sro')
+    //     ->where('id_opd', auth()->user()->id_opd)
+    //     ->where('tahun', auth()->user()->tahun);
+    // }
+
+    public function anggaran()
+    {
+        return $this->hasOne(AnggaranopdModel::class, 'id_subrincianobjek', 'id_sro')
+                    ->where('id_opd', auth()->user()->id_opd)
+                    ->where('tahun', auth()->user()->tahun);
+    }
+
+    
+
+    
 }

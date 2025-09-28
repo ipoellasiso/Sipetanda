@@ -14,4 +14,15 @@ class AkunModel extends Model
         'no_rek',
         'rek',
     ];
+
+    public function kelompok()
+    {
+        return $this->hasMany(KelompokModel::class, 'id_akun', 'id');
+    }
+
+    public function anggaran()
+    {
+        return $this->hasMany(AnggaranopdModel::class, 'id_akun', 'id');
+    }
+
 }
