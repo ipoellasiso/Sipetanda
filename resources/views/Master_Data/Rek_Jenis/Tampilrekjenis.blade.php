@@ -77,8 +77,8 @@
     </div>
 {{-- </div> --}}
 
-@include('Master_Data.Rek_jenis.Modal.import')
-@include('Master_Data.Rek_jenis.Fungsi.Fungsi')
-@include('Master_Data.Rek_jenis.Modal.Tambah')
+@include('Master_Data.Rek_Jenis.Modal.import')
+@include('Master_Data.Rek_Jenis.Fungsi.Fungsi')
+@include('Master_Data.Rek_Jenis.Modal.Tambah')
 
 @endsection
