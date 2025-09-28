@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\JenisImport;
 use App\Models\AkunModel;
-use App\Models\jenisModel;
+use App\Models\JenisModel;
 use App\Models\KelompokModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;

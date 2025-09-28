@@ -6,7 +6,7 @@ use App\Imports\jenisImport;
 use App\Imports\ObjekImport;
 use App\Imports\RincianobjekImport;
 use App\Models\AkunModel;
-use App\Models\jenisModel;
+use App\Models\JenisModel;
 use App\Models\KelompokModel;
 use App\Models\ObjekModel;
 use App\Models\RincianObjekModel;
@@ -139,7 +139,7 @@ class RincianObjekController extends Controller
     }
 
     public function getDatajenis($id){
-        $data = jenisModel::where('id_kelompok', $id)->where('rek_jen', 'LIKE', '%'.request('q').'%')->paginate(10);
+        $data = JenisModel::where('id_kelompok', $id)->where('rek_jen', 'LIKE', '%'.request('q').'%')->paginate(10);
 
         return response()->json($data);
     }
