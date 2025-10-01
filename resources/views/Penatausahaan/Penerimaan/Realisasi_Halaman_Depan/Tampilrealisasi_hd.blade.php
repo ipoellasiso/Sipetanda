@@ -2536,6 +2536,26 @@
                                                                                         @endif
                                                                                     </div>
                                                                                 </div>
+                                                                                <div class="row col-md-12">
+                                                                                    <div class="col-md-5 table-bordered">
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; DAK Non Fisik-Dana Ketahanan Pangan Dan Pertanian</i><br>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($tanggaran_ptpangan, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($total_ptpangan, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span>{{ number_format($tanggaran_ptpangan - $total_ptpangan, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-1 table-bordered" align="right">
+                                                                                        @if ($total_ptpangan > 0 && $tanggaran_ptpangan > 0)
+                                                                                            <span>{{ number_format($total_ptpangan / $tanggaran_ptpangan * 100, 2) }} %</span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                                
                                                                             </div>
                                                                         </div>
                                                                         <div class="" id="pt151">
