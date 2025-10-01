@@ -1514,9 +1514,9 @@
                                                                                 </div>
                                                                                 <div class="row col-md-12">
                                                                                     <div class="col-md-5 table-bordered">
-                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan dari Pengembalian Kelebihan Pembayaran</i><br>
-                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pembayaran Belanja Barang Pakai Habis-Bahan-Bahan</i><br>
-                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lainnya</i>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan dari Pengembalian Kelebihan Pembayaran  </i><br>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Belanja Jasa Kantor-Jasa Pegawai Pemerintah dengan Perjanjian Kerja   </i><br>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (PPPK) Paruh Waktu pada Jabatan Tenaga Kesehatan</i>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
                                                                                         <span> {{ number_format($tanggaran_llpbph, 2) }}</span>
@@ -1535,9 +1535,9 @@
                                                                                 </div>
                                                                                 <div class="row col-md-12">
                                                                                     <div class="col-md-5 table-bordered">
-                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan dari Pengembalian Kelebihan Pembayaran </i><br>
-                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Belanja Barang Pakai Habis-Barang untuk</i><br>
-                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dijual/Diserahkan kepada Pihak Ketiga/Pihak Lain</i>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; Pendapatan dari Pengembalian Kelebihan Pembayaran Belanja </i><br>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Jasa Kantor-Jasa Pegawai Pemerintah dengan Perjanjian Kerja</i><br>
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (PPPK) Paruh Waktu pada Jabatan Tenaga Teknis</i>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
                                                                                         <span> {{ number_format($tanggaran_llppihakke3, 2) }}</span>
