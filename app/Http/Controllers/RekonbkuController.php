@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BkuopdModel;
 use App\Models\OpdModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class RekonbkuController extends Controller
         if ($request->ajax()) {
 
             $dataq = DB::table('tb_bkuopd')
-                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro', 'tb_bkuopd.status3' )
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
                         ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
                         ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
@@ -72,6 +73,22 @@ class RekonbkuController extends Controller
 
             return Datatables::of($dataq)
                     ->addIndexColumn()
+                    ->addColumn('action3', function($row){
+                        if($row->status3 == 'Posting')
+                        {
+                        $btn2 = '
+                                ';
+                        }else{
+                        
+                        $btn2 = '
+                               <a href="javascript:void(0)" data-toggle="tooltip" data-id_transaksi="'.$row->id_transaksi.'" class="Postingbkuopd btn btn-outline-primary m-b-xs btn-sm">Posting
+                                </a>
+                            ';
+                        }
+
+                        return $btn2;
+                    })
+
                     ->addColumn('nilai_transaksi', function($row) {
                         return number_format($row->nilai_transaksi);
                     })
@@ -107,4 +124,5 @@ class RekonbkuController extends Controller
 
         return view('Penatausahaan.Penerimaan.Rekon.Rekon');
     }
+
 }

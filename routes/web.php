@@ -209,6 +209,7 @@ Route::get('/rekrincianobjek/subrincianobjek/{id}', [SubRincianObjekController::
 // DATA REKON
 Route::get('/tampilrekon', [RekonbkuController::class, 'index'])->middleware('auth:web','checkRole:User');
 Route::get('/tampilrekon2', [RekonbkuController::class, 'index2'])->middleware('auth:web','checkRole:User');
+// Route::get('/rekonopd/edit/{id_transaksi}', [RekonbkuController::class, 'postingidrek'])->middleware('auth:web','checkRole:User');
 
 // REALISASI OPD
 Route::get('/tampilrealisasiopd', [RealisasiopdController::class, 'index'])->name('realisasiopd.index')->middleware('auth:web','checkRole:User');
@@ -229,6 +230,8 @@ Route::get('/reksubrincianobjek/anggaranopd/{id}', [AnggaranopdController::class
 // BAP REKON
 Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->name('baprekon.index')->middleware('auth:web','checkRole:User');
 Route::get('/baprekon/cetak', [BaprekonOpdController::class, 'cetakPdf'])->name('baprekon.cetak')->middleware('auth:web','checkRole:User');
+
+
 
 
 

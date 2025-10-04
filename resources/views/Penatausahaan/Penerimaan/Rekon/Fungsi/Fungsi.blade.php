@@ -45,6 +45,18 @@
         ]
     });
 
+    // tambah id rekening (posting)
+    $('body').on('click', '.Postingbkuopd', function()  {
+        var iduser = $(this).data('id_transaksi');
+        $.get("/rekonopd/edit/"+iduser, function (data) {
+            $('#saveBtn').val("tambah-rekonopd");
+            $('#tambahposting').modal('show');
+            $('#id_transaksi5').val(data.id_transaksi);
+            $('#id_rekening').val(data.id_rekening);
+            $('.bd-example-modal-xl').modal('hide');
+        })
+    });
+
 });
 
 </script>

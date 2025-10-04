@@ -99,14 +99,12 @@
                                         <th>Tanggal Transaksi</th>
                                         <th>Uraian</th>
                                         <th>Nilai</th>
+                                        {{-- <th></th> --}}
                                     </tr>
                                 </thead>
                                 @php $total = 0; @endphp
                                 <tfoot>
-                                    {{-- <tr>
-                                        <th colspan="7" style="text-align: right">Total</th>
-                                        <td style="text-align: right"><strong> {{ number_format($total = $dataq->sum('nilai_transaksi'), 0) }}</td>
-                                    </tr> --}}
+                                    {{-- server side --}}
                                 </tfoot>
                             </table>
                         </div>
