@@ -167,7 +167,7 @@ class BaprekonOpdController extends Controller
 
         $data = [
             'title'        => 'Berita Acara Rekon',
-            'active_home'  => 'active',
+            'active_laporan'  => 'active',
             'active_subopd'=> 'active',
             'active_sidebap'=> 'active',
             'breadcumd'    => 'Berita Acara',

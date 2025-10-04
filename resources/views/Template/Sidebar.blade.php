@@ -163,23 +163,17 @@
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
                                 <a href="/tampilbkuopd">Bku Penerimaan</a>
                             </li>
-                            <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
-                                <a href="/tampilrekapanrekuser">Buku Pembantu Penerimaan</a>
-                            </li>
                             <li class="submenu-item @if(isset($active_siderekon)){{ $active_siderekon }} @endif">
-                                <a href="/tampilrekon">Rekon</a>
+                                <a href="/tampilrekon">Kertas Kerja</a>
                             </li>
-                            <li class="submenu-item">
-                                <a href="/tampilrealisasiopd">Realisasi</a>
-                            </li>
-                            <li class="submenu-item @if(isset($active_sidebap)){{ $active_sidebap }} @endif">
-                                <a href="/tampilbaprekon">BAP Rekon</a>
+                            <li class="submenu-item @if(isset($active_sideposting)){{ $active_sideposting }} @endif">
+                                <a href="/tampilposting">Posting Penerimaan</a>
                             </li>
                         @endif
                     </ul>
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub @if(isset($active_laporan)){{ $active_laporan }} @endif">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-file-earmark-plus-fill"></i>
                         <span>Laporan</span>
@@ -190,15 +184,21 @@
                                 <a href="/tampilbku">BKU</a>
                             </li>
                             <li class="submenu-item">
-                                <a href="/tampilrealisasi">Realisasi</a>
+                                <a href="/tampilrealisasi">Realisasi Penerimaan</a>
                             </li>
                             <li class="submenu-item">
                                 <a href="/tampilrekapanrek">Buku Pembantu Penerimaan</a>
                             </li>
                         @endif
                         @if(Auth::user()->role == 'User')
+                            <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
+                                <a href="/tampilrekapanrekuser">Buku Pembantu Penerimaan</a>
+                            </li>
                             <li class="submenu-item">
-                                <a href="">Realisasi</a>
+                                <a href="/tampilrealisasiopd">Realisasi Penerimaan</a>
+                            </li>
+                            <li class="submenu-item @if(isset($active_sidebap)){{ $active_sidebap }} @endif">
+                                <a href="/tampilbaprekon">BAR Penerimaan</a>
                             </li>
                         @endif
                     </ul>

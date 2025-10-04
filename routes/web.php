@@ -18,6 +18,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\ObjekController;
 use App\Http\Controllers\OpdController;
 use App\Http\Controllers\PeriodeController;
+use App\Http\Controllers\PostingController;
 use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
@@ -230,6 +231,11 @@ Route::get('/reksubrincianobjek/anggaranopd/{id}', [AnggaranopdController::class
 // BAP REKON
 Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->name('baprekon.index')->middleware('auth:web','checkRole:User');
 Route::get('/baprekon/cetak', [BaprekonOpdController::class, 'cetakPdf'])->name('baprekon.cetak')->middleware('auth:web','checkRole:User');
+
+// DATA POSTING
+Route::get('/tampilposting', [PostingController::class, 'index'])->middleware('auth:web','checkRole:User');
+Route::post('/transaksi/update-bku', [PostingController::class, 'updateBku'])->name('transaksi.updateBku')->middleware('auth:web','checkRole:User');
+Route::post('/batalkan-posting', [PostingController::class, 'batalkanPosting'])->name('batalkan.posting')->middleware('auth:web','checkRole:User');
 
 
 

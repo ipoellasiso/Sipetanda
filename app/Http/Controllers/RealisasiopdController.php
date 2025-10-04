@@ -30,7 +30,7 @@ class RealisasiopdController extends Controller
 
         $data = array(
             'title'                => 'Laporan Realisasi',
-            'active_penerimaan'    => 'active',
+            'active_laporan'    => 'active',
             'active_sub'           => 'active',
             'active_siderealisasi' => 'active',
             'breadcumd'            => 'Penatausahaan',
