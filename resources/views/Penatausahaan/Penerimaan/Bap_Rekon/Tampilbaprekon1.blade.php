@@ -28,21 +28,37 @@
         .ttd { margin-top: 50px; width: 100%; }
         .ttd td { text-align: center; vertical-align: top; }
 
+        .kop-surat {
+            text-align: center;
+            border-bottom: 3px solid #000; /* Garis bawah tebal */
+            padding-bottom: 10px; /* Jarak antara teks dan garis */
+            margin-bottom: 20px; /* Jarak antara kop dan konten */
+        }
+        .kop-surat h1, .kop-surat h2, .kop-surat h3 {
+            margin: 0;
+            padding: 0;
+        }
+        .kop-surat p {
+            margin: 0;
+            padding: 0;
+        }
+
     </style>
 
     <div class="card">
         <div class="card-body">
 
-            <h2 class="text-center">BERITA ACARA REKONSILIASI</h2>
-            <h3 class="text-center">{{ strtoupper($rekon->nama_opd ?? '') }}</h3>
-            <p class="text-center">
-                Tanggal: {{ \Carbon\Carbon::parse($rekon->tanggal)->format('d-m-Y') }}
-            </p>
-
             {{-- 🔎 Filter bulan & tahun --}}
             <form method="GET" action="{{ route('baprekon.index') }}" class="mb-3">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col 4">
+                        <h3> Filter Laporan </h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Pilih Bulan:</label>
                         <select name="bulan" class="form-control">
                             @for($i=1; $i<=12; $i++)
                                 <option value="{{ $i }}" {{ $i == $bulan ? 'selected' : '' }}>
@@ -51,7 +67,8 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
+                        <label>Pilih Tahun:</label>
                         <select name="tahun" class="form-control">
                             @for($t=date('Y')-2; $t<=date('Y')+1; $t++)
                                 <option value="{{ $t }}" {{ $t == $tahun ? 'selected' : '' }}>
@@ -60,54 +77,178 @@
                             @endfor
                         </select>
                     </div>
+                    <div class="col-md-4">
+                        <label for="tgl_rekon">Pilih Tanggal Rekon:</label>
+                        <input type="date" name="tgl_rekon" id="tgl_rekon" class="form-control"
+                            value="{{ $tgl_rekon ?? date('Y-m-d') }}">
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="submit" class="btn btn-primary">Terapkan</button>
+                        <button type="submit" class="btn btn-danger">Reset</button>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col 4">
+                    </div>
+                    <div class="col 8">
+                    </div>
+                    <div class="col 2 text-end">
+                        {{-- <button type="submit" class="btn btn-success">Cetak</button> --}}
+                        {{-- Button Cetak PDF --}}
+                        <a href="{{ route('baprekon.cetak', ['bulan' => $bulan, 'tahun' => $tahun, 'tgl_rekon' => $tgl_rekon]) }}"
+                        target="_blank" class="btn btn-danger">
+                        Cetak PDF
+                        </a>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
 
-            <table class="table-striped text-center">
-                <thead class="">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-2">
+                    <div style="padding-left:20px;" class="avatar-image  m-h-10 m-r-25">
+                    <img src="/app/assets/images/logo/13.png"  width="40%">
+                </div>
+                </div>
+                <div class="col-8">
+                    <div class="center">
+                        <h2>PEMERINTAH KOTA PALU</h2>
+                        <h2>BADAN PENGELOLA KEUANGAN DAN ASET DAERAH (BPKAD)</h2>
+                        <p>Jl. Balai Kota Selatan No. 2, Telp. (0451) 485880 - 485089</p>
+                    </div>
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+            <div class="kop-surat"></div>   
+            <div class="center">
+                <h8><b><b><u>BERITA ACARA</u></b></h8><br>
+                <h8><b>REKONSILIASI PENERIMAAN / REALISASI PENDAPATAN</b></h8><br>
+                <h8><b>BULAN {{ strtoupper($rekon->bulan) }}</b></h8>
+            </div>
+            
+            <br>
+
+            <p> Pada hari ini, {{ $tanggalRekon }}</b>,
+                kami yang bertanda tangan di bawah ini :</p>
+
+            <div class="row">
+                    &nbsp;&nbsp;1. Nama
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;FADHILA YUNUS, SE<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jabatan
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Kepala Seksi Penatausahaan Penerimaan<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alamat
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Jl. Baruga No. 2
+            </div>
+            <br>
+
+            <p> Bertindak untuk dan atas nama Badan Pendapatan Daerah Kota Palu, selanjutnya disebut <b>PIHAK KEDUA</b>.</p>
+
+            <div class="row">
+                    &nbsp;&nbsp;2. Nama
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ $rekon->nama_bendahara }}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jabatan
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Bendahara Penerimaan {{ $rekon->nama_opd }}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alamat
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ $rekon->alamat }}
+            </div>
+            <br>
+
+            <p> Bertindak untuk dan atas nama BPKAD Kota Palu, selanjutnya disebut <b>PIHAK PERTAMA</b>.</p>
+
+            <p> Kedua belah pihak telah melakukan rekonsiliasi penerimaan pendapatan bulan
+                {{ $rekon->bulan }}</b> dengan hasil sebagai berikut:</p>
+
+            <table>
+                <thead>
                     <tr>
-                        <th class="text-center" style="text-align:center;" width="60px">No</th>
-                        {{-- <th>No Rekening</th> --}}
-                        <th style="text-align:center;">Uraian</th>
-                        <th class="text-right" style="text-align:center;" width="180px">Realisasi Sebelumnya</th>
-                        <th class="text-right" style="text-align:center;" width="180px">Realisasi Bulan Ini</th>
-                        {{-- <th class="text-right">Trx Sebelumnya</th> --}}
-                        {{-- <th class="text-right">Trx Bulan Ini</th> --}}
-                        <th class="text-right" style="text-align:center;" width="180px">Total Realisasi</th>
-                        <th class="text-right" style="text-align:center;" width="180px">Total Trx</th>
-                        <th class="text-right" style="text-align:center;" width="180px">Selisih</th>
-                        <th class="text-center" style="text-align:center;" width="100px">Status</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="10px">No</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="500px">Uraian</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="20px">Anggaran</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="20px">Realisasi s/d bulan ini (BPKAD)</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="20px">Realisasi s/d bulan ini (OPD)</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="20px">Selisih</th>
+                        <th style="text-align:center; background-color: #dddddd;" width="10px">Keterangan</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $tot_anggaran = $tot_bpkad = $tot_opd = $tot_selisih = 0;
+                    @endphp
                     @foreach($rekonDetails as $i => $row)
                     <tr>
-                        <td class="text-center">{{ $i+1 }}</td>
-                        {{-- <td>{{ $row->no_rekening }}</td> --}}
-                        <td>{{ $row->rekening2 }}</td>
-                        <td class="text-right">{{ number_format($row->bku_sebelumnya, 0, ',', '.') }}</td>
-                        <td class="text-right">{{ number_format($row->bku_bulan_ini, 0, ',', '.') }}</td>
-                        {{-- <td class="text-right">{{ number_format($row->trx_sebelumnya, 0, ',', '.') }}</td> --}}
-                        {{-- <td class="text-right">{{ number_format($row->trx_bulan_ini, 0, ',', '.') }}</td> --}}
-                        <td class="text-right"><strong>{{ number_format($row->total_bku, 0, ',', '.') }}</strong></td>
-                        <td class="text-right"><strong>{{ number_format($row->total_trx, 0, ',', '.') }}</strong></td>
-                        <td class="text-right">
-                            <strong>{{ number_format($row->selisih, 0, ',', '.') }}</strong>
-                        </td>
-                        <td class="text-center">
-                            @if($row->status_rekon == 'Sama')
-                                <span class="bg-green">Sama</span>
-                            @else
-                                <span class="bg-red">Tidak Sama</span>
-                            @endif
-                        </td>
+                        <td>{{ $i+1 }}</td>
+                        <td>{{ $row->uraian }}</td>
+                        <td style="text-align:right">{{ number_format($row->total_anggaran,2,',','.') }}</td>
+                        <td style="text-align:right">{{ number_format($row->total_transaksi,2,',','.') }}</td>
+                        <td style="text-align:right">{{ number_format($row->total_bku,2,',','.') }}</td>
+                        <td style="text-align:right">{{ number_format($row->selisih,2,',','.') }}</td>
+                        <td>{{ $row->status_rekon }}</td>
                     </tr>
                     @endforeach
+                    <tr style="background:#f0f0f0; font-weight:bold">
+                        <td colspan="2" style="text-align:center;">TOTAL</td>
+                        <td style="text-align:right">
+                            {{ number_format(collect($rekonDetails)->sum(fn($r)=>(float)$r->total_anggaran),2,',','.') }}
+                        </td>
+                        <td style="text-align:right">
+                            {{ number_format(collect($rekonDetails)->sum(fn($r)=>(float)$r->total_transaksi),2,',','.') }}
+                        </td>
+                        <td style="text-align:right">
+                            {{ number_format(collect($rekonDetails)->sum(fn($r)=>(float)$r->total_bku),2,',','.') }}
+                        </td>
+                        <td style="text-align:right">
+                            {{ number_format(collect($rekonDetails)->sum(fn($r)=>(float)$r->selisih),2,',','.') }}
+                        </td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
+
+            <div class="row">
+                <div class="col-12">
+                    <p><b>Catatan :</b> 
+                        {{ $catatan->status1 ?? '-' }}, 
+                        {{ $catatan->status2 ?? '-' }}, 
+                        {{ $catatan->status3 ?? '-' }}
+                        <a href="#" class="badge bg-primary">
+                            Cetak Rincian Selisih
+                        </a>
+                    </p>
+                    
+                </div>
+            </div>
+
+            <br><br>
+            <div class="row" style="display:flex;justify-content:space-between;">
+                <div class="left" style="width:45%; text-align:center;">
+                    PIHAK KEDUA<br>
+                    Bendahara Penerimaan<br>
+                    {{ $rekon->nama_opd }}<br><br><br><br><br>
+                    ( {{ $rekon->nama_bendahara }} )<br>
+                    Nip. {{ $rekon->pangkat }}
+                </div>
+
+                <div class="right" style="width:45%; text-align:center;">
+                    PIHAK PERTAMA<br>
+                    Kepala Seksi Penatausahaan Penerimaan<br><br><br><br><br><br>
+                    ( FADHILA YUNUS, SE )<br>
+                    Nip. 
+                </div>
+            </div>
 
         </div>
     </div>
