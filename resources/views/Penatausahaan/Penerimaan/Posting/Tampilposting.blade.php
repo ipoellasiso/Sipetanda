@@ -49,22 +49,16 @@
                                 <br>
                                 <div class="row mb-3">
                                     <div class="col-md-3">
-                                        <label for="filter-opd">OPD</label>
-                                        <select id="filter-opd" class="form-control">
-                                            <option value="">-- Semua OPD --</option>
-                                            {{-- @foreach($listOpd as $opd)
-                                                <option value="{{ $opd->id_opd }}">{{ $opd->nama_opd }}</option>
-                                            @endforeach --}}
+                                        <label>OPD</label>
+                                        <select class="form-select" name="id_opd" id="id_opdopd" style="width: 100%" required>
+                                            <option></option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="filter-rekening">Rekening</label>
-                                        <select id="filter-rekening" class="form-control">
-                                            <option value="">-- Semua Rekening --</option>
-                                            {{-- @foreach($listRekening as $rek)
-                                                <option value="{{ $rek->id_rekening }}">{{ $rek->rekening2 }}</option>
-                                            @endforeach --}}
+                                        <label>Rekening</label>
+                                        <select class="form-select" name="id_rekening" id="id_rekeningopd" style="width: 100%" required>
+                                            <option></option>
                                         </select>
                                     </div>
 

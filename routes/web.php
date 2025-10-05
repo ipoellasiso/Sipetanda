@@ -233,9 +233,11 @@ Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->name('ba
 Route::get('/baprekon/cetak', [BaprekonOpdController::class, 'cetakPdf'])->name('baprekon.cetak')->middleware('auth:web','checkRole:User');
 
 // DATA POSTING
-Route::get('/tampilposting', [PostingController::class, 'index'])->middleware('auth:web','checkRole:User');
-Route::post('/transaksi/update-bku', [PostingController::class, 'updateBku'])->name('transaksi.updateBku')->middleware('auth:web','checkRole:User');
-Route::post('/batalkan-posting', [PostingController::class, 'batalkanPosting'])->name('batalkan.posting')->middleware('auth:web','checkRole:User');
+Route::get('/tampilposting', [PostingController::class, 'index'])->middleware('auth:web','checkRole:Admin');
+Route::post('/transaksi/update-bku', [PostingController::class, 'updateBku'])->name('transaksi.updateBku')->middleware('auth:web','checkRole:Admin');
+Route::post('/batalkan-posting', [PostingController::class, 'batalkanPosting'])->name('batalkan.posting')->middleware('auth:web','checkRole:Admin');
+Route::get('/posting/rekening', [PostingController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
+Route::get('/posting/opd', [PostingController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
 
 
 

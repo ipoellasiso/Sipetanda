@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OpdModel;
+use App\Models\RekeningModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,24 +54,16 @@ class PostingController extends Controller
                 ->join('tb_opd', 'tb_opd.id', '=', 'tb_transaksi.id_opd')
                 ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
                 ->join('tb_bank', 'tb_bank.id_bank', '=', 'tb_transaksi.id_bank')
-                ->where('tb_transaksi.tahun', auth()->user()->tahun);
+                ->where('tb_transaksi.tahun', auth()->user()->tahun)
 
             // 🔎 filter dari request
-            if ($request->opd) {
-                $query->where('tb_transaksi.id_opd', $request->opd);
-            }
-            if ($request->rekening) {
-                $query->where('tb_transaksi.id_rekening', $request->rekening);
-            }
-            if ($request->tgl_awal && $request->tgl_akhir) {
-                $query->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir]);
-            }
+                ->when($request->opd, fn($q) => $q->where('tb_transaksi.id_opd', $request->opd))
+                ->when($request->rekening, fn($q) => $q->where('tb_transaksi.id_rekening', $request->rekening))
+                ->when($request->tgl_awal && $request->tgl_akhir, fn($q) => $q->whereBetween('tb_transaksi.tgl_transaksi', [$request->tgl_awal, $request->tgl_akhir]));
 
             return Datatables::of($query)
                 ->addIndexColumn()
-                ->addColumn('nilai_transaksi', function($row) {
-                    return number_format($row->nilai_transaksi);
-                })
+                ->addColumn('nilai_transaksi', fn($row) => number_format($row->nilai_transaksi))
                 ->rawColumns(['nilai_transaksi'])
                 ->make(true);
         }
@@ -94,14 +88,14 @@ class PostingController extends Controller
 
         foreach ($data as $item) {
             $bku = DB::table('tb_bkuopd')
-                ->where('id_opd', $user->id_opd)
+                // ->where('id_opd', $user->id_opd)
                 ->where('tahun', $user->tahun)
                 ->where('no_kas_bpkad', $item['no_buku'])
                 ->first();
 
             if ($bku) {
                 DB::table('tb_bkuopd')
-                    ->where('id_opd', $user->id_opd)
+                    // ->where('id_opd', $user->id_opd)
                     ->where('tahun', $user->tahun)
                     ->where('no_kas_bpkad', $item['no_buku'])
                     ->update([
@@ -110,7 +104,7 @@ class PostingController extends Controller
                     ]);
 
                 $trx = DB::table('tb_transaksi')
-                    ->where('id_opd', $user->id_opd)
+                    // ->where('id_opd', $user->id_opd)
                     ->where('tahun', $user->tahun)
                     ->where('id_transaksi', $item['id_transaksi'])
                     ->first();
@@ -151,20 +145,109 @@ class PostingController extends Controller
 
     public function batalkanPosting(Request $request)
     {
-        // sekarang pakai id_transaksi, bukan id_rekening
-        $trx = DB::table('tb_transaksi')->where('id_transaksi', $request->id_transaksi)->first();
+        $user = auth()->user();
 
-        if ($trx && $trx->status4 == 'Posting') {
-            DB::table('tb_transaksi')
-                ->where('id_transaksi', $trx->id_transaksi)
-                ->update([
-                    'status4' => 'Belum Posting',
-                    'updated_at' => now(),
-                ]);
+        // Ambil transaksi berdasarkan id_transaksi
+        $trx = DB::table('tb_transaksi')
+            // ->where('id_opd', $user->id_opd)
+            ->where('tahun', $user->tahun)
+            ->where('id_transaksi', $request->id_transaksi)
+            ->first();
 
-            return response()->json(['success' => true, 'message' => 'Posting berhasil dibatalkan!']);
+        // Jika tidak ada transaksi
+        if (!$trx) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaksi tidak ditemukan!'
+            ], 404);
         }
 
-        return response()->json(['success' => false, 'message' => 'Data tidak valid atau belum posting!']);
+        // Jika status bukan "Posting"
+        if ($trx->status4 !== 'Posting') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data belum di-posting!'
+            ], 422);
+        }
+
+        // Cek apakah data ada di BKU berdasarkan no_kas_bpkad = no_buku
+        $bku = DB::table('tb_bkuopd')
+            // ->where('id_opd', $user->id_opd)
+            ->where('tahun', $user->tahun)
+            ->where('no_kas_bpkad', $trx->no_buku)
+            ->first();
+
+        // Jika data di BKU tidak ada
+        if (!$bku) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan di BKU OPD!'
+            ], 422);
+        }
+
+        // Update: hapus id_rekening dari BKU dan ubah status transaksi
+        DB::table('tb_bkuopd')
+            // ->where('id_opd', $user->id_opd)
+            ->where('tahun', $user->tahun)
+            ->where('no_kas_bpkad', $trx->no_buku)
+            ->update([
+                'id_rekening' => null,
+                'updated_at'  => now(),
+            ]);
+
+        DB::table('tb_transaksi')
+            ->where('id_transaksi', $trx->id_transaksi)
+            ->update([
+                'status4'    => 'Belum Posting',
+                'updated_at' => now(),
+            ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Posting transaksi berhasil dibatalkan!'
+        ]);
     }
+
+    public function getDatarek(Request $request)
+    {
+        $search = $request->searchRek;
+  
+        if($search == ''){
+            $rek = RekeningModel::orderBy('rekening2','asc')->select('id_rekening','rekening2')->get();
+        }else{
+            $rek = RekeningModel::orderBy('rekening2','asc')->select('id_rekening','rekening2')->where('rekening2', 'like', '%' .$search . '%')->get();
+        }
+  
+        $response = array();
+        foreach($rek as $row){
+            $response[] = array(
+                "id"   => $row->id_rekening,
+                "text" => $row->rekening2
+            );
+        }
+
+        return response()->json($response); 
+    } 
+
+    public function getDataopd(Request $request)
+    {
+        $search = $request->searchOpd;
+  
+        if($search == ''){
+            $opd = OpdModel::orderBy('nama_opd','asc')->select('id','nama_opd')->get();
+        }else{
+            $opd = OpdModel::orderBy('nama_opd','asc')->select('id','nama_opd')->where('nama_opd', 'like', '%' .$search . '%')->limit(5)->get();
+        }
+  
+        $response = array();
+        foreach($opd as $row){
+            $response[] = array(
+                "id"   => $row->id,
+                "text" => $row->nama_opd
+            );
+        }
+
+        return response()->json($response); 
+    } 
+
 }

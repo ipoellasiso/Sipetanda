@@ -158,6 +158,9 @@
                             <li class="submenu-item @if(isset($active_sidebukupp)){{ $active_sidebukupp }} @endif">
                                 <a href="/tampilrekapanrek">Buku Pembantu Penerimaan</a>
                             </li>
+                            <li class="submenu-item @if(isset($active_sideposting)){{ $active_sideposting }} @endif">
+                                <a href="/tampilposting">Posting Penerimaan</a>
+                            </li>
                         @endif
                         @if(Auth::user()->role == 'User')
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
@@ -166,9 +169,9 @@
                             <li class="submenu-item @if(isset($active_siderekon)){{ $active_siderekon }} @endif">
                                 <a href="/tampilrekon">Kertas Kerja</a>
                             </li>
-                            <li class="submenu-item @if(isset($active_sideposting)){{ $active_sideposting }} @endif">
+                            {{-- <li class="submenu-item @if(isset($active_sideposting)){{ $active_sideposting }} @endif">
                                 <a href="/tampilposting">Posting Penerimaan</a>
-                            </li>
+                            </li> --}}
                         @endif
                     </ul>
                 </li>

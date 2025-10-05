@@ -12,27 +12,6 @@
         }
     });
 
-      /*------------------------------------------
-      --------------------------------------------
-      Render DataTable
-      --------------------------------------------
-      --------------------------------------------*/
-    // var table = $('.tabelposting').DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     ajax: "/tampilposting",
-    //     columns: [
-    //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-    //         {data: 'no_rekening', name: 'no_rekening'},
-    //         {data: 'rekening2', name: 'rekening2'},
-    //         {data: 'no_buku', name: 'no_buku'},
-    //         {data: 'tgl_transaksi', name: 'tgl_transaksi'},
-    //         {data: 'uraian', name: 'uraian'},
-    //         {data: 'nama_opd', name: 'nama_opd'},
-    //         {data: 'nama_bank', name: 'nama_bank'},
-    //         {data: 'nilai_transaksi', name: 'nilai_transaksi'},
-    //     ]
-    // });
 
     let table = $('.tabelposting').DataTable({
         processing: true,
@@ -40,8 +19,8 @@
         ajax: {
             url: '/tampilposting',
             data: function(d){
-            d.opd      = $('#filter-opd').val();
-            d.rekening = $('#filter-rekening').val();
+            d.opd      = $('#id_opdopd').val();
+            d.rekening = $('#id_rekeningopd').val();
             d.tgl_awal = $('#tanggal-awal').val();
             d.tgl_akhir= $('#tanggal-akhir').val();
             },
@@ -59,7 +38,6 @@
             render: function(data, type, row){
                 if (data === 'Posting') {
                 return `
-                    <span class="badge bg-success">Sudah Posting</span><br>
                     <button class="btn btn-sm btn-danger batal-posting"
                     data-id_transaksi="${row.id_transaksi}"
                     data-no_buku="${row.no_buku}">
@@ -87,13 +65,13 @@
         ]
         });
 
-    $('#btn-filter').on('click', function(){
-    table.ajax.reload();
+    $('#btn-filter').on('click', function() {
+        table.ajax.reload();
     });
 
-    $('#btn-reset').on('click', function(){
-        $('#filter-opd').val('');
-        $('#filter-rekening').val('');
+    $('#btn-reset').on('click', function() {
+        $('#id_opdopd').val(null).trigger('change');
+        $('#id_rekeningopd').val(null).trigger('change');
         $('#tanggal-awal').val('');
         $('#tanggal-akhir').val('');
         table.ajax.reload();
@@ -118,7 +96,7 @@
                     url: "/batalkan-posting",
                     type: "POST",
                     data: {
-                        id: id,
+                        id_transaksi: id_transaksi,
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(res){
@@ -138,6 +116,13 @@
                             });
                         }
                         $('.tabelposting').DataTable().ajax.reload();
+                    },
+                        error: function(xhr){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal!',
+                            text: xhr.responseJSON?.message || 'Terjadi kesalahan server!'
+                        });
                     }
                 });
             }
@@ -183,7 +168,7 @@
                     },
                     success: function(res) {
                         Swal.fire("Sukses!", res.message, "success").then(() => {
-                            location.reload();
+                            $('.tabelposting').DataTable().ajax.reload();
                         });
                     },
                     error: function(xhr) {
@@ -198,92 +183,50 @@
         });
     });
 
-    // tambah data
-    $('#createBku').click(function (){
-        $('#saveBtn').val("create-bku");
-        $('#id_transaksi').val('');
-        $('#userForm').trigger("reset");
-        $('#tambahbku').modal('show');
-        $('#modal-preview').attr('src', 'https://via/placeholder.com/150');
-
-    });
-
-    // edit data
-    $('body').on('click', '.editBku', function(e)  {
-        var id_transaksi1 = $(this).data('id_transaksi');
-        $.get("/bku/edit/"+id_transaksi1, function (data) {
-            $('#saveBtn').val("edit-bku");
-            $('#tambahbku').modal('show');
-        
-            $('#id_transaksi').val(data.id_transaksi);
-            $("#id_rekening").html('<option value = "'+data.id_rekening+'" selected >'+data.rekening2+'</option>');
-            // $('#id_rekening').val(data.id_rekening);
-            $('#id_opd').html('<option value = "'+data.id+'" selected >'+data.nama_opd+'</option>');
-            $('#id_bank').html('<option value = "'+data.id_bank+'" selected >'+data.nama_bank+'</option>');
-            $('#uraian').val(data.uraian);
-            $('#no_buku').val(data.no_buku);
-            $('#tgl_transaksi').val(data.tgl_transaksi);
-            $('#nilai_transaksi').val(data.nilai_transaksi);
-        })
-    });
-
-    // simpan data
-    $('body').on('submit', '#userForm', function(e){
-        e.preventDefault();
-
-        var actionType = $('#saveBtn').val();
-        $('#saveBtn').html('Menunggu Ya.....');
-
-        var formData = new FormData(this);
-
-        $.ajax({
-            type:'POST',
-            url: "/bku/store",
-            data: formData,
-            cacha: false,
-            contentType: false,
-            processData: false,
-            success: (data) => {
-                if(data.success)
-                {
-                    $('#userForm').trigger("reset");
-                    $('#tambahbku').modal('hide');
-                    $('#saveBtn').html('Simpan');
-
-                    Swal.fire({
-                        icon: "success",
-                        title: "success",
-                        text: "Data Berhasil Disimpan"
-                    })
-
-                    table.draw();
-                }
-                else
-                {
-                    $('#userForm').trigger("reset");
-                    $('#tambahbku').modal('hide');
-                    $('#saveBtn').html('Simpan');
-
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Nomor Buku/Bukti Sudah Ada"
-                    })
-
-                    table.draw();
-                }
+     $('#id_rekeningopd').select2({
+	    placeholder: "Pilih Rekening",
+    	allowClear: true,
+        // dropdownParent: $('#tambahbku'),
+	    ajax: { 
+            url: "/posting/rekening",
+            type: "Get",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    searchRek: params.term // search term
+                };
             },
-            error: function(data){
-                console.log('Error:', data);
-                $('saveBtn').html('Simpan');
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+                cache: true
             }
-        });
     });
 
-    $(document).ready(function() {
-        $('.amount').on('keyup', function(e) {
-            $(this).val(formatRupiah($(this).val(), ' '));
-        });
+    $('#id_opdopd').select2({
+	    placeholder: "Pilih Opd",
+    	allowClear: true,
+        // dropdownParent: $('#tambahbku'),
+	    ajax: { 
+            url: "/posting/opd",
+            type: "Get",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    searchOpd: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+                cache: true
+            }
     });
 
 });
