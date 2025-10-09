@@ -27,6 +27,7 @@ class BkuopdModel extends Model
         'status2',
         'status3',
         'no_kas_bpkad',
+        'no_buku',
         'tgl_transaksi',
         'nilai_transaksi',
         'created_at',
