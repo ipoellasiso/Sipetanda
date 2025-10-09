@@ -276,11 +276,13 @@ class BkuOpdController extends Controller
         }
 
         // validasi no_buku duplikat
-        $cekbku = BkuopdModel::where('no_buku', $nourut)
-            ->where('id_transaksi', '!=', $bkuId)
-            ->first();
+        $cekbku = BkuopdModel::where('no_buku', $nourut);
 
-        if ($cekbku) {
+        if (!empty($bkuId)) {
+            $cekbku->where('id_transaksi', '!=', $bkuId);
+        }
+
+        if ($cekbku->exists()) {
             return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
         }
 
