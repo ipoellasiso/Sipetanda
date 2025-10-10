@@ -224,7 +224,7 @@
                         {{ $catatan->status1 ?? '-' }}, 
                         {{ $catatan->status2 ?? '-' }}, 
                         {{ $catatan->status3 ?? '-' }}
-                        <a href="#" class="badge bg-primary">
+                        <a href="{{ route('baprekon.cetakRincianSelisih', ['bulan' => $bulan]) }}" class="btn btn-primary btn-sm" target="_blank">
                             Cetak Rincian Selisih
                         </a>
                     </p>

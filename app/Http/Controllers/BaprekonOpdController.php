@@ -357,4 +357,60 @@ class BaprekonOpdController extends Controller
         return $pdf->stream('BAP_Rekon.pdf');
     }
 
+    public function cetakRincianSelisih(Request $request)
+    {
+        $user = auth()->user();
+        $tahun = $user->tahun ?? date('Y');
+        $bulan = $request->input('bulan', date('m'));
+
+        // 🔹 Ambil data OPD
+        $opd = DB::table('tb_opd')
+            ->select('id', 'nama_opd', 'alamat', 'nama_bendahara', 'pangkat')
+            ->where('id', $user->id_opd)
+            ->first();
+
+        if (!$opd) {
+            return back()->with('error', 'Data OPD tidak ditemukan.');
+        }
+
+        // 🔹 Ambil hanya BKU yang BELUM ADA id_rekening (id_rekening = null)
+        $bkuSelisih = DB::table('tb_bkuopd')
+            ->select('id_subrincianobjek', 'uraian', 'tgl_transaksi', 'nilai_transaksi')
+            ->where('id_opd', $user->id_opd)
+            ->where('tahun', $tahun)
+            ->whereYear('tgl_transaksi', $tahun)
+            ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
+            ->whereNull('id_rekening') // ✅ hanya ambil yang belum ada id_rekening
+            ->orderBy('id_subrincianobjek')
+            ->get();
+
+        // 🔹 Kelompokkan per subrincian
+        $rekonDetails = $bkuSelisih->groupBy('id_subrincianobjek')->map(function($items, $id_sro){
+            $uraian = DB::table('tb_subrincianobjek')
+                        ->where('id_sro', $id_sro)
+                        ->value('rek_sro') ?? 'Tidak ditemukan';
+
+            return (object)[
+                'id_subrincianobjek' => $id_sro,
+                'uraian' => $uraian,
+                'total_opd' => $items->sum('nilai_transaksi'),
+                'detail_opd' => $items
+            ];
+        })->values()->all();
+
+        if (empty($rekonDetails)) {
+            return back()->with('warning', 'Tidak ada data selisih — semua BKU sudah punya id_rekening.');
+        }
+
+        // 🔹 Buat PDF
+        $pdf = PDF::loadView('Penatausahaan.Penerimaan.Bap_Rekon.CetakRincianSelisih', [
+            'rekonDetails' => $rekonDetails,
+            'opd' => $opd,
+            'bulan' => \Carbon\Carbon::create()->month($bulan)->translatedFormat('F'),
+            'tahun' => $tahun,
+        ])->setPaper('a4', 'portrait');
+
+        return $pdf->stream('Rincian_Selisih_'.$opd->nama_opd.'.pdf');
+    }
+
 }

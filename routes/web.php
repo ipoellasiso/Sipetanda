@@ -231,6 +231,7 @@ Route::get('/reksubrincianobjek/anggaranopd/{id}', [AnggaranopdController::class
 // BAP REKON
 Route::get('/tampilbaprekon', [BaprekonOpdController::class, 'index'])->name('baprekon.index')->middleware('auth:web','checkRole:User');
 Route::get('/baprekon/cetak', [BaprekonOpdController::class, 'cetakPdf'])->name('baprekon.cetak')->middleware('auth:web','checkRole:User');
+Route::get('/baprekon/cetak-rincian-selisih', [BaprekonOpdController::class, 'cetakRincianSelisih'])->name('baprekon.cetakRincianSelisih');
 
 // DATA POSTING
 Route::get('/tampilposting', [PostingController::class, 'index'])->middleware('auth:web','checkRole:Admin');
@@ -238,6 +239,7 @@ Route::post('/transaksi/update-bku', [PostingController::class, 'updateBku'])->n
 Route::post('/batalkan-posting', [PostingController::class, 'batalkanPosting'])->name('batalkan.posting')->middleware('auth:web','checkRole:Admin');
 Route::get('/posting/rekening', [PostingController::class, 'getDatarek'])->middleware('auth:web','checkRole:Admin');
 Route::get('/posting/opd', [PostingController::class, 'getDataopd'])->middleware('auth:web','checkRole:Admin');
+
 
 
 

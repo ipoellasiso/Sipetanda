@@ -84,7 +84,7 @@
                                                         <span> {{ number_format($total_pendapatandaerah, 2) }}</span>
                                                     </div>
                                                     <div class="col-md-2" align="right">
-                                                        <span> {{ number_format($tanggaran_pendapatandaerah - $total_pendapatandaerah, 2) }}</span>
+                                                        <span>( {{ number_format($tanggaran_pendapatandaerah - $total_pendapatandaerah, 2) }} )</span>
                                                     </div>
                                                     <div class="col-md-1" align="right">
                                                         @if ($total_pendapatandaerah > 0 && $tanggaran_pendapatandaerah > 0)
