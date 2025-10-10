@@ -33,7 +33,7 @@ class BaprekonOpdController extends Controller
         $pangkat = $opd->pangkat;
 
         $tahun = date('Y');
-        $bulan = $request->bulan ?? date('m'); // default bulan sekarang
+        $bulan = $request->bulan ?? date('m'); // default bulan sekarangaaaa
         $tglRekon = $request->input('tgl_rekon', date('Y-m-d')); // default hari ini
 
         // --- 6. Ambil catatan berdasarkan bulan & tahun ---
