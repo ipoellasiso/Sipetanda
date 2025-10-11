@@ -57,20 +57,20 @@ class BaprekonOpdController extends Controller
         ->groupBy('id_subrincianobjek','uraian')
         ->get();
 
-        // --- 2. Ambil BKU per subrincian
         // $bkuData = DB::table('tb_bkuopd')
         //     ->select('id_subrincianobjek','id_rekening',DB::raw('SUM(nilai_transaksi) as total_bku'))
         //     ->where('id_opd',$userx->id_opd)
         //     ->whereYear('tgl_transaksi',$tahun)
-        //     ->whereMonth('tgl_transaksi',$bulan)
+        //     ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan]) // akumulasi sampai bulan filter
         //     ->groupBy('id_subrincianobjek','id_rekening')
         //     ->get();
 
         $bkuData = DB::table('tb_bkuopd')
             ->select('id_subrincianobjek','id_rekening',DB::raw('SUM(nilai_transaksi) as total_bku'))
-            ->where('id_opd',$userx->id_opd)
-            ->whereYear('tgl_transaksi',$tahun)
-            ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan]) // akumulasi sampai bulan filter
+            ->where('id_opd', $userx->id_opd)
+            ->whereYear('tgl_transaksi', $tahun)
+            ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
+            ->whereNotNull('id_rekening') // ✅ tambahkan ini agar yang null tidak ikut
             ->groupBy('id_subrincianobjek','id_rekening')
             ->get();
         
@@ -357,13 +357,14 @@ class BaprekonOpdController extends Controller
         return $pdf->stream('BAP_Rekon.pdf');
     }
 
+    
     public function cetakRincianSelisih(Request $request)
     {
         $user = auth()->user();
         $tahun = $user->tahun ?? date('Y');
         $bulan = $request->input('bulan', date('m'));
 
-        // 🔹 Ambil data OPD
+        // Ambil data OPD
         $opd = DB::table('tb_opd')
             ->select('id', 'nama_opd', 'alamat', 'nama_bendahara', 'pangkat')
             ->where('id', $user->id_opd)
@@ -373,46 +374,46 @@ class BaprekonOpdController extends Controller
             return back()->with('error', 'Data OPD tidak ditemukan.');
         }
 
-        // 🔹 Ambil total realisasi dari BKU OPD
+        // Ambil realisasi OPD
         $opdData = DB::table('tb_bkuopd')
             ->select('id_rekening', DB::raw('SUM(nilai_transaksi) as total_opd'))
             ->where('id_opd', $user->id_opd)
-            ->where('tahun', $tahun)
             ->whereYear('tgl_transaksi', $tahun)
             ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
             ->groupBy('id_rekening')
             ->get();
 
-        // 🔹 Ambil total realisasi dari Transaksi BPKAD
+        // Ambil realisasi BPKAD
         $bpkadData = DB::table('tb_transaksi')
             ->select('id_rekening', DB::raw('SUM(nilai_transaksi) as total_bpkad'))
             ->where('id_opd', $user->id_opd)
-            ->where('tahun', $tahun)
             ->whereYear('tgl_transaksi', $tahun)
             ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
             ->groupBy('id_rekening')
             ->get();
 
-        // 🔹 Gabungkan hasil untuk cari selisih
+        // Gabungkan rekening
+        $semuaRekening = $bpkadData->pluck('id_rekening')
+            ->merge($opdData->pluck('id_rekening'))
+            ->unique();
+
         $rekon = [];
-        foreach ($bpkadData as $bpkad) {
-            $id_rek = $bpkad->id_rekening;
-            $total_bpkad = $bpkad->total_bpkad;
-            $total_opd = $opdData->firstWhere('id_rekening', $id_rek)->total_opd ?? 0;
-            $selisih = $total_bpkad - $total_opd;
+        foreach ($semuaRekening as $id_rek) {
+            $total_bpkad = $bpkadData->firstWhere('id_rekening', $id_rek)->total_bpkad ?? 0;
+            $total_opd   = $opdData->firstWhere('id_rekening', $id_rek)->total_opd ?? 0;
+            $selisih     = $total_bpkad - $total_opd;
 
             $rek = DB::table('tb_rekening')->where('id_rekening', $id_rek)->first();
 
             $rekon[] = (object)[
                 'id_rekening' => $id_rek,
-                'uraian' => $rek->rekening2 ?? '-',
+                'uraian'      => $rek->rekening2 ?? 'Belum dikaitkan dengan rekening',
                 'total_bpkad' => $total_bpkad,
-                'total_opd' => $total_opd,
-                'selisih' => $selisih,
+                'total_opd'   => $total_opd,
+                'selisih'     => $selisih,
             ];
         }
 
-        // 🔹 Pisahkan ke dua kelompok
         $lebih = collect($rekon)->where('selisih', '>', 0)->values();
         $minus = collect($rekon)->where('selisih', '<', 0)->values();
 
@@ -420,41 +421,67 @@ class BaprekonOpdController extends Controller
             return back()->with('warning', 'Tidak ada data selisih lebih atau minus.');
         }
 
-        foreach ($lebih as $row) {
-            $row->detail_opd = DB::table('tb_bkuopd')
-                ->where('id_opd', $user->id_opd)
-                ->where('id_rekening', $row->id_rekening)
-                ->whereYear('tgl_transaksi', $tahun)
-                ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
-                ->get();
+        // ==============================
+        // 🔍 Ambil Rincian Penyebab Selisih
+        // ==============================
+        $ambilDetail = function ($rows) use ($user, $tahun, $bulan) {
+            foreach ($rows as $row) {
+                // === OPD ===
+                $row->detail_opd = DB::table('tb_bkuopd')
+                    ->where('id_opd', $user->id_opd)
+                    ->whereYear('tgl_transaksi', $tahun)
+                    ->whereRaw('MONTH(tgl_transaksi) = ?', [$bulan])
+                    ->where(function ($q) use ($row, $user, $tahun, $bulan) {
+                        // Kondisi penyebab selisih OPD:
+                        $q->whereNull('id_rekening') // belum direkon
+                        ->orWhereNotExists(function ($sub) use ($row, $user, $tahun, $bulan) {
+                            $sub->select(DB::raw(1))
+                                ->from('tb_transaksi')
+                                ->whereColumn('tb_transaksi.id_rekening', 'tb_bkuopd.id_rekening')
+                                ->where('tb_transaksi.id_opd', $user->id_opd)
+                                ->whereYear('tb_transaksi.tgl_transaksi', $tahun)
+                                ->whereRaw('MONTH(tb_transaksi.tgl_transaksi) <= ?', [$bulan])
+                                ->whereColumn('tb_transaksi.tgl_transaksi', '=', 'tb_bkuopd.tgl_transaksi'); // tidak ada pasangan tanggal sama
+                        });
+                    })
+                    ->orderBy('tgl_transaksi', 'asc')
+                    ->get()
+                    ->map(function ($d) {
+                        if (is_null($d->id_rekening)) {
+                            $d->label = '🔵 Belum Direkon (id_rekening kosong)';
+                        } else {
+                            $d->label = '🟠 Tidak ada pasangan tanggal di BPKAD';
+                        }
+                        return $d;
+                    });
 
-            $row->detail_bpkad = DB::table('tb_transaksi')
-                ->where('id_opd', $user->id_opd)
-                ->where('id_rekening', $row->id_rekening)
-                ->whereYear('tgl_transaksi', $tahun)
-                ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
-                ->get();
-        }
+                // === BPKAD ===
+                $row->detail_bpkad = DB::table('tb_transaksi')
+                    ->where('id_opd', $user->id_opd)
+                    ->whereYear('tgl_transaksi', $tahun)
+                    ->whereRaw('MONTH(tgl_transaksi) = ?', [$bulan])
+                    ->whereNull('status4') // belum posting
+                    ->orderBy('tgl_transaksi', 'asc')
+                    ->get()
+                    ->map(function ($d) {
+                        $d->label = '🟢 Belum Posting (BPKAD)';
+                        return $d;
+                    });
+            }
 
-        foreach ($minus as $row) {
-            $row->detail_opd = DB::table('tb_bkuopd')
-                ->where('id_opd', $user->id_opd)
-                ->where('id_rekening', $row->id_rekening)
-                ->whereYear('tgl_transaksi', $tahun)
-                ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
-                ->get();
+            return $rows;
+        };
 
-            $row->detail_bpkad = DB::table('tb_transaksi')
-                ->where('id_opd', $user->id_opd)
-                ->where('id_rekening', $row->id_rekening)
-                ->whereYear('tgl_transaksi', $tahun)
-                ->whereRaw('MONTH(tgl_transaksi) <= ?', [$bulan])
-                ->get();
-        }
+        $lebih = $ambilDetail($lebih);
+        $minus = $ambilDetail($minus);
 
-        // 🔹 Kirim ke view PDF
+        // Hanya tampilkan rekening yang punya detail penyebab
+        $lebih = $lebih->filter(fn($r) => $r->detail_opd->isNotEmpty() || $r->detail_bpkad->isNotEmpty())->values();
+        $minus = $minus->filter(fn($r) => $r->detail_opd->isNotEmpty() || $r->detail_bpkad->isNotEmpty())->values();
+
+        // Cetak PDF
         $pdf = PDF::loadView('Penatausahaan.Penerimaan.Bap_Rekon.CetakRincianSelisih', [
-            'opd' => $opd,
+            'opd'   => $opd,
             'lebih' => $lebih,
             'minus' => $minus,
             'bulan' => \Carbon\Carbon::create()->month($bulan)->translatedFormat('F'),
@@ -463,5 +490,4 @@ class BaprekonOpdController extends Controller
 
         return $pdf->stream('Rincian_Selisih_'.$opd->nama_opd.'.pdf');
     }
-
 }

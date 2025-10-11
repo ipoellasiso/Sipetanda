@@ -133,40 +133,58 @@
     });
 
     // simpan data batal  no kas bpkad
-    $('body').on('submit', '#userFormBatal', function(e){
+        $('body').on('submit', '#userFormBatal', function(e){
         e.preventDefault();
 
-        var id_transaksi2 = $(this).data("id_transaksi");
-        var actionType = $('#saveBtn').val();
-        $('#saveBtn').html('Sabar Ya.....');
-
         var formData = new FormData(this);
+        var id_transaksi = $('#id_transaksi6').val(); // ambil dari form modal
+
+        $('#saveBtn').html('Sabar Ya.....');
 
         $.ajax({
             type:'POST',
-            url: "/bkukasbpkad/updatebatal/"+id_transaksi2,
+            url: "/bkukasbpkad/updatebatal/" + id_transaksi,
             data: formData,
-            cacha: false,
+            cache: false,
             contentType: false,
             processData: false,
-            success: (data) => {
 
+            success: function (response) {
                 $('#userFormBatal').trigger("reset");
                 $('#batalbkukasbpkad').modal('hide');
                 $('#saveBtn').html('Terima');
-                // $('.bd-example-modal-xl').modal('hide');
 
                 Swal.fire({
                     icon: "success",
-                    title: "success",
-                    text: "Data Berhasil DiSimpan"
-                })
+                    title: "Berhasil!",
+                    text: response.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
 
-                table.draw();
+                // Ubah tombol di baris yang sama tanpa reload
+                let baris = $('.batalbkuopd[data-id_transaksi="'+response.id_transaksi+'"]').closest('td');
+
+                // Sembunyikan tombol batalkan
+                $('.batalbkuopd[data-id_transaksi="'+response.id_transaksi+'"]').hide();
+
+                // Tambahkan tombol Ubah
+                baris.append(`
+                    <a href="javascript:void(0)" 
+                    data-toggle="tooltip" 
+                    data-id_transaksi="${response.id_transaksi}" 
+                    class="ubahbkuopd btn btn-outline-success m-b-xs btn-sm">
+                        Ubah
+                    </a>
+                `);
             },
-            error: function(data){
-                console.log('Error:', data);
-                $('saveBtn').html('Terima');
+            error: function(xhr){
+                $('#saveBtn').html('Terima');
+                Swal.fire({
+                    icon: "error",
+                    title: "Gagal!",
+                    text: "Terjadi kesalahan, coba lagi."
+                });
             }
         });
     });

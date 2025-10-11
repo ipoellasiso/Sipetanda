@@ -106,7 +106,7 @@ class BkuOpdController extends Controller
         if ($request->ajax()) {
 
             $databku = DB::table('tb_bkuopd')
-                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro' )
+                        ->select('tb_opd.nama_opd', 'tb_bank.nama_bank', 'tb_bkuopd.uraian', 'tb_bkuopd.ket', 'tb_bkuopd.uraian', 'tb_bkuopd.no_buku', 'tb_bkuopd.no_kas_bpkad', 'tb_bkuopd.tgl_transaksi', 'tb_bkuopd.nilai_transaksi', 'tb_bkuopd.id_transaksi', 'tb_bkuopd.status1', 'tb_bkuopd.status2', 'tb_subrincianobjek.no_rek_sro', 'tb_subrincianobjek.rek_sro', 'tb_bkuopd.id_rekening' )
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_bkuopd.id_opd')
                         ->join('tb_subrincianobjek', 'tb_subrincianobjek.id_sro', '=', 'tb_bkuopd.id_subrincianobjek')
                         ->join('tb_bank', 'tb_bank.id_bank', 'tb_bkuopd.id_bank')
@@ -117,19 +117,33 @@ class BkuOpdController extends Controller
 
             return Datatables::of($databku)
                     ->addIndexColumn()
+                    // ==========================
+                    // TOMBOL AKSI (Ubah/Delete)
+                    // ==========================
                     ->addColumn('action', function($row){
-
-                            $btn = '    <div class="dropdown">
-                                            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Aksi
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="editBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="javascript:void(0)">Ubah</a></li>
-                                                <li><a class="deleteBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="javascript:void(0)">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                ';
-
+                        // Jika id_rekening ADA → tombol disable
+                        if (!is_null($row->id_rekening)) {
+                            $btn = '
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" disabled title="Data sudah dikaitkan dengan rekening, tidak dapat diubah.">
+                                        Aksi
+                                    </button>
+                                </div>
+                            ';
+                        } else {
+                            // Jika id_rekening NULL → tombol aktif
+                            $btn = '
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Aksi
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="editBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="javascript:void(0)">Ubah</a></li>
+                                        <li><a class="deleteBkuopd dropdown-item" data-id_transaksi="'.$row->id_transaksi.'" href="javascript:void(0)">Delete</a></li>
+                                    </ul>
+                                </div>
+                            ';
+                        }
                         return $btn;
                     })
 
@@ -156,20 +170,22 @@ class BkuOpdController extends Controller
                         return $btn1;
                     })
 
+                    // ==========================
+                    // TOMBOL BATALKAN (juga disable jika belum ada rekening)
+                    // ==========================
                     ->addColumn('action3', function($row){
-                        if($row->status2 == 'Input' | $row->status1 == 'Input')
-                        {
-                        $btn2 = '
-                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id_transaksi="'.$row->id_transaksi.'" class="batalbkuopd btn btn-outline-primary m-b-xs btn-sm">Batalkan
-                                    </a>
-                                ';
-                        }else{
-                        
-                        $btn2 = '
-                               
+                        if (!is_null($row->id_rekening)) {
+                            $btn2 = '<button class="btn btn-outline-secondary btn-sm" disabled title="Data sudah dikaitkan dengan rekening">Batalkan</button>';
+                        } else {
+                            $btn2 = '
+                                <a href="javascript:void(0)" data-toggle="tooltip" 
+                                title="Batalkan Transaksi" 
+                                data-id_transaksi="'.$row->id_transaksi.'" 
+                                class="batalbkuopd btn btn-outline-primary btn-sm">
+                                    Batalkan
+                                </a>
                             ';
                         }
-
                         return $btn2;
                     })
 
@@ -198,6 +214,17 @@ class BkuOpdController extends Controller
 
         // cek apakah data sudah ada (edit mode)
         $existing = BkuopdModel::find($bkuId);
+
+        // Cegah edit data yang sudah diposting
+        if ($request->id_transaksi) {
+            $bku = BkuopdModel::find($request->id_transaksi);
+            if ($bku && $bku->status1 == 'Input' && $bku->status2 == 'Input') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data sudah diposting dan tidak dapat diubah!'
+                ], 400);
+            }
+        }
 
         if ($existing) {
             // edit → pakai nomor lama
@@ -447,18 +474,22 @@ class BkuOpdController extends Controller
     public function simpanbatalkasbpkad(Request $request, string $idhalaman)
     {
 
-        bkusModel::where('no_buku',$request->get('no_kas_bpkad'))
-        ->update([
-            'status3' => 0,
-        ]);
+        bkusModel::where('no_buku', $request->get('no_kas_bpkad'))
+            ->update([
+                'status3' => 0,
+            ]);
 
-        BkuopdModel::where('id_transaksi',$request->get('id_transaksi'))
-        ->update([
-            'status1'       => 'Batal',
-            'status2'       => 'Batal',
-        ]);
+        BkuopdModel::where('id_transaksi', $request->get('id_transaksi'))
+            ->update([
+                'status1' => 'Batal',
+                'status2' => 'Batal',
+            ]);
 
-            return redirect('/tampilbkuopd')->with('success','Data Berhasil DiUpdate');
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaksi berhasil dibatalkan!',
+            'id_transaksi' => $request->get('id_transaksi'),
+        ]);
     }
 
     public function ubahkasbpkad($id)
@@ -516,6 +547,15 @@ class BkuOpdController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil diupdate!'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        BkuopdModel::where('id_transaksi', $id)->delete();
+
+        return response()->json([
+            'success' => 'Data berhasil dihapus.'
         ]);
     }
 
