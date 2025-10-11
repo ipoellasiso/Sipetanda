@@ -184,62 +184,6 @@ class BkuOpdController extends Controller
         return view('Penatausahaan.Penerimaan.Bku_Opd.Tampilbkuopd', $data);
     }
 
-    // public function store(Request $request)
-    // {
-    //     $now = Carbon::now();
-    //     $Thn = $now->year;
-    //     $Bulan =  $now->month;
-            
-    //     $ambilopd1 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-    //          foreach($ambilopd1 as $d)
-    //          $ambilopd  = $d->status1;
-    //     $ambilopd2 = OpdModel::select('id', 'status1')->where('tb_opd.id', auth()->user()->id_opd)->get();
-    //          foreach($ambilopd2 as $d)
-    //          $ambilopd2  = $d->id;
-
-    //     $cek = DB::table("tb_bkuopd")->select(DB::raw("COUNT(no_buku) as jumlah"))->where('id_opd', auth()->user()->id_opd)->groupBy('id_opd');
-    //     if ($cek ->count() >0){
-    //         foreach($cek->get() as $k){
-    //             $nourut = sprintf("%04s", abs( ((int)$k->jumlah) +1 )). '/' . $ambilopd . '/' . $Thn;
-    //         }
-    //     } else {
-    //         $num = 1;
-    //         $nourut = sprintf("%04s", $num) . '/' . $ambilopd . '/' . $Thn;
-    //     }
-
-
-    //     $bkuId = $request->id_transaksi;
-
-    //     $cekbku = BkuopdModel::where('no_buku', $request->no_buku)->where('id_transaksi', '!=', $request->id_transaksi)->first();
-    //     if($cekbku)
-    //     {
-    //         return redirect()->back()->with('error', 'Nomor Buku/Bukti Sudah Ada');
-    //     } else {
-    //         $details = [
-    //             'id_akun'            => $request->id_akun,
-    //             'id_kelompok'        => $request->id_kelompok,
-    //             'id_jenis'           => $request->id_jenis,
-    //             'id_objek'           => $request->id_objek,
-    //             'id_rincianobjek'    => $request->id_rincianobjek,
-    //             'id_subrincianobjek' => $request->id_subrincianobjek,
-    //             'id_rekening'        => $request->id_rekening,
-    //             'id_opd'             => $ambilopd2,
-    //             'id_bank'            => $request->id_bank,
-    //             'uraian'             => $request->uraian,
-    //             'ket'                => $request->ket,
-    //             'no_buku'            => $nourut,
-    //             'tgl_transaksi'      => $request->tgl_transaksi,
-    //             'nilai_transaksi'    => str_replace('.','',$request->nilai_transaksi),
-    //             'tahun'              => date('Y'),
-    //             // 'status3'            => 0,
-    //         ];
-    //     }
-        
-    //         BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $details);
-    //         // BkuopdModel::updateOrCreate(['id_transaksi' => $bkuId], $no_buku);
-    //         return response()->json(['success' =>'Data Berhasil Disimpan']);
-    // }
-
     public function store(Request $request)
     {
         $now = Carbon::now();
@@ -444,20 +388,43 @@ class BkuOpdController extends Controller
 
     public function simpankasbpkad(Request $request, string $idhalaman)
     {
+        $request->validate([
+            'no_kas_bpkad' => 'required|string',
+            'id_transaksi' => 'required',
+        ]);
 
-        bkusModel::where('no_buku',$request->get('no_kas_bpkad'))
-        ->update([
+        // Cek apakah nomor kas sudah ada
+        $cekDuplikat = BkuopdModel::where('no_kas_bpkad', $request->no_kas_bpkad)->exists();
+        if ($cekDuplikat) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Nomor Kas BPKAD sudah digunakan!'
+            ], 400);
+        }
+
+        // Update tabel bkusModel
+        bkusModel::where('no_buku', $request->no_kas_bpkad)->update([
             'status3' => 1,
         ]);
 
-        BkuopdModel::where('id_transaksi',$request->get('id_transaksi'))
-        ->update([
-            'no_kas_bpkad'  => $request->no_kas_bpkad,
-            'status1'       => 'Input',
-            'status2'       => 'Input',
+        // Update tabel BkuopdModel
+        $update = BkuopdModel::where('id_transaksi', $request->id_transaksi)->update([
+            'no_kas_bpkad' => $request->no_kas_bpkad,
+            'status1' => 'Input',
+            'status2' => 'Input',
         ]);
 
-            return redirect('/tampilbkuopd')->with('success','Data Berhasil DiUpdate');
+        if ($cekDuplikat) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Nomor Kas BPKAD sudah digunakan!'
+            ], 400); // ⬅️ tambahkan 400 di sini
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil disimpan!'
+        ]);
     }
 
     public function batalkasbpkad($id)
@@ -514,19 +481,42 @@ class BkuOpdController extends Controller
     public function simpanubahkasbpkad(Request $request, string $idhalaman)
     {
 
-        bkusModel::where('no_buku',$request->get('no_kas_bpkad'))
-        ->update([
-            'status3' => 1,
+        $request->validate([
+        'no_kas_bpkad' => 'required|string',
+        'id_transaksi' => 'required',
         ]);
 
-        BkuopdModel::where('id_transaksi',$request->get('id_transaksi'))
-        ->update([
-            'no_kas_bpkad'  => $request->no_kas_bpkad,
-            'status1'       => 'Input',
-            'status2'       => 'Input',
-        ]);
+        // Cek apakah nomor kas sudah digunakan oleh transaksi lain
+        $cekDuplikat = BkuopdModel::where('no_kas_bpkad', $request->no_kas_bpkad)
+            ->where('id_transaksi', '!=', $request->id_transaksi) // abaikan dirinya sendiri
+            ->exists();
 
-            return redirect('/tampilbkuopd')->with('success','Data Berhasil DiUpdate');
+        if ($cekDuplikat) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Nomor Kas BPKAD sudah digunakan!'
+            ], 400);
+        }
+
+        // Update ke tabel
+        $update = BkuopdModel::where('id_transaksi', $request->id_transaksi)
+            ->update([
+                'no_kas_bpkad' => $request->no_kas_bpkad,
+                'status1' => 'Input',
+                'status2' => 'Input',
+            ]);
+
+        if (!$update) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data gagal diperbarui!'
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diupdate!'
+        ]);
     }
 
 }

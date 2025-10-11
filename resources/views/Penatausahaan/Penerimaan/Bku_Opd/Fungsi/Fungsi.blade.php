@@ -64,37 +64,57 @@
     $('body').on('submit', '#userFormSimpan', function(e){
         e.preventDefault();
 
-        var id_transaksi2 = $(this).data("id_transaksi");
-        var actionType = $('#saveBtn').val();
+        var id_transaksi2 = $('#id_transaksis5').val(); // ambil dari input
         $('#saveBtn').html('Sabar Ya.....');
 
         var formData = new FormData(this);
 
         $.ajax({
-            type:'POST',
-            url: "/bkukasbpkad/update/"+id_transaksi2,
+            type: 'POST',
+            url: "/bkukasbpkad/update/" + id_transaksi2,
             data: formData,
-            cacha: false,
+            cache: false,
             contentType: false,
             processData: false,
-            success: (data) => {
 
+            success: function(response) {
+                $('#saveBtn').html('Terima');
+
+                // kalau gagal (response.success = false)
+                if (response.success === false) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal!",
+                        text: response.message
+                    });
+                    return;
+                }
+
+                // kalau sukses
                 $('#userFormSimpan').trigger("reset");
                 $('#tambahkasbpkad').modal('hide');
-                $('#saveBtn').html('Terima');
-                // $('.bd-example-modal-xl').modal('hide');
 
                 Swal.fire({
                     icon: "success",
-                    title: "success",
-                    text: "Data Berhasil DiSimpan"
-                })
+                    title: "Berhasil!",
+                    text: response.message
+                });
 
                 table.draw();
             },
-            error: function(data){
-                console.log('Error:', data);
-                $('saveBtn').html('Terima');
+
+            // ⬇️ letakkan di sini — dalam satu level dengan "success:"
+            error: function(xhr) {
+                $('#saveBtn').html('Terima');
+                let msg = 'Terjadi kesalahan';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                }
+                Swal.fire({
+                    icon: "error",
+                    title: "Gagal!",
+                    text: msg
+                });
             }
         });
     });
@@ -164,41 +184,61 @@
         })
     });
 
-    // simpan data no kas bpkad
+    // simpan data ubah no kas bpkad
     $('body').on('submit', '#userFormUbah', function(e){
         e.preventDefault();
 
-        var id_transaksi2 = $(this).data("id_transaksi");
-        var actionType = $('#saveBtn').val();
+        var id_transaksi2 = $('#id_transaksis6').val(); // ambil dari input form
         $('#saveBtn').html('Sabar Ya.....');
 
         var formData = new FormData(this);
 
         $.ajax({
-            type:'POST',
-            url: "/bkukasbpkad/updateubah/"+id_transaksi2,
+            type: 'POST',
+            url: "/bkukasbpkad/updateubah/" + id_transaksi2,
             data: formData,
-            cacha: false,
+            cache: false,
             contentType: false,
             processData: false,
-            success: (data) => {
 
+            success: function(response) {
+                $('#saveBtn').html('Terima');
+
+                // Jika duplikat / gagal
+                if (response.success === false) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal!",
+                        text: response.message
+                    });
+                    return;
+                }
+
+                // Jika berhasil
                 $('#userFormUbah').trigger("reset");
                 $('#ubahkasbpkad').modal('hide');
-                $('#saveBtn').html('Terima');
-                // $('.bd-example-modal-xl').modal('hide');
 
                 Swal.fire({
                     icon: "success",
-                    title: "success",
-                    text: "Data Berhasil DiSimpan"
-                })
+                    title: "Berhasil!",
+                    text: response.message
+                });
 
                 table.draw();
             },
-            error: function(data){
-                console.log('Error:', data);
-                $('saveBtn').html('Terima');
+
+            error: function(xhr) {
+                $('#saveBtn').html('Terima');
+                let msg = 'Terjadi kesalahan';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                }
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Gagal!",
+                    text: msg
+                });
             }
         });
     });

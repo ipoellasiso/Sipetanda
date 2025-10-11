@@ -507,5 +507,4 @@
 @include('Penatausahaan.Penerimaan.Bku_Opd.Modal.Batal')
 @include('Penatausahaan.Penerimaan.Bku_Opd.Modal.ubahkasbpkd')
 
-
 @endsection
