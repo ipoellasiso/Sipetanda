@@ -22,6 +22,7 @@ use App\Http\Controllers\PostingController;
 use App\Http\Controllers\Realisasi_hd_Controller;
 use App\Http\Controllers\Realisasi_HD_Controller as ControllersRealisasi_HD_Controller;
 use App\Http\Controllers\RealisasiController;
+use App\Http\Controllers\RealisasiHomeController;
 use App\Http\Controllers\RealisasiopdController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\RekonbkuController;
@@ -93,6 +94,7 @@ Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('rea
 
 // REALISASI HALAMAN DEPAN
 Route::get('/tampilrealisasi_hd', [ControllersRealisasi_HD_Controller::class, 'index']);
+Route::get('/laporan-pendapatan', [RealisasiHomeController::class, 'laporanPendapatan'])->name('laporan.pendapatan');
 
 // REKAPAN REKENING 
 Route::get('/tampilrekapanrek', [KamarController::class, 'index'])->name('view.dataindex.index')->middleware('auth:web','checkRole:Admin');
