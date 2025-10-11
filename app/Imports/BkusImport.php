@@ -21,15 +21,25 @@ class BkusImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFail
     */
     public function model(array $row)
     {
+        // Fungsi bantu untuk normalisasi angka dari Excel
+        $normalizeNumber = function ($value) {
+            if ($value === null || $value === '') return 0;
+            // Hapus semua karakter non-numerik kecuali koma & titik
+            $value = preg_replace('/[^0-9.,-]/', '', $value);
+            // Hapus titik ribuan, ubah koma jadi titik desimal
+            $value = str_replace(['.', ','], ['', '.'], $value);
+            return (float) $value;
+        };
+
         return new bkusModel([
-            //
             'id_rekening' => $row['id_rekening'],
             'no_buku' => $row['no_buku'],
             'tgl_transaksi' => date('Y-m-d', strtotime($row['tgl_transaksi'])),
             'uraian' => $row['uraian'],
             'id_opd' => $row['id_opd'],
             'id_bank' => $row['id_bank'],
-            'nilai_transaksi' => $row['nilai_transaksi'],
+            // ✅ Normalisasi nilai supaya miliaran tidak jadi minus
+            'nilai_transaksi' => $normalizeNumber($row['nilai_transaksi']),
             'tahun' => $row['tahun'],
             'status3' => $row['status3'],
         ]);
