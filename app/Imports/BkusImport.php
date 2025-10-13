@@ -24,11 +24,27 @@ class BkusImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFail
         // Fungsi bantu untuk normalisasi angka dari Excel
         $normalizeNumber = function ($value) {
             if ($value === null || $value === '') return 0;
+
             // Hapus semua karakter non-numerik kecuali koma & titik
             $value = preg_replace('/[^0-9.,-]/', '', $value);
-            // Hapus titik ribuan, ubah koma jadi titik desimal
-            $value = str_replace(['.', ','], ['', '.'], $value);
-            return (float) $value;
+
+            // Jika ada koma dan titik, tentukan mana yang desimal
+            if (strpos($value, ',') !== false && strpos($value, '.') !== false) {
+                // Asumsi: tanda terakhir (koma/titik) adalah desimal
+                if (strrpos($value, ',') > strrpos($value, '.')) {
+                    // Koma desimal, titik ribuan
+                    $value = str_replace('.', '', $value);
+                    $value = str_replace(',', '.', $value);
+                } else {
+                    // Titik desimal, koma ribuan
+                    $value = str_replace(',', '', $value);
+                }
+            } elseif (strpos($value, ',') !== false) {
+                // Hanya koma → ubah jadi titik desimal
+                $value = str_replace(',', '.', $value);
+            }
+
+            return (float)$value;
         };
 
         return new bkusModel([
