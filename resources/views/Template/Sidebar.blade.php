@@ -153,7 +153,7 @@
                                 <a href="/tampilbku">BKU</a>
                             </li>
                             <li class="submenu-item @if(isset($active_siderealisasi)){{ $active_siderealisasi }} @endif">
-                                <a href="/tampilrealisasi">Realisasi</a>
+                                <a href="/laporanpendapatan">Realisasi</a>
                             </li>
                             <li class="submenu-item @if(isset($active_sidebukupp)){{ $active_sidebukupp }} @endif">
                                 <a href="/tampilrekapanrek">Buku Pembantu Penerimaan</a>

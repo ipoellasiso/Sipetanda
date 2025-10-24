@@ -385,4 +385,234 @@ class RealisasiController extends Controller
         return view('Penatausahaan.Penerimaan.Realisasi.Tampilrealisasi1', $data);
     }
 
+  
+public function laporanPendapatan(Request $request)
+{
+    $userId = Auth::guard('web')->user()->id;
+
+    $dataq = [
+        'title' => 'Laporan Pendapatan Daerah',
+        'active_penerimaan' => 'active',
+        'active_sub' => 'active',
+        'active_siderealisasi' => 'active',
+        'breadcumd' => 'Penatausahaan',
+        'breadcumd1' => 'Penerimaan',
+        'breadcumd2' => 'Realisasi',
+        'userx' => UserModel::where('id', $userId)->first(['fullname', 'role', 'gambar', 'tahun']),
+    ];
+
+    // === Ambil tanggal dari form, default dari awal tahun sampai hari ini
+    $tgl_awal = $request->get('tgl_awal', date('Y') . '-01-01');
+    $tgl_akhir = $request->get('tgl_akhir', date('Y-m-d'));
+
+    // === Helper: Hitung realisasi berdasarkan rentang tanggal
+    $sumRealisasi = function ($whereColumn, $whereValue, $tgl_awal, $tgl_akhir) {
+        return (float) DB::table('tb_transaksi')
+            ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_transaksi.id_rekening')
+            ->where($whereColumn, 'like', $whereValue . '%')
+            ->whereBetween('tb_transaksi.tgl_transaksi', [$tgl_awal, $tgl_akhir])
+            ->sum('tb_transaksi.nilai_transaksi');
+    };
+
+    // === Helper: Total anggaran tetap
+    $sumAnggaran = function ($whereColumn, $whereValue) {
+        return (float) DB::table('tb_anggaran')
+            ->join('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_anggaran.id_rekening')
+            ->where($whereColumn, 'like', $whereValue . '%')
+            ->sum('tb_anggaran.nilai');
+    };
+
+    // === Helper: Ambil semua anak rekening + realisasi range tanggal
+    $fetchRekeningChildren = function ($prefixPattern) use ($tgl_awal, $tgl_akhir) {
+        $rekening = DB::table('tb_rekening')
+            ->select('id_rekening', 'no_rekening', 'rekening2')
+            ->where('no_rekening', 'like', $prefixPattern)
+            ->orderBy('no_rekening')
+            ->get();
+
+        if ($rekening->isEmpty()) return [];
+
+        $ids = $rekening->pluck('id_rekening');
+
+        $anggaranMap = DB::table('tb_anggaran')
+            ->whereIn('id_rekening', $ids)
+            ->select('id_rekening', DB::raw('SUM(nilai) as total'))
+            ->groupBy('id_rekening')
+            ->pluck('total', 'id_rekening');
+
+        $realisasiMap = DB::table('tb_transaksi')
+            ->whereIn('id_rekening', $ids)
+            ->whereBetween('tgl_transaksi', [$tgl_awal, $tgl_akhir])
+            ->select('id_rekening', DB::raw('SUM(nilai_transaksi) as total'))
+            ->groupBy('id_rekening')
+            ->pluck('total', 'id_rekening');
+
+        $result = [];
+        foreach ($rekening as $r) {
+            $ang = (float) ($anggaranMap[$r->id_rekening] ?? 0);
+            $rt = (float) ($realisasiMap[$r->id_rekening] ?? 0);
+            if ($ang == 0 && $rt == 0) continue;
+
+            $result[] = [
+                'kategori' => ' - ' . ($r->rekening2 ?? ''),
+                'anggaran' => $ang,
+                'realisasi_bulan' => $rt,
+                'total_realisasi' => $rt,
+                'sisa' => $rt - $ang,
+                'persen' => $ang > 0 ? ($rt / $ang * 100) : 0,
+                'sub' => [],
+            ];
+        }
+
+        return $result;
+    };
+
+    // === Level Utama
+    $anggaran_pendapatan = $sumAnggaran('tb_rekening.ket4', '4');
+    $realisasi_pendapatan = $sumRealisasi('tb_rekening.ket4', '4', $tgl_awal, $tgl_akhir);
+
+    // === PAD
+    $anggaran_pad = $sumAnggaran('tb_rekening.ket1', '4.1');
+    $realisasi_pad = $sumRealisasi('tb_rekening.ket1', '4.1', $tgl_awal, $tgl_akhir);
+
+    // === TRANSFER
+    $anggaran_transfer = $sumAnggaran('tb_rekening.ket1', '4.2');
+    $realisasi_transfer = $sumRealisasi('tb_rekening.ket1', '4.2', $tgl_awal, $tgl_akhir);
+
+    // === LAIN-LAIN
+    $anggaran_lain = $sumAnggaran('tb_rekening.ket1', '4.3');
+    $realisasi_lain = $sumRealisasi('tb_rekening.ket1', '4.3', $tgl_awal, $tgl_akhir);
+
+    // === SUBSTRUKTUR PAD
+    $padGroups = [
+        '4.1.01' => 'Pajak Daerah',
+        '4.1.02' => 'Retribusi Daerah',
+    ];
+
+    $padSub = [];
+    foreach ($padGroups as $prefix => $label) {
+        $children = $fetchRekeningChildren($prefix . '%');
+        $ang = array_sum(array_column($children, 'anggaran'));
+        $rt = array_sum(array_column($children, 'total_realisasi'));
+
+        if ($ang == 0 && $rt == 0) continue;
+
+        $padSub[] = [
+            'kategori' => $label,
+            'anggaran' => $ang,
+            'realisasi_bulan' => $rt,
+            'total_realisasi' => $rt,
+            'sisa' => $rt - $ang,
+            'persen' => $ang > 0 ? ($rt / $ang * 100) : 0,
+            'sub' => $children,
+        ];
+    }
+
+    // === SUBSTRUKTUR TRANSFER
+    $transferGroups = [
+        '4.2.01' => [
+            'label' => 'Pendapatan Transfer Pemerintah Pusat',
+            'sub' => [
+                '4.2.01.07' => 'Dana Transfer Umum - DBH',
+                '4.2.01.08' => 'Dana Alokasi Umum (DAU)',
+                '4.2.01.09' => 'Dana Transfer Khusus - DAK',
+                '4.2.01.06' => 'Insentif Fiskal',
+            ],
+        ],
+        '4.2.02' => [
+            'label' => 'Pendapatan Transfer Antar Daerah',
+            'sub' => [
+                '4.2.02.01' => 'Pendapatan Bagi Hasil Pajak',
+                '4.2.02.02' => 'Bantuan Keuangan Khusus dari Provinsi',
+            ],
+        ],
+    ];
+
+    $transferSub = [];
+    foreach ($transferGroups as $prefix => $mainGroup) {
+        $mainChildren = [];
+
+        foreach ($mainGroup['sub'] as $subPrefix => $subLabel) {
+            $children = $fetchRekeningChildren($subPrefix . '%');
+            $ang = array_sum(array_column($children, 'anggaran'));
+            $rt = array_sum(array_column($children, 'total_realisasi'));
+
+            if ($ang == 0 && $rt == 0) continue;
+
+            $mainChildren[] = [
+                'kategori' => $subLabel,
+                'anggaran' => $ang,
+                'realisasi_bulan' => $rt,
+                'total_realisasi' => $rt,
+                'sisa' => $rt - $ang,
+                'persen' => $ang > 0 ? ($rt / $ang * 100) : 0,
+                'sub' => $children,
+            ];
+        }
+
+        $angTotal = array_sum(array_column($mainChildren, 'anggaran'));
+        $rtTotal = array_sum(array_column($mainChildren, 'total_realisasi'));
+
+        if ($angTotal == 0 && $rtTotal == 0) continue;
+
+        $transferSub[] = [
+            'kategori' => $mainGroup['label'],
+            'anggaran' => $angTotal,
+            'realisasi_bulan' => $rtTotal,
+            'total_realisasi' => $rtTotal,
+            'sisa' => $rtTotal - $angTotal,
+            'persen' => $angTotal > 0 ? ($rtTotal / $angTotal * 100) : 0,
+            'sub' => $mainChildren,
+        ];
+    }
+
+    // === LAIN-LAIN PAD YANG SAH
+    $lainChildren = $fetchRekeningChildren('4.3.%');
+
+    // === Susun Hierarki Akhir
+    $data = [[
+        'kategori' => 'Pendapatan Daerah',
+        'anggaran' => $anggaran_pendapatan,
+        'realisasi_bulan' => $realisasi_pendapatan,
+        'total_realisasi' => $realisasi_pendapatan,
+        'sisa' => $realisasi_pendapatan - $anggaran_pendapatan,
+        'persen' => $anggaran_pendapatan > 0 ? ($realisasi_pendapatan / $anggaran_pendapatan * 100) : 0,
+        'sub' => [
+            [
+                'kategori' => 'Pendapatan Asli Daerah (PAD)',
+                'anggaran' => $anggaran_pad,
+                'realisasi_bulan' => $realisasi_pad,
+                'total_realisasi' => $realisasi_pad,
+                'sisa' => $realisasi_pad - $anggaran_pad,
+                'persen' => $anggaran_pad > 0 ? ($realisasi_pad / $anggaran_pad * 100) : 0,
+                'sub' => $padSub,
+            ],
+            [
+                'kategori' => 'Pendapatan Transfer',
+                'anggaran' => $anggaran_transfer,
+                'realisasi_bulan' => $realisasi_transfer,
+                'total_realisasi' => $realisasi_transfer,
+                'sisa' => $realisasi_transfer - $anggaran_transfer,
+                'persen' => $anggaran_transfer > 0 ? ($realisasi_transfer / $anggaran_transfer * 100) : 0,
+                'sub' => $transferSub,
+            ],
+            [
+                'kategori' => 'Lain-Lain Pendapatan Daerah Yang Sah',
+                'anggaran' => $anggaran_lain,
+                'realisasi_bulan' => $realisasi_lain,
+                'total_realisasi' => $realisasi_lain,
+                'sisa' => $realisasi_lain - $anggaran_lain,
+                'persen' => $anggaran_lain > 0 ? ($realisasi_lain / $anggaran_lain * 100) : 0,
+                'sub' => $lainChildren,
+            ],
+        ],
+    ]];
+
+    return view('Penatausahaan.Penerimaan.Realisasi.1234tes', array_merge($dataq, [
+        'tgl_awal' => $tgl_awal,
+        'tgl_akhir' => $tgl_akhir,
+        'data' => $data,
+    ]));
+}
+
 }

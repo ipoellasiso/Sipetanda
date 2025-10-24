@@ -91,6 +91,8 @@ Route::get('/bku/bank', [BkuController::class, 'getDatabank'])->middleware('auth
 
 // REALISASI
 Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('realisasi.index')->middleware('auth:web','checkRole:Admin');
+Route::get('/laporanpendapatan', [RealisasiController::class, 'laporanPendapatan'])->name('realisasi.laporanpendapatan')
+->middleware('auth:web', 'checkRole:Admin');
 
 // REALISASI HALAMAN DEPAN
 Route::get('/tampilrealisasi_hd', [ControllersRealisasi_HD_Controller::class, 'index']);
