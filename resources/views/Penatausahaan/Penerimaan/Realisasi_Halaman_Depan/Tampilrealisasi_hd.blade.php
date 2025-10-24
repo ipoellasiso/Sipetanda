@@ -624,7 +624,16 @@
                                                                                         <span> {{ number_format($total_rddinkes, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rddinkes - $total_rddinkes, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddinkes - $tanggaran_rddinkes;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddinkes > 0 && $tanggaran_rddinkes > 0)
@@ -645,7 +654,16 @@
                                                                                         <span> {{ number_format($total_rddinkespkm, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddinkespkm - $total_rddinkespkm, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddinkespkm - $tanggaran_rddinkespkm;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddinkespkm > 0 && $tanggaran_rddinkespkm > 0)
@@ -668,7 +686,16 @@
                                                                                         <span> {{ number_format($total_rddlh, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rddlh - $total_rddlh, 2) }}</span>
+                                                                                         @php
+                                                                                            $sisa = $total_rddlh - $tanggaran_rddlh;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddlh > 0 && $tanggaran_rddlh > 0)
@@ -689,7 +716,16 @@
                                                                                         <span> {{ number_format($total_rddlhsampah, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddlhsampah - $total_rddlhsampah, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddlhsampah - $tanggaran_rddlhsampah;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddlhsampah > 0 && $tanggaran_rddlhsampah > 0)
@@ -708,7 +744,16 @@
                                                                                         <span> {{ number_format($total_rddlholahraga, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddlholahraga - $total_rddlholahraga, 2) }}</span>
+                                                                                         @php
+                                                                                            $sisa = $total_rddlholahraga - $tanggaran_rddlholahraga;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddlholahraga > 0 && $tanggaran_rddlholahraga > 0)
@@ -731,7 +776,16 @@
                                                                                         <span> {{ number_format($total_rdtr, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rdtr - $total_rdtr, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdtr - $tanggaran_rdtr;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdtr > 0 && $tanggaran_rdtr > 0)
@@ -752,7 +806,16 @@
                                                                                         <span> {{ number_format($total_rdtrimb, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdtrimb - $total_rdtrimb, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdtrimb - $tanggaran_rdtrimb;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdtrimb > 0 && $tanggaran_rdtrimb > 0)
@@ -775,7 +838,16 @@
                                                                                         <span> {{ number_format($total_rddispora, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rddispora - $total_rddispora, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddispora - $tanggaran_rddispora;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddispora > 0 && $tanggaran_rddispora > 0)
@@ -796,7 +868,16 @@
                                                                                         <span> {{ number_format($total_rddisporaolahraga, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddisporaolahraga - $total_rddisporaolahraga, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddisporaolahraga - $tanggaran_rddisporaolahraga;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddisporaolahraga > 0 && $tanggaran_rddisporaolahraga > 0)
@@ -819,7 +900,16 @@
                                                                                         <span> {{ number_format($total_rddishub, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rddishub - $total_rddishub, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddishub - $tanggaran_rddishub;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddishub > 0 && $tanggaran_rddishub > 0)
@@ -840,7 +930,16 @@
                                                                                         <span> {{ number_format($total_rddishubparkir, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddishubparkir - $total_rddishubparkir, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddishubparkir - $tanggaran_rddishubparkir;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddishubparkir > 0 && $tanggaran_rddishubparkir > 0)
@@ -859,7 +958,16 @@
                                                                                         <span> {{ number_format($total_rddishubpkb, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddishubpkb - $total_rddishubpkb, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddishubpkb - $tanggaran_rddishubpkb;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddishubpkb > 0 && $tanggaran_rddishubpkb > 0)
@@ -879,7 +987,16 @@
                                                                                         <span> {{ number_format($total_rddishubterminal, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rddishubterminal - $total_rddishubterminal, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rddishubterminal - $tanggaran_rddishubterminal;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rddishubterminal > 0 && $tanggaran_rddishubterminal > 0)
@@ -902,7 +1019,16 @@
                                                                                         <span> {{ number_format($total_rdpertanian, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rdpertanian - $total_rdpertanian, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpertanian - $tanggaran_rdpertanian;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpertanian > 0 && $tanggaran_rdpertanian > 0)
@@ -923,7 +1049,16 @@
                                                                                         <span> {{ number_format($total_rdpertanianpelelangan, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpertanianpelelangan - $total_rdpertanianpelelangan, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpertanianpelelangan - $tanggaran_rdpertanianpelelangan;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpertanianpelelangan > 0 && $tanggaran_rdpertanianpelelangan > 0)
@@ -942,7 +1077,16 @@
                                                                                         <span> {{ number_format($total_rdpertanianrph, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpertanianrph - $total_rdpertanianrph, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpertanianrph - $tanggaran_rdpertanianrph;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpertanianrph > 0 && $tanggaran_rdpertanianrph > 0)
@@ -962,7 +1106,16 @@
                                                                                         <span> {{ number_format($total_rdpertanianbt, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpertanianbt - $total_rdpertanianbt, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpertanianbt - $tanggaran_rdpertanianbt;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpertanianbt > 0 && $tanggaran_rdpertanianbt > 0)
@@ -982,7 +1135,16 @@
                                                                                         <span> {{ number_format($total_rdpertanianbi, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpertanianbi - $total_rdpertanianbi, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpertanianbi - $tanggaran_rdpertanianbi;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpertanianbi > 0 && $tanggaran_rdpertanianbi > 0)
@@ -1005,7 +1167,16 @@
                                                                                         <span> {{ number_format($total_rdkoperasi, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rdkoperasi - $total_rdkoperasi, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdkoperasi - $tanggaran_rdkoperasi;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdkoperasi > 0 && $tanggaran_rdkoperasi > 0)
@@ -1026,7 +1197,16 @@
                                                                                         <span> {{ number_format($total_rdkoperasialat, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdkoperasialat - $total_rdkoperasialat, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdkoperasialat - $tanggaran_rdkoperasialat;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdkoperasialat > 0 && $tanggaran_rdkoperasialat > 0)
@@ -1047,7 +1227,16 @@
                                                                                         <span> {{ number_format($total_rdkoperasipasar, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdkoperasipasar - $total_rdkoperasipasar, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdkoperasipasar - $tanggaran_rdkoperasipasar;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdkoperasipasar > 0 && $tanggaran_rdkoperasipasar > 0)
@@ -1066,7 +1255,16 @@
                                                                                         <span> {{ number_format($total_rdkoperasiimta, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdkoperasiimta - $total_rdkoperasiimta, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdkoperasiimta - $tanggaran_rdkoperasiimta;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdkoperasiimta > 0 && $tanggaran_rdkoperasiimta > 0)
@@ -1089,7 +1287,16 @@
                                                                                         <span> {{ number_format($total_rdperindag, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rdperindag - $total_rdperindag, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdperindag - $tanggaran_rdperindag;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdperindag > 0 && $tanggaran_rdperindag > 0)
@@ -1111,7 +1318,16 @@
                                                                                         <span> {{ number_format($total_rdperindagpasar, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdperindagpasar - $total_rdperindagpasar, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdperindagpasar - $tanggaran_rdperindagpasar;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdperindagpasar > 0 && $tanggaran_rdperindagpasar > 0)
@@ -1134,7 +1350,16 @@
                                                                                         <span> {{ number_format($total_rdpu, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_rdpu - $total_rdpu, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpu - $tanggaran_rdpu;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpu > 0 && $tanggaran_rdpu > 0)
@@ -1155,7 +1380,16 @@
                                                                                         <span> {{ number_format($total_rdpukakus, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpukakus - $total_rdpukakus, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpukakus - $tanggaran_rdpukakus;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpukakus > 0 && $tanggaran_rdpukakus > 0)
@@ -1174,7 +1408,16 @@
                                                                                         <span> {{ number_format($total_rdpulab, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpulab - $total_rdpulab, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpulab - $tanggaran_rdpulab;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpulab > 0 && $tanggaran_rdpulab > 0)
@@ -1193,7 +1436,16 @@
                                                                                         <span> {{ number_format($total_rdpualat, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_rdpualat - $total_rdpualat, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_rdpualat - $tanggaran_rdpualat;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_rdpualat > 0 && $tanggaran_rdpualat > 0)
@@ -1272,7 +1524,16 @@
                                                                                         <span> {{ number_format($total_hpkddividenbumn, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span>{{ number_format($tanggaran_hpkddividenbumn - $total_hpkddividenbumn, 2) }}</span>
+                                                                                        @php
+                                                                                            $sisa = $total_hpkddividenbumn - $tanggaran_hpkddividenbumn;
+                                                                                        @endphp
+
+                                                                                        <span style="{{ $sisa < 0 ? 'color:red;' : '' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_hpkddividenbumn > 0 && $tanggaran_hpkddividenbumn > 0)
@@ -1299,7 +1560,16 @@
                                                                                 <span> {{ number_format($total_llp, 2) }}</span>
                                                                             </div>
                                                                             <div class="col-md-2 table-bordered" align="right">
-                                                                                <span> {{ number_format($tanggaran_llp - $total_llp, 2) }}</span>
+                                                                                @php
+                                                                                    $sisa = $total_llp - $tanggaran_llp;
+                                                                                @endphp
+
+                                                                                <span style="{{ $sisa < 0 ? 'color:red;' : '' }}">
+                                                                                    {{ $sisa < 0 
+                                                                                        ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                        : number_format($sisa, 2) 
+                                                                                    }}
+                                                                                </span>
                                                                             </div>
                                                                             <div class="col-md-1 table-bordered" align="right">
                                                                                 @if ($total_llp > 0 && $tanggaran_llp > 0)
