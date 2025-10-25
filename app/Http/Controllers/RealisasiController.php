@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\AnggaranModel;
 use App\Models\bkusModel;
 use App\Models\UserModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Exports\LaporanPendapatanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class RealisasiController extends Controller
@@ -736,6 +739,25 @@ class RealisasiController extends Controller
             'tgl_akhir' => $tgl_akhir,
             'data' => $data,
         ]));
+    }
+
+    public function exportExcel(Request $request)
+    {
+        // Jalankan ulang fungsi utama laporan untuk ambil data terbaru
+        $response = $this->laporanPendapatan($request);
+        $viewData = $response->getData(true);
+
+        // Kirim ke Excel Export
+        return \Maatwebsite\Excel\Facades\Excel::download(
+            new \App\Exports\LaporanPendapatanExport(
+                $viewData['data'],
+                $viewData['tgl_awal'],
+                $viewData['tgl_akhir']
+            ),
+            'Laporan_Pendapatan_' . date('Ymd_His') . '.xlsx'
+        );
+        
+        return Excel::download(new LaporanPendapatanExport($data, $tgl_awal, $tgl_akhir), 'Laporan_Pendapatan.xlsx');
     }
 
 }

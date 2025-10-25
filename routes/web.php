@@ -93,6 +93,7 @@ Route::get('/bku/bank', [BkuController::class, 'getDatabank'])->middleware('auth
 Route::get('/tampilrealisasi', [RealisasiController::class, 'index'])->name('realisasi.index')->middleware('auth:web','checkRole:Admin');
 Route::get('/laporanpendapatan', [RealisasiController::class, 'laporanPendapatan'])->name('realisasi.laporanpendapatan')
 ->middleware('auth:web', 'checkRole:Admin');
+Route::get('/laporan-pendapatan/excel', [RealisasiController::class, 'exportExcel'])->name('laporan-pendapatan.excel')->middleware('auth:web', 'checkRole:Admin');
 
 // REALISASI HALAMAN DEPAN
 Route::get('/tampilrealisasi_hd', [ControllersRealisasi_HD_Controller::class, 'index']);

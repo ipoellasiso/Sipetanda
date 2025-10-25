@@ -115,20 +115,32 @@
 </style>
 
 <div class="card shadow-sm p-3">
-    {{-- === Filter tanggal === --}}
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-0 text-primary fw-bold"></h4>
-        <form method="GET" class="d-flex align-items-center justify-content-end mb-2" style="gap: 10px;">
-            <label class="fw-semibold mb-0">Periode:</label>
-            <input type="date" name="tgl_awal" value="{{ $tgl_awal }}" class="form-control" style="width: 160px;">
-            <span class="fw-bold">s/d</span>
-            <input type="date" name="tgl_akhir" value="{{ $tgl_akhir }}" class="form-control" style="width: 160px;">
-            <button type="submit" class="btn btn-primary btn-sm">
-                <i class="bi bi-search"></i> Tampilkan
-            </button>
-        </form>
-    </div>
+  {{-- === Filter tanggal === --}}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+      @if(!isset($pdfMode))
+      <form method="GET" action="{{ route('laporan-pendapatan.excel') }}" class="mb-3">
+          <input type="hidden" name="tgl_awal" value="{{ $tgl_awal }}">
+          <input type="hidden" name="tgl_akhir" value="{{ $tgl_akhir }}">
+          <button type="submit" class="btn btn-success btn-sm">
+              <i class="bi bi-file-earmark-excel"></i> Export Excel
+          </button>
+      </form>
+      @endif
 
+      <h4 class="mb-0 text-primary fw-bold"></h4>
+      <form method="GET" class="d-flex align-items-center justify-content-end mb-2" style="gap: 10px;">
+          <label class="fw-semibold mb-0">Periode:</label>
+          <input type="date" name="tgl_awal" value="{{ $tgl_awal }}" class="form-control" style="width: 160px;">
+          <span class="fw-bold">s/d</span>
+          <input type="date" name="tgl_akhir" value="{{ $tgl_akhir }}" class="form-control" style="width: 160px;">
+          <button type="submit" class="btn btn-primary btn-sm">
+              <i class="bi bi-search"></i> Tampilkan
+          </button>
+      </form>
+  </div>
+</div>
+
+<div class="card shadow-sm p-3">
     {{-- === HEADER LAPORAN === --}}
     <div class="d-flex align-items-center justify-content-center mb-4 text-center" style="gap: 20px;">
         <div style="flex: 0 0 90px;">
@@ -182,4 +194,5 @@
         @endforeach
     </div>
 </div>
+
 @endsection
