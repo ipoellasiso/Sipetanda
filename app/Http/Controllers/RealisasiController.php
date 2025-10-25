@@ -487,6 +487,8 @@ public function laporanPendapatan(Request $request)
     $padGroups = [
         '4.1.01' => 'Pajak Daerah',
         '4.1.02' => 'Retribusi Daerah',
+        '4.1.03' => 'Hasil Pengelolaan Kekayaan Daerah yang Dipisahkan',
+        '4.1.04' => 'Lain-lain Pendapatan Asli Daerah yang Sah',
     ];
 
     $padSub = [];
@@ -506,6 +508,70 @@ public function laporanPendapatan(Request $request)
             'persen' => $ang > 0 ? ($rt / $ang * 100) : 0,
             'sub' => $children,
         ];
+    }
+
+    // === RETRIBUSI PER OPD + SUB REKENING ===
+    $opdRetribusi = DB::table('tb_opd')
+        ->leftJoin('tb_anggaran', 'tb_anggaran.id_opd', '=', 'tb_opd.id')
+        ->leftJoin('tb_rekening', 'tb_rekening.id_rekening', '=', 'tb_anggaran.id_rekening')
+        ->where('tb_rekening.ket2', 'like', '4.1.02%') // hanya retribusi daerah
+        ->groupBy('tb_opd.id', 'tb_opd.nama_opd')
+        ->select('tb_opd.id', 'tb_opd.nama_opd')
+        ->get();
+
+    foreach ($padSub as &$sub) {
+        if ($sub['kategori'] === 'Retribusi Daerah') {
+            $sub['sub'] = [];
+
+            foreach ($opdRetribusi as $opd) {
+                // === Ambil rekening per OPD ===
+                $rekeningOPD = DB::table('tb_rekening')
+                    ->join('tb_anggaran', 'tb_anggaran.id_rekening', '=', 'tb_rekening.id_rekening')
+                    ->leftJoin('tb_transaksi', function ($join) use ($opd) {
+                        $join->on('tb_transaksi.id_rekening', '=', 'tb_rekening.id_rekening')
+                            ->where('tb_transaksi.id_opd', '=', $opd->id);
+                    })
+                    ->where('tb_rekening.ket2', 'like', '4.1.02%')
+                    ->where('tb_anggaran.id_opd', $opd->id)
+                    ->whereBetween('tb_transaksi.tgl_transaksi', [$tgl_awal, $tgl_akhir])
+                    ->groupBy('tb_rekening.id_rekening', 'tb_rekening.rekening2')
+                    ->select(
+                        'tb_rekening.rekening2',
+                        DB::raw('SUM(tb_anggaran.nilai) as total_anggaran'),
+                        DB::raw('SUM(tb_transaksi.nilai_transaksi) as total_realisasi')
+                    )
+                    ->get();
+
+                // === Hitung total per OPD ===
+                $anggaran = $rekeningOPD->sum('total_anggaran');
+                $realisasi = $rekeningOPD->sum('total_realisasi');
+
+                // === Buat array sub rekening untuk collapse ===
+                $rekeningSub = [];
+                foreach ($rekeningOPD as $r) {
+                    $rekeningSub[] = [
+                        'kategori' => '- ' . $r->rekening2,
+                        'anggaran' => (float) $r->total_anggaran,
+                        'realisasi_bulan' => (float) $r->total_realisasi,
+                        'total_realisasi' => (float) $r->total_realisasi,
+                        'sisa' => (float) $r->total_realisasi - (float) $r->total_anggaran,
+                        'persen' => $r->total_anggaran > 0 ? ($r->total_realisasi / $r->total_anggaran * 100) : 0,
+                        'sub' => [],
+                    ];
+                }
+
+                // === Tambahkan OPD + rekeningnya ===
+                $sub['sub'][] = [
+                    'kategori' => $opd->nama_opd,
+                    'anggaran' => $anggaran,
+                    'realisasi_bulan' => $realisasi,
+                    'total_realisasi' => $realisasi,
+                    'sisa' => $realisasi - $anggaran,
+                    'persen' => $anggaran > 0 ? ($realisasi / $anggaran * 100) : 0,
+                    'sub' => $rekeningSub,
+                ];
+            }
+        }
     }
 
     // === SUBSTRUKTUR TRANSFER
@@ -567,7 +633,63 @@ public function laporanPendapatan(Request $request)
     }
 
     // === LAIN-LAIN PAD YANG SAH
-    $lainChildren = $fetchRekeningChildren('4.3.%');
+    // $lainChildren = $fetchRekeningChildren('4.3.%');
+
+    // === SUBSTRUKTUR LAIN-LAIN PENDAPATAN DAERAH YANG SAH ===
+    $lainGroups = [
+        '4.3.01' => [
+            'label' => 'Pendapatan Hibah',
+            'sub' => [
+                '4.3.01.04' => 'Pendapatan Hibah dari Badan/Lembaga/Organisasi Dalam Negeri',
+                '4.3.01.01' => 'Pendapatan Hibah dari Pemerintah Pusat',
+            ],
+        ],
+        '4.3.03' => [
+            'label' => 'Lain-lain Pendapatan Sesuai dengan Ketentuan Peraturan Perundang-Undangan',
+            'sub' => [
+                '4.3.03.02' => 'Pendapatan Dana Kapitasi JKN pada FKTP',
+                '4.3.03.04' => 'Kontribusi dari Sumber Lain yang Sah dan Tidak Mengikat',
+            ],
+        ],
+    ];
+
+    $lainSub = [];
+    foreach ($lainGroups as $prefix => $mainGroup) {
+        $mainChildren = [];
+
+        foreach ($mainGroup['sub'] as $subPrefix => $subLabel) {
+            $children = $fetchRekeningChildren($subPrefix . '%');
+            $ang = array_sum(array_column($children, 'anggaran'));
+            $rt  = array_sum(array_column($children, 'total_realisasi'));
+
+            if ($ang == 0 && $rt == 0) continue;
+
+            $mainChildren[] = [
+                'kategori' => $subLabel,
+                'anggaran' => $ang,
+                'realisasi_bulan' => $rt,
+                'total_realisasi' => $rt,
+                'sisa' => $rt - $ang,
+                'persen' => $ang > 0 ? ($rt / $ang * 100) : 0,
+                'sub' => $children,
+            ];
+        }
+
+        $angTotal = array_sum(array_column($mainChildren, 'anggaran'));
+        $rtTotal  = array_sum(array_column($mainChildren, 'total_realisasi'));
+
+        if ($angTotal == 0 && $rtTotal == 0) continue;
+
+        $lainSub[] = [
+            'kategori' => $mainGroup['label'],
+            'anggaran' => $angTotal,
+            'realisasi_bulan' => $rtTotal,
+            'total_realisasi' => $rtTotal,
+            'sisa' => $rtTotal - $angTotal,
+            'persen' => $angTotal > 0 ? ($rtTotal / $angTotal * 100) : 0,
+            'sub' => $mainChildren,
+        ];
+    }
 
     // === Susun Hierarki Akhir
     $data = [[
@@ -603,7 +725,7 @@ public function laporanPendapatan(Request $request)
                 'total_realisasi' => $realisasi_lain,
                 'sisa' => $realisasi_lain - $anggaran_lain,
                 'persen' => $anggaran_lain > 0 ? ($realisasi_lain / $anggaran_lain * 100) : 0,
-                'sub' => $lainChildren,
+                'sub' => $lainSub,
             ],
         ],
     ]];

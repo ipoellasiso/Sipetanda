@@ -8,23 +8,17 @@
     $bgClass = 'bg-level-' . min($level, 4); // maksimal level 4
 @endphp
 
-<div class="accordion-item border-0 border-bottom {{ $bgClass }}"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#{{ $collapseId }}"
-    aria-expanded="false"
-    aria-controls="{{ $collapseId }}"
-    style="box-shadow:none;">
+<div class="accordion-item border-0 border-bottom {{ $bgClass }}">
     
     <h2 class="accordion-header" id="{{ $headingId }}">
         <button 
-            class="accordion-button collapsed py-1 px-0"
+            class="accordion-button collapsed py-2 px-0 {{ $bgClass }}"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#{{ $collapseId }}"
             aria-expanded="false"
             aria-controls="{{ $collapseId }}"
-        >
+            style="box-shadow:none;">
             <div class="row w-100 align-items-center gx-1">
                 {{-- === Kolom Uraian === --}}
                 <div class="col-md-3 text-start indent-{{ $level }}">

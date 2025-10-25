@@ -99,36 +99,59 @@
     color: #e74c3c !important; /* merah tegas */
 }
 
-/* 🌈 Warna dasar per level */
-.bg-level-0 { background-color: #f8f9fa !important; }  /* abu muda */
-.bg-level-1 { background-color: #eaf2fb !important; }  /* biru muda */
-.bg-level-2 { background-color: #fdfdfd !important; }  /* putih polos */
-.bg-level-3 { background-color: #f5f7fa !important; }  /* abu keputihan */
-.bg-level-4 { background-color: #fefefe !important; }  /* cadangan */
+.bg-level-0 {
+    background: linear-gradient(to right, #e3f2fd, #f8fbff) !important; /* biru lembut */
+}
+.bg-level-1 {
+    background: linear-gradient(to right, #f1f8ff, #ffffff) !important;
+}
+.bg-level-2 {
+    background: linear-gradient(to right, #fafcff, #ffffff) !important;
+}
+.bg-level-3 {
+    background: linear-gradient(to right, #ffffff, #ffffff) !important;
+}
+.bg-level-4 {
+    background-color: #ffffff !important;
+}
 
-/* 🚫 Override Bootstrap agar tidak hilang saat collapse */
+/* 🧱 Pastikan warna tidak hilang saat di-collapse */
+.accordion-item.bg-level-0,
+.accordion-item.bg-level-1,
+.accordion-item.bg-level-2,
+.accordion-item.bg-level-3 {
+    transition: background 0.4s ease;
+    border-left: 4px solid transparent;
+}
+
+/* 🩵 Warna border kiri per level agar kontras dan elegan */
+.bg-level-0 { border-left-color: #1565c0 !important; }  /* biru tua */
+.bg-level-1 { border-left-color: #1e88e5 !important; }  /* biru terang */
+.bg-level-2 { border-left-color: #64b5f6 !important; }  /* biru lembut */
+.bg-level-3 { border-left-color: #bbdefb !important; }  /* sangat lembut */
+
+/* 🧩 Pastikan tombol collapse mewarisi warna parent */
 .accordion-button.bg-level-0,
 .accordion-button.bg-level-1,
 .accordion-button.bg-level-2,
-.accordion-button.bg-level-3,
-.accordion-button.bg-level-4 {
+.accordion-button.bg-level-3 {
     background-color: inherit !important;
     box-shadow: none !important;
+    transition: all 0.3s ease;
 }
 
-/* Saat diklik (expanded), tetap pertahankan warnanya */
+/* Saat dibuka, tetap gunakan warna yang sama */
 .accordion-button:not(.collapsed).bg-level-0,
 .accordion-button:not(.collapsed).bg-level-1,
 .accordion-button:not(.collapsed).bg-level-2,
-.accordion-button:not(.collapsed).bg-level-3,
-.accordion-button:not(.collapsed).bg-level-4 {
+.accordion-button:not(.collapsed).bg-level-3 {
     background-color: inherit !important;
-    color: #002060 !important;
+    color: #0d47a1 !important;
 }
 
-/* Supaya transisi halus */
-.accordion-item {
-    transition: background-color 0.3s ease;
+/* Hover efek lembut */
+.accordion-item:hover {
+    filter: brightness(0.98);
 }
 </style>
 
