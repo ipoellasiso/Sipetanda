@@ -176,13 +176,14 @@
                     </ul>
                 </li>
 
+                @if(Auth::user()->role == 'User')
                 <li class="sidebar-item  has-sub @if(isset($active_laporan)){{ $active_laporan }} @endif">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-file-earmark-plus-fill"></i>
                         <span>Laporan</span>
                     </a>
                     <ul class="submenu">
-                        @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
+                        {{-- @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Verifikasi')
                             <li class="submenu-item">
                                 <a href="/tampilbku">BKU</a>
                             </li>
@@ -192,8 +193,8 @@
                             <li class="submenu-item">
                                 <a href="/tampilrekapanrek">Buku Pembantu Penerimaan</a>
                             </li>
-                        @endif
-                        @if(Auth::user()->role == 'User')
+                        @endif --}}
+                        {{-- @if(Auth::user()->role == 'User') --}}
                             <li class="submenu-item @if(isset($active_sidebukuppuser)){{ $active_sidebukuppuser }} @endif">
                                 <a href="/tampilrekapanrekuser">Buku Pembantu Penerimaan</a>
                             </li>
