@@ -2,163 +2,122 @@
 @section('content')
 
 <style>
-.text-nowrap {
-    white-space: nowrap !important;
-}
-.accordion-body .text-secondary {
-    line-height: 1.6;
-    font-size: 14px;
-    padding-left: 8px;
-}
-.accordion-body strong {
-    font-weight: 600;
-    color: #002060; /* biru tua profesional */
-}
-.rekening-item {
-    font-style: normal;
-    line-height: 1.6;
-    white-space: normal;
-    display: block;
-    text-indent: -10px;
-    margin-left: 15px;
+:root {
+  --dot-size: 8px;           /* ukuran titik */
+  --dot-gap: 6px;            /* jarak titik dan teks */
+  --indent-base: 18px;       /* indent dasar level 0 */
+  --font-main: "Segoe UI", "Open Sans", Arial, sans-serif;
 }
 
-.number-col {
-    white-space: nowrap;
-    padding-right: 10px;
-    font-feature-settings: "tnum";
+/* === Struktur grid utama === */
+.grid-row {
+  display: grid;
+  grid-template-columns: 45% 18% 18% 14% 5%;
+  align-items: center;
+  gap: 1px;
+  border-bottom: 0.5px solid #e5e7eb;
+  min-height: 32px;
+  line-height: 1.4;
+  padding: 4px 0;
+  font-family: var(--font-main) !important;
 }
 
-/* indent berjenjang untuk sub-level */
-.indent-level-0 { padding-left: 0px; }
-.indent-level-1 { padding-left: 18px; }   /* level: PAD / Transfer */
-.indent-level-2 { padding-left: 36px; }   /* jenis: Pajak, Retribusi, DBH */
-.indent-level-3 { padding-left: 54px; }   /* objek / rincian */
-
-/* beri jarak vertikal antar baris leaf agar tidak rapat */
-.component-leaf-row, .accordion-item .accordion-body .row {
-    margin-bottom: 6px;
+/* === Header tabel === */
+.grid-row.fw-semibold {
+  align-items: center !important;
+  min-height: 36px;
+  font-weight: 600 !important;
+  color: #475569;
+  background-color: #fafbfc;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* agar teks nama panjang wrap tapi tetap rapi pada kolom uraian */
-.col-md-4 {
-    word-break: break-word;
+/* Header 'Uraian' sejajar otomatis ke titik node */
+.grid-row.fw-semibold > .cell:first-child {
+  display: flex;
+  align-items: center;
+  padding-left: calc(var(--indent-base) + (var(--dot-size) / 2) + var(--dot-gap)) !important;
+  text-align: left !important;
 }
 
-/* buat warna persen jelas */
-.text-success { color: #2ecc71; }
-.text-warning { color: #0fedf1; }
-.text-danger  { color: #e74c3c; }
-
-.card {
-    border: none;
-    border-radius: 12px;
-    background-color: #f9fafb;
+/* === Kolom Uraian === */
+.cell-uraian {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  white-space: normal;
+  word-wrap: break-word;
+  padding-left: var(--indent);
+  color: #1e293b;
 }
 
-/* Header tabel */
-.table-header {
-    background-color: #f1f3f5;
-    font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
-    color: #333;
+/* === Kolom angka === */
+.cell-number {
+  font-size: 14px;
+  font-family: var(--font-main) !important;
+  text-align: center;
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 33px !important; /* <--- tambahkan jarak kanan */
 }
 
-/* .text-nowrap { white-space: nowrap !important; } */
-.text-right { text-align: right; }
-
-.accordion-button {
-    background-color: transparent;
-    box-shadow: none !important;
-}
-.accordion-button:not(.collapsed) {
-    color: #0d6efd;
-    background-color: #f8f9fa;
+/* === Node Titik === */
+.dot {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: background-color 0.2s ease;
 }
 
-/* Level padding indent */
-.indent-0 { padding-left: 0px; }
-.indent-1 { padding-left: 20px; }
-.indent-2 { padding-left: 40px; }
-.indent-3 { padding-left: 60px; }
-.indent-4 { padding-left: 80px; }
+.bg-primary { background-color: #2563eb !important; }
+.bg-secondary { background-color: #94a3b8 !important; }
 
-/* Warna persen
-.text-success { color: #1e1f1e !important; }
-.text-warning { color: #1e1f1e !important; }
-.text-danger  { color: #1e1f1e !important; } */
+/* === Warna teks === */
+.text-primary { color: #1e3a8a !important; }
+.text-secondary { color: #475569 !important; }
+.text-success { color: #16a34a !important; }
+.text-danger  { color: #dc2626 !important; }
+.text-warning { color: #f59e0b !important; }
 
-.percentage {
-    font-weight: 600;
-}
-
-.text-success {
-    color: #2ecc71 !important; /* hijau segar */
-}
-.text-danger {
-    color: #e74c3c !important; /* merah tegas */
+/* === Struktur tree === */
+.tree-node {
+  margin: 0;
+  padding: 0;
+  --indent: calc(var(--indent-base) * var(--level, 0));
 }
 
-.bg-level-0 {
-    background: linear-gradient(to right, #e3f2fd, #f8fbff) !important; /* biru lembut */
-}
-.bg-level-1 {
-    background: linear-gradient(to right, #f1f8ff, #ffffff) !important;
-}
-.bg-level-2 {
-    background: linear-gradient(to right, #fafcff, #ffffff) !important;
-}
-.bg-level-3 {
-    background: linear-gradient(to right, #ffffff, #ffffff) !important;
-}
-.bg-level-4 {
-    background-color: #ffffff !important;
+/* Subtree tanpa border tambahan */
+.tree-children {
+  border-left: none !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
-/* 🧱 Pastikan warna tidak hilang saat di-collapse */
-.accordion-item.bg-level-0,
-.accordion-item.bg-level-1,
-.accordion-item.bg-level-2,
-.accordion-item.bg-level-3 {
-    transition: background 0.4s ease;
-    border-left: 4px solid transparent;
+/* Hover baris */
+.node-header:hover {
+  background-color: #f9fafc;
+  transition: background 0.2s ease;
 }
 
-/* 🩵 Warna border kiri per level agar kontras dan elegan */
-.bg-level-0 { border-left-color: #1565c0 !important; }  /* biru tua */
-.bg-level-1 { border-left-color: #1e88e5 !important; }  /* biru terang */
-.bg-level-2 { border-left-color: #64b5f6 !important; }  /* biru lembut */
-.bg-level-3 { border-left-color: #bbdefb !important; }  /* sangat lembut */
-
-/* 🧩 Pastikan tombol collapse mewarisi warna parent */
-.accordion-button.bg-level-0,
-.accordion-button.bg-level-1,
-.accordion-button.bg-level-2,
-.accordion-button.bg-level-3 {
-    background-color: inherit !important;
-    box-shadow: none !important;
-    transition: all 0.3s ease;
+/* Rata vertikal titik dan teks */
+.cell-uraian .dot {
+  margin-top: 0px;
 }
 
-/* Saat dibuka, tetap gunakan warna yang sama */
-.accordion-button:not(.collapsed).bg-level-0,
-.accordion-button:not(.collapsed).bg-level-1,
-.accordion-button:not(.collapsed).bg-level-2,
-.accordion-button:not(.collapsed).bg-level-3 {
-    background-color: inherit !important;
-    color: #0d47a1 !important;
-}
-
-/* Hover efek lembut */
-.accordion-item:hover {
-    filter: brightness(0.98);
+/* Kolom header juga ikut geser supaya sejajar */
+.grid-row.fw-semibold .cell.text-end {
+  padding-right: 43px !important;
 }
 </style>
 
 <div class="card shadow-sm p-3">
+    {{-- === Filter tanggal === --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-0 text-primary fw-bold"></h4>
-        {{-- Filter Bulan --}}
         <form method="GET" class="d-flex align-items-center justify-content-end mb-2" style="gap: 10px;">
             <label class="fw-semibold mb-0">Periode:</label>
             <input type="date" name="tgl_awal" value="{{ $tgl_awal }}" class="form-control" style="width: 160px;">
@@ -172,51 +131,55 @@
 
     {{-- === HEADER LAPORAN === --}}
     <div class="d-flex align-items-center justify-content-center mb-4 text-center" style="gap: 20px;">
-        {{-- Logo Kota Palu --}}
         <div style="flex: 0 0 90px;">
             <img src="{{ asset('/app/assets/images/logo/13.png') }}" 
                 alt="Logo Kota Palu" 
-                width="90" 
+                width="70" 
                 class="img-fluid">
         </div>
 
-        {{-- Teks Judul --}}
         <div style="flex: 1;">
             <h5 class="fw-bold mb-1 text-uppercase" style="color:#1d3557; letter-spacing: 0.5px;">
-                PEMERINTAHAN KOTA PALU
+                PEMERINTAH KOTA PALU
             </h5>
             <h6 class="fw-bold mb-1" style="color:#1d3557;">
-                LAPORAN TARGET DAN REALISASI PENDAPATAN DAERAH KOTA PALU
+                LAPORAN TARGET DAN REALISASI PENDAPATAN DAERAH
             </h6>
             <h6 class="fw-semibold mb-1" style="color:#1d3557;">
                 TAHUN ANGGARAN {{ date('Y') }}
             </h6>
             <h6 class="fw-semibold" style="color:#1d3557;">
                 PERIODE {{ \Carbon\Carbon::parse($tgl_awal)->format('d M Y') }}
-                s/d
-                {{ \Carbon\Carbon::parse($tgl_akhir)->format('d M Y') }}
+                s/d {{ \Carbon\Carbon::parse($tgl_akhir)->format('d M Y') }}
             </h6>
         </div>
     </div>
 
-    <hr style="border: 1px solid #1d3557; opacity: 0.3; margin-top: 10px; margin-bottom: 20px;">
+    <hr style="
+        border: none;
+        border-top: 3px solid #1d3557;
+        width: 98%;
+        margin: 6px auto 40px auto;
+        opacity: 0.4;
+        ">
 
-    {{-- Header tabel --}}
-    <div class="row text-center py-2 table-header">
-        <div class="col-md-3 text-start">Uraian</div>
-        <div class="col-md-2">Anggaran</div>
-        <div class="col-md-2">Realisasi (Bulan Ini)</div>
-        <div class="col-md-2">Total Realisasi (Akumulasi)</div>
-        <div class="col-md-2">Sisa</div>
-        <div class="col-md-1">%</div>
+    {{-- === HEADER TABEL === --}}
+    <div class="grid-row fw-semibold border-bottom py-2" style="font-size:14px;">
+        <div class="cell">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uraian</div>
+        <div class="cell text-center">Anggaran</div>
+        <div class="cell text-center">Total Realisasi (Akumulasi)</div>
+        <div class="cell text-center">Sisa</div>
+        <div class="cell text-center">%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
     </div>
 
-    {{-- Isi laporan --}}
+    {{-- === ISI DATA === --}}
     <div class="accordion" id="accordion-laporan">
         @foreach ($data as $i => $item)
-            @include('Penatausahaan.Penerimaan.Realisasi.component-laporan', ['item' => $item, 'prefix' => 'item'.$i])
+            @include('Penatausahaan.Penerimaan.Realisasi.component-laporan', [
+                'item' => $item,
+                'prefix' => 'item-' . $i
+            ])
         @endforeach
     </div>
 </div>
-
 @endsection

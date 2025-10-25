@@ -5,9 +5,11 @@
 
     <script src="/assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="/assets/static/js/pages/dashboard.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/numbro@2.3.1/dist/numbro.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <script>
         // aman walau $labels tidak ada
         const labels = @json($labels ?? []);
