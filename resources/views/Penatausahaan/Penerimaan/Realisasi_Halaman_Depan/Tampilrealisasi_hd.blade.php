@@ -3403,8 +3403,29 @@
                                                                                             }}
                                                                                         </span>
                                                                                     </div>
+                                                                                    <div class="col-md-5 table-bordered">
+                                                                                        <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp; DAK Non Fisik-BOP Kesetaraan Kinerja</i>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($tanggaran_ptdaknfkesetaraankin, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        <span> {{ number_format($total_ptdaknfkesetaraankin, 2) }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-md-2 table-bordered" align="right">
+                                                                                        @php
+                                                                                            $sisa = $total_ptdaknfkesetaraankin - $tanggaran_ptdaknfkesetaraankin;
+                                                                                        @endphp
+
+                                                                                        <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
+                                                                                            {{ $sisa < 0 
+                                                                                                ? '(' . number_format(abs($sisa), 2) . ')' 
+                                                                                                : number_format($sisa, 2) 
+                                                                                            }}
+                                                                                        </span>
+                                                                                    </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
-                                                                                        @if ($total_ptdaknfkesetaraan > 0 && $tanggaran_ptdaknfkesetaraan > 0)
+                                                                                        @if ($total_ptdaknfkesetaraankin > 0 && $tanggaran_ptdaknfkesetaraankin > 0)
                                                                                             <span>{{ number_format($total_ptdaknfkesetaraan / $tanggaran_ptdaknfkesetaraan * 100, 2) }} %</span>
                                                                                         @endif
                                                                                     </div>
