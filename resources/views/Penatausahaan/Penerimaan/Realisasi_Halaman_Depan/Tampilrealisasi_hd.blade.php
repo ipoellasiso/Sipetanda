@@ -3251,7 +3251,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-2 table-bordered" align="right">
                                                                                         @php
-                                                                                            $sisa = $total_ptdakfpsk - $tanggaran_ptdakfpsk;
+                                                                                            $sisa = $total_ptdaknf - $tanggaran_ptdaknf;
                                                                                         @endphp
 
                                                                                         <span style="color: {{ $sisa < 0 ? 'red' : 'green' }}">
@@ -3260,9 +3260,6 @@
                                                                                                 : number_format($sisa, 2) 
                                                                                             }}
                                                                                         </span>
-                                                                                    </div>
-                                                                                    <div class="col-md-2 table-bordered" align="right">
-                                                                                        <span> {{ number_format($tanggaran_ptdaknf - $total_ptdaknf, 2) }}</span>
                                                                                     </div>
                                                                                     <div class="col-md-1 table-bordered" align="right">
                                                                                         @if ($total_ptdaknf > 0 && $tanggaran_ptdaknf > 0)
